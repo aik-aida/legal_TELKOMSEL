@@ -1,9 +1,9 @@
 <?php
     include_once '../db_connect.php';
-    $sql = "select * from tamara_aset_header;";
-    $master = mysql_query($sql);
-    $arr_master = mysql_fetch_array($master);
-    print_r($arr_master);
+    $sql = "select * from tamara_asSet_header limit 500;";
+    $master = mysql_query($sql) or die(mysql_error());
+    $arr_master = array();
+    
 ?>
 <!DOCTYPE html>
 <html>
@@ -18,7 +18,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="font-awesome/css/font-awesome.css" rel="stylesheet">
+    <link href="css/plugins/dataTables/dataTables.bootstrap.css" rel="stylesheet">
     <link href="css/sb-admin.css" rel="stylesheet">
+    
     <!--
       <FRAMESET id="main" BORDER=0 rows="15%,*">
       <FRAME NAME="header" src=header.php scrolling=no >
@@ -70,7 +72,8 @@
                         <!-- /.panel-heading -->
                         <div class="panel-body">
                             <div class="table-responsive">
-                                <table class="table table-striped table-bordered table-hover">
+                                <div class="scrollable">
+                                <table class="table table-striped table-bordered table-hover" id="dataTables-master">
                                     <thead>
                                         <tr>
                                             <th> </th>
@@ -86,8 +89,25 @@
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        <?php
+                                            while($temp = mysql_fetch_array($master)) { ?>
+                                                <tr>
+                                                <td><input type="checkbox" name="dtmaster[]" id="dtmaster" value=<?php echo $temp['site_id']; ?> ></td>
+                                                <td><?php echo $temp['site_id']; ?></td>
+                                                <td><?php echo $temp['site_name']; ?></td>
+                                                <td><?php echo $temp['address']; ?></td>
+                                                <td><?php echo $temp['kecamatan']; ?></td>
+                                                <td><?php echo $temp['kabupaten']; ?></td>
+                                                <td><?php echo $temp['propinsi']; ?></td>
+                                                <td><?php echo $temp['area']; ?></td>
+                                                <td><?php echo $temp['region']; ?></td>
+                                                <td><?php echo $temp['asset_status']; ?></td>
+                                           </tr>     
+                                        <?php
+                                            } ?>
                                     </tbody>
                                 </table>
+                                </div>
                             </div>
                             <!-- /.table-responsive -->
                         </div>
@@ -105,10 +125,17 @@
     <script src="js/plugins/metisMenu/jquery.metisMenu.js"></script>
 
     <!-- Page-Level Plugin Scripts - Forms -->
-
+    <script src="js/plugins/dataTables/jquery.dataTables.js"></script>
+    <script src="js/plugins/dataTables/dataTables.bootstrap.js"></script>
     <!-- SB Admin Scripts - Include with every page -->
     <script src="js/sb-admin.js"></script>
 
+    <!-- Page-Level Demo Scripts - Tables - Use for reference -->
+    <script>
+    $(document).ready(function() {
+        $('#dataTables-master').dataTable();
+    });
+    </script>
     <!-- Page-Level Demo Scripts - Forms - Use for reference -->
 
 </body>

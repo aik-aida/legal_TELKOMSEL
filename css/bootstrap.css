@@ -1409,6 +1409,71 @@ th {
   width: 100%;
   margin-bottom: 20px;
 }
+    .container-fluid {
+      max-width: 500px;
+      margin: 20px auto;
+      border: 20px solid #efefef;
+      padding: 0;
+      background-color: #fff;
+      box-shadow: 2px 3px 5px rgba(0,0,0,.5);
+    }
+
+    /* important styles below */
+    table {
+      width: 100%;
+    }
+    .table-wrapper {
+      overflow: hidden;
+      border-right: 1px solid #ccc;
+    }
+    .pinned {
+      width: 30%;
+      border-right: 1px solid #ccc;
+      float: left;
+    }
+    .scrollable {
+      float: right;
+      width: 69%;
+      overflow: scroll;
+      overflow-y: hidden;
+    }
+    th {
+      text-transform: uppercase;
+      line-height: 12px;
+      text-align: center;
+      overflow: hidden;
+      white-space: nowrap;
+    }
+    td {
+      text-align: center;
+      vertical-align: middle;
+      overflow: hidden;
+      height: 30px;
+      white-space: nowrap;
+    }
+    .pinned td {
+      position: relative;
+      font-weight: bold;
+      line-height: 18px;
+      text-align: left;
+      overflow: hidden;
+    }
+    .pinned td.wrap {
+      white-space: normal;
+    }
+    td .outer {
+      position: relative;
+      height: 30px;
+    }
+    td .inner {
+      overflow: hidden;
+      white-space: nowrap;
+      position: absolute;
+      width: 100%;
+    }
+    .pinned td .inner.wrap {
+      white-space: normal;
+    }
 .table > thead > tr > th,
 .table > tbody > tr > th,
 .table > tfoot > tr > th,
