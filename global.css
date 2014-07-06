@@ -1,0 +1,661 @@
+ /* General page style. The scroll bar colours only visible in IE5.5+ */
+body {
+	font-family: arial,verdana,sans-serif;
+      color: black;
+      font-size: 16px;
+	background-color: #eeeeff;
+	scrollbar-base-color: #3D7ECB;
+	scrollbar-face-color: #CC9933;
+	scrollbar-highlight-color: #FFFFFF;
+	scrollbar-shadow-color: #DEE3E7;
+	scrollbar-3dlight-color: #D1D7DC;
+	scrollbar-arrow-color:  #FFFF66;
+	scrollbar-track-color: #CCFFCC;
+	scrollbar-darkshadow-color: #98AAB1;
+}
+
+/*#f1eee0 */
+
+/* This is the border line & background colour round the entire page */
+.bodyline	{ background-color: #FFFFFF; border: solid #D1D7DC 0px; }
+
+/* General font families for common tags */
+font,th,td,p { font-family: Verdana, Arial, Helvetica, sans-serif }
+a:link,a:active,a:visited { text-decoration: underline; color : #006699; }
+a:hover		{ text-decoration: underline; color : #DD6900; }
+
+
+h1 { font-size: 20px; font-weight: bold; color: #660000 }
+h2 { font-size: 18px; font-weight: bold; color: #003300 }
+
+
+hr      { height: 1px; border: solid #6495ED 0px; border-top-width: 1px;}
+
+/* The largest text used in the index page title and toptic title etc. */
+.maintitle,h1,h2,h3        {
+                        font-weight: bold; font-size: 22px; font-family: "Trebuchet MS",Verdana, Arial, Helvetica, sans-serif;
+                        text-decoration: none; line-height : 120%; color : #000000;
+}
+
+
+h2        {
+                        font-weight: bold; font-size: 18px; font-family: "Trebuchet MS",Verdana, Arial, Helvetica, sans-serif;
+                        text-decoration: none; line-height : 120%; color : #000000;
+}
+
+h3        {
+                        font-weight: bold; font-size: 14px; font-family: "Trebuchet MS",Verdana, Arial, Helvetica, sans-serif;
+                        text-decoration: none; line-height : 120%; color : #000000;
+}
+
+.outerTableColor2 { background-color: #620C00; }
+.outerTableColor { background-color: #660000; }
+.OddRow { background-color: #FFFFCC; }
+.EvenRow {  background-color: white; }
+td1 { vertical-align: middle; nowrap }
+th { background-color: #33CCFF; vertical-align: bottom; text-align: left;  font-weight: bold; }
+.totals { background-color: #33CCFF; vertical-align: bottom; text-align: right;  font-weight: bold; }
+#success { color: green; font-weight: bold; }
+#error { color: red; font-weight: bold; }
+#errorsHeader { color: red; font-weight: bold;  }
+
+a:link	{
+	text-decoration: none;
+	color: #003300;
+}
+
+a:visited	{
+	text-decoration: none;
+	color: #003300;
+}
+
+a:hover	{
+	text-decoration: none;
+	color: #ff0000;
+	background-color: #fff0c0;
+}
+
+a:active	{
+	text-decoration: none;
+	color: #ff0000;
+}
+
+textarea {
+/*border-style: solid;*/
+                font-family: Verdana, Geneva, sans-serif;
+                font-size:8px;
+}
+
+textarea#styled {
+        width: 250px;
+        height: 120px;
+        border: 3px solid #cccccc;
+        padding: 5px;
+        font-family: Tahoma, sans-serif;
+        font: normal 11px Helvetica;
+        background-image: url(bg.gif);
+        background-position: bottom right;
+        background-repeat: no-repeat;
+}
+
+textarea#styled1{
+        width: 450px;
+        height: 120px;
+        border: 3px solid #cccccc;
+        padding: 5px;
+        font-family: Tahoma, sans-serif;
+        font: normal 11px Helvetica;
+        background-image: url(bg.gif);
+        background-position: bottom right;
+        background-repeat: no-repeat;
+}
+
+/* The main submit button option */
+
+input,select {text-indent : 1px; }
+
+input.button {
+	background-color : #E5E5E4;
+	font-weight : normal;
+	font: normal 12px Verdana, Arial, Helvetica, sans-serif;	
+ 	color: black;
+	text-indent : 1px;
+}
+
+input.radio {
+	background-color : #E5E5E4;
+	font-weight : normal;
+	font: normal 12px Verdana, Arial, Helvetica, sans-serif;	
+ 	color: black;
+	text-indent : 1px;
+	
+}
+
+/* This is the outline round the main forum tables */
+.forumline	{ background-color: #FFFFFF; border: 2px #006699 solid; }
+
+
+/* Main table cell colours and backgrounds */
+td.row1	{ background-color: #EFEFEF; }
+td.row2a	{ background-color: red; border: 1px solid }
+td.row2 { background-color: #98AAB1; border: 1px solid }
+td.row3	{ background-color: #D3D3D3; border: 1px solid; font: normal 12px Helvetica }
+
+
+/*
+  This is for the table cell above the Topics, Post & Last posts on the index.php page
+  By default this is the fading out gradiated silver background.
+  However, you could replace this with a bitmap specific for each forum
+*/
+td.rowpic {
+		background-color: #FFFFFF;
+		/*background-image: url(images/cellpic2.jpg);*/
+		background-repeat: repeat-y;
+}
+
+/* Header cells - the blue and silver gradient backgrounds */
+th	{
+	color: #FFA34F; font-size: 11px; font-weight : bold;
+	background-color: #006699; height: 25px;
+}
+
+td.pr	{
+	color: #FFA34F; font-size: 8px; font-weight : bold;
+	background-color: #006699; height: 25px;
+}
+
+td.cat,td.catHead,td.catSides,td.catLeft,td.catRight,td.catBottom {
+/*			background-image: url(images/cellpic1.gif);*/
+			background-color:#D1D7DC; border: #FFFFFF; border-style: solid; height: 28px;
+}
+
+
+/*
+  Setting additional nice inner borders for the main table cells.
+  The names indicate which sides the border will be on.
+  Don't worry if you don't understand this, just ignore it :-)
+*/
+td.cat,td.catHead,td.catBottom {
+	height: 29px;
+	border-width: 0px 0px 0px 0px;
+}
+th.thHead,th.thSides,th.thTop,th.thLeft,th.thRight,th.thBottom,th.thCornerL,th.thCornerR {
+	font-weight: bold; border: #FFFFFF; border-style: solid; height: 28px; }
+td.row3Right,td.spaceRow {
+	background-color: #D1D7DC; border: #FFFFFF; border-style: solid; }
+
+th.thHead,td.catHead { font-size: 12px; border-width: 1px 1px 0px 1px; }
+th.thSides,td.catSides,td.spaceRow	 { border-width: 0px 1px 0px 1px; }
+th.thRight,td.catRight,td.row3Right	 { border-width: 0px 1px 0px 0px; }
+th.thLeft,td.catLeft	  { border-width: 0px 0px 0px 1px; }
+th.thBottom,td.catBottom  { border-width: 0px 1px 1px 1px; }
+th.thTop	 { border-width: 1px 0px 0px 0px; }
+th.thCornerL { border-width: 1px 0px 0px 1px; }
+th.thCornerR { border-width: 1px 1px 0px 0px; }
+
+/* Name of poster in viewmsg.php and viewtopic.php and other places */
+.name			{ font-size : 11px; color : #000000;}
+
+
+font {
+font-family: Verdana, Arial, Helvetica, sans-serif; text-decoration: none
+}
+
+font.fieldTitle{
+font-size: 12px; border-width: 2px 1px 0px 1px; letter-spacing: 0px
+}
+
+font.error{
+font-size: 12px; border-width: 2px 1px 0px 1px; letter-spacing: 1px; color: red
+}
+
+/* Form elements 
+input,textarea, select {
+        color : #000000;
+        font: normal 12px Verdana, Arial, Helvetica, sans-serif;
+        border-color : #000000;
+}
+*/
+
+/* The text input fields important */
+input.inputImportant, textarea.Important, select.selectImportant {
+         background-color : #FF0000;
+	 		font: normal 12px Helvetica
+}
+ 
+/* The text input fields mandatory */
+input.inputMandatory, textarea.selectMandatory, select.selectMandatory {
+         background-color : #FFFF99;
+	 		font: normal 12px Helvetica
+}
+         
+/* The text input fields mandatory */
+input.inputNotMandatory, textarea.NotMandatory, select.selectNotMandatory {
+         background-color : #F0F8FF;
+	 		font: normal 12px Helvetica
+}
+
+/* The text input fields mandatory */
+input.inputDisable, select.selectDisable {
+         background-color : #E6E6E6;
+         font: normal 12px Helvetica;
+	 		text-indent : 2px
+	 		color: #000000;
+}
+
+textarea.inputDisable {
+         background-color : #E6E6E6;
+         font: normal 10px Helvetica;
+	 		text-indent : 2px
+	 		color: #000000;
+}
+
+div.pagination {
+        padding: 3px;
+        margin: 3px;
+        font: normal 10px Verdana, Arial, Helvetica, sans-serif;
+}
+
+div.pagination a {
+        padding: 2px 5px 2px 5px;
+        margin: 2px;
+        border: 1px solid #AAAADD;
+
+        text-decoration: none; /* no underline */
+        color: #000099;
+}
+div.pagination a:hover, div.pagination a:active {
+        border: 1px solid #000099;
+
+        color: #000;
+}
+div.pagination span.current {
+        padding: 2px 5px 2px 5px;
+        margin: 2px;
+                border: 1px solid #000099;
+                font-weight: bold;
+                background-color: #000099;
+                color: #FFF;
+}
+
+
+
+div.pagination span.disabled {
+                padding: 2px 5px 2px 5px;
+                margin: 2px;
+                border: 1px solid #EEE;
+                color: #DDD;
+}
+
+.normalbox      {
+	border: 1px solid #440000;
+	margin: 3px;
+	padding: 5px;
+	background-color: #C0C0C0;
+}
+
+div.box {
+width:220px;
+padding:10px;
+border:5px solid gray;
+margin:0px;
+}
+
+
+
+#rounded-corner
+{
+	font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
+	font-size: 12px;
+	margin: 45px;
+	width: 480px;
+	text-align: left;
+	border-collapse: collapse;
+}
+#rounded-corner thead th.rounded-company
+{
+	background: #b9c9fe url('menuicons/left.png') left -1px no-repeat;
+}
+#rounded-corner thead th.rounded-q4
+{
+	background: #b9c9fe url('menuicons/right.png') right -1px no-repeat;
+}
+#rounded-corner th
+{
+	padding: 8px;
+	font-weight: normal;
+	font-size: 13px;
+	color: #039;
+	background: #b9c9fe;
+}
+#rounded-corner td
+{
+	padding: 8px;
+	background: #e8edff;
+	border-top: 1px solid #fff;
+	color: #669;
+}
+#rounded-corner tfoot td.rounded-foot-left
+{
+	background: #e8edff url('menuicons/botleft.png') left bottom no-repeat;
+}
+#rounded-corner tfoot td.rounded-foot-right
+{
+	background: #e8edff url('menuicons/botright.png') right bottom no-repeat;
+}
+#rounded-corner tbody tr:hover td
+{
+	background: #d0dafd;
+}
+
+.searchList {
+        margin: 0px;
+        padding: 0px;
+        list-style-type: none;
+        position: absolute;
+        width: 206px;
+        height: 160px;
+        overflow-y:auto;
+        overflow:-moz-auto-vertical
+}
+.wrapSearch {
+}
+input1 {
+        width: 220px;
+        padding: 2px;
+        font-family: Tahoma, Geneva, sans-serif;
+        font-size: 8px;
+}
+html, body {
+        font-family: Tahoma, Geneva, sans-serif;
+        font-size: 8px;
+}
+.searchList li {
+        display: block;
+        border-bottom-width: 1px;
+        border-bottom-style: solid;
+        border-bottom-color: #D6D6D6;
+        font-family: Tahoma, Geneva, sans-serif;
+        font-size: 10px;
+        width: 98%;
+}
+.searchList li a{
+        display: block;
+        color: white;
+        text-decoration: none;
+        background-color: blue;
+        padding-top: 5px;
+        padding-right: 5px;
+        padding-bottom: 5px;
+        padding-left: 8px;
+}
+.searchList li a:hover{
+        color: white;
+        background-color: #555;
+}
+.listWrap {
+        visibility: hidden;
+}
+
+ul.pagination{
+	margin:0px;
+	padding:0px;
+	height:10%;
+	overflow:hidden;
+	font:12px 'Tahoma';
+	list-style-type:none;	
+}
+
+ul.pagination li.details{
+    padding:7px 10px 7px 10px;
+    font-size:14px;
+}
+
+ul.pagination li.dot{padding: 3px 0;}
+
+ul.pagination li{
+	float:left;
+	margin:0px;
+	padding:0px;
+	margin-left:5px;
+}
+
+ul.pagination li:first-child{
+	margin-left:0px;
+}
+
+ul.pagination li a{
+	color:black;
+	display:block;
+	text-decoration:none;
+	padding:7px 10px 7px 10px;
+}
+
+ul.pagination li a img{
+	border:none;
+}
+	
+
+	ul.pagination li.details{
+	   color:#C59E08;
+	}
+    
+    ul.pagination li a
+	{
+		border-radius:3px;	
+		-moz-border-radius:3px;
+		-webkit-border-radius:3px;
+		padding:6px 9px 6px 9px;
+	}
+
+	ul.pagination li a
+	{
+		color:#893A00;
+		background:#FFCB00;
+		background:-moz-linear-gradient(top,#FFD500,#FFCB00);
+		background:-webkit-gradient(linear,0 0,0 100%,from(#FFD500),to(#FFCB00));	
+	}	
+	
+	ul.pagination li a:hover,
+	ul.pagination li a.current
+	{
+		background:#FFF4BA;
+	}   
+
+
+#load{
+position:absolute;
+z-index:1;
+border:3px double #999;
+background:#FFFF99;
+width:300px;
+height:100px;
+margin-top:-150px;
+margin-left:-150px;
+top:50%;
+left:50%;
+text-align:center;
+line-height:80px;
+font-family:"Trebuchet MS", verdana, arial,tahoma;
+font-size:18pt;
+}
+
+
+.CSSTableGenerator {
+
+	margin:0px;padding:0px;
+
+	width:100%;
+	box-shadow: 10px 10px 5px #888888;
+
+	border:1px solid #000000;
+
+	
+
+	-moz-border-radius-bottomleft:0px;
+
+	-webkit-border-bottom-left-radius:0px;
+
+	border-bottom-left-radius:0px;
+
+	
+
+	-moz-border-radius-bottomright:0px;
+
+	-webkit-border-bottom-right-radius:0px;
+
+	border-bottom-right-radius:0px;
+
+	
+
+	-moz-border-radius-topright:0px;
+
+	-webkit-border-top-right-radius:0px;
+
+	border-top-right-radius:0px;
+
+	
+
+	-moz-border-radius-topleft:0px;
+
+	-webkit-border-top-left-radius:0px;
+
+	border-top-left-radius:0px;
+
+}.CSSTableGenerator table{
+
+	width:100%;
+
+	height:100%;
+
+	margin:0px;padding:0px;
+
+}.CSSTableGenerator tr:last-child td:last-child {
+
+	-moz-border-radius-bottomright:0px;
+
+	-webkit-border-bottom-right-radius:0px;
+
+	border-bottom-right-radius:0px;
+
+}
+
+.CSSTableGenerator table tr:first-child td:first-child {
+
+	-moz-border-radius-topleft:0px;
+
+	-webkit-border-top-left-radius:0px;
+
+	border-top-left-radius:0px;
+
+}
+
+.CSSTableGenerator table tr:first-child td:last-child {
+
+	-moz-border-radius-topright:0px;
+
+	-webkit-border-top-right-radius:0px;
+
+	border-top-right-radius:0px;
+
+}.CSSTableGenerator tr:last-child td:first-child{
+
+	-moz-border-radius-bottomleft:0px;
+
+	-webkit-border-bottom-left-radius:0px;
+
+	border-bottom-left-radius:0px;
+
+}.CSSTableGenerator tr:hover td{
+
+	
+
+}
+.CSSTableGenerator tr:nth-child(odd){ background-color:#ffaa56; }
+
+.CSSTableGenerator tr:nth-child(even)    { background-color:#ffffff; }
+.CSSTableGenerator td{
+
+	vertical-align:middle;
+
+	
+
+	
+
+	border:1px solid #000000;
+
+	border-width:0px 1px 1px 0px;
+
+	text-align:left;
+
+	padding:7px;
+
+	font-size:10px;
+
+	font-family:Arial;
+
+	font-weight:bold;
+
+	color:#000000;
+
+}.CSSTableGenerator tr:last-child td{
+
+	border-width:0px 1px 0px 0px;
+
+}.CSSTableGenerator tr td:last-child{
+
+	border-width:0px 0px 1px 0px;
+
+}.CSSTableGenerator tr:last-child td:last-child{
+
+	border-width:0px 0px 0px 0px;
+
+}
+
+.CSSTableGenerator tr:first-child td{
+
+		background:-o-linear-gradient(bottom, #ff7f00 5%, #bf5f00 100%);	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #ff7f00), color-stop(1, #bf5f00) );
+	background:-moz-linear-gradient( center top, #ff7f00 5%, #bf5f00 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr="#ff7f00", endColorstr="#bf5f00");	background: -o-linear-gradient(top,#ff7f00,bf5f00);
+
+
+	background-color:#ff7f00;
+
+	border:0px solid #000000;
+
+	text-align:center;
+
+	border-width:0px 0px 1px 1px;
+
+	font-size:14px;
+
+	font-family:Arial;
+
+	font-weight:bold;
+
+	color:#ffffff;
+
+}
+
+.CSSTableGenerator tr:first-child:hover td{
+
+	background:-o-linear-gradient(bottom, #ff7f00 5%, #bf5f00 100%);	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #ff7f00), color-stop(1, #bf5f00) );
+	background:-moz-linear-gradient( center top, #ff7f00 5%, #bf5f00 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr="#ff7f00", endColorstr="#bf5f00");	background: -o-linear-gradient(top,#ff7f00,bf5f00);
+
+
+	background-color:#ff7f00;
+
+}
+
+.CSSTableGenerator tr:first-child td:first-child{
+
+	border-width:0px 0px 1px 0px;
+
+}
+
+.CSSTableGenerator tr:first-child td:last-child{
+
+	border-width:0px 0px 1px 1px;
+
+}
