@@ -42,7 +42,7 @@
                     </a>
                 </li>
                 <li>
-                    <a class="dropdown-toggle" href="#">
+                    <a class="dropdown-toggle" href="input_legal.php">
                         Input Data Legal
                     </a>
                 </li>
