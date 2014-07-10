@@ -22,6 +22,8 @@
 
 </html>
 -->
+<?php require_once('popup-form.php'); ?>
+
 <!DOCTYPE html>
 <html>
 
@@ -36,6 +38,7 @@
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="font-awesome/css/font-awesome.css" rel="stylesheet">
     <link href="css/sb-admin.css" rel="stylesheet">
+    <link rel="STYLESHEET" type="text/css" href="popup.css">
     <!--
       <FRAMESET id="main" BORDER=0 rows="15%,*">
       <FRAME NAME="header" src=header.php scrolling=no >
@@ -44,7 +47,7 @@
 </head>
 
 
-<body>
+<body onload="javascript:fg_hideform('fg_formContainer','fg_backgroundpopup');">
 
         <nav class="navbar navbar-default navbar-fixed-top" role="navigation" style="margin-bottom: 0">
             <div class="navbar-header">
@@ -110,7 +113,7 @@
                         <!-- /.panel-heading -->
                         <div class="panel-body">
                             <div class="table-responsive scroll-table">
-                                <table class="table table-striped table-bordered table-hover">
+                                <table class="table table-striped table-bordered table-hover" id="dataTables-example">
                                     <?php   
                                         include_once '../db_connect.php';
                                         global $legal;
@@ -127,14 +130,18 @@
                                             <th rowspan="2">Site Address</th>
                                             <th rowspan="2">Vendor/Notaris</th>
                                             <th colspan="3">Telkomsel</th>
+                                            <th rowspan="2">detail</th>
+                                            <!--
                                             <th colspan="3">BAPD</th>
                                             <th colspan="3">BAST</th>
                                             <th colspan="5">Informasi Kontak / PO</th>
+                                            -->
                                         </tr>
                                         <tr>
                                             <th>Target Tahap 1</th>
                                             <th>Target Tahap 2</th>
                                             <th>Target Tahap 3</th>
+                                            <!--
                                             <th>Tahap 1</th>
                                             <th>Tahap 2</th>
                                             <th>Tahap 3</th>
@@ -145,7 +152,7 @@
                                             <th>Tanggal Efektif Kontrak</th>
                                             <th>Tanggal AKhir Kontrak</th>
                                             <th>Sub Kontraktor</th>
-                                            <th>Remarks</th>
+                                            <th>Remarks</th>-->
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -165,6 +172,10 @@
                                                 <td></td>
                                                 <td></td>
                                                 <td></td>
+                                                <td><a href='javascript:fg_popup_form("fg_formContainer","fg_form_InnerContainer","fg_backgroundpopup");'>
+                                                    <button type="button" class="btn btn-primary btn-circle"><i class="fa fa-list"></i>
+                                                    </button></a></td>
+                                                <!--
                                                 <td></td>
                                                 <td></td>
                                                 <td></td>
@@ -175,7 +186,7 @@
                                                 <td></td>
                                                 <td></td>
                                                 <td></td>
-                                                <td></td>
+                                                <td></td>-->
                                            </tr>     
                                         <?php
                                             } ?>
@@ -197,12 +208,25 @@
     <script src="js/bootstrap.min.js"></script>
     <script src="js/plugins/metisMenu/jquery.metisMenu.js"></script>
 
-    <!-- Page-Level Plugin Scripts - Forms -->
+    <!-- Page-Level Plugin Scripts - Tables -->
+    <script src="js/plugins/dataTables/jquery.dataTables.js"></script>
+    <script src="js/plugins/dataTables/dataTables.bootstrap.js"></script>
 
     <!-- SB Admin Scripts - Include with every page -->
     <script src="js/sb-admin.js"></script>
 
-    <!-- Page-Level Demo Scripts - Forms - Use for reference -->
+    <!-- Page-Level Demo Scripts - Tables - Use for reference -->
+    <script>
+    $(document).ready(function() {
+        $('#dataTables-example').dataTable();
+    });
+    </script>
+
+    <?PHP
+//3. php include contactform-code.php at the end of the page
+
+require_once('contactform-code.php');
+?>
 
 </body>
 
