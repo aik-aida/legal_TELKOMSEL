@@ -82,17 +82,39 @@
                         Data Legal
                     </a>
                 </li>
-                <li>
-                    <a class="dropdown-toggle" href="input_legal.php">
-                        Input Data Legal
+                <li class= "dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                    Input Data Legal <i class="fa fa-caret-down"></i>
                     </a>
+                        <ul class="dropdown-menu dropdown-messages">
+                            <li>
+                                <a class="dropdown-toggle" href="input_legal.php">
+                                    <div>
+                                        <strong>Input Data Legal</strong>
+                                    </div>
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-toggle" href="land_document.php">
+                                    <div>
+                                        <strong>Input Land Document</strong>
+                                    </div>
+                                </a>
+                            </li>
+                        </ul>
                 </li>
                 <li>
                     <a class="dropdown-toggle"  href="view_dtmaster.php">
                         Data Master
                     </a>
                 </li>
-                
+                <!-- aku tambah yg ini -->
+                <li>
+                    <a class="dropdown-toggle"  href="input_form.php">
+                        Input Form
+                    </a>
+                </li>
+                <!---->
             </ul>
         </nav>
 

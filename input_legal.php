@@ -1,9 +1,9 @@
 <?php
-    include_once '../db_connect.php';
+    /*include_once '../db_connect.php';
     $sql = "select * from tamara_aset_header;";
     $master = mysql_query($sql);
     $arr_master = mysql_fetch_array($master);
-    print_r($arr_master);
+    print_r($arr_master);*/
 ?>
 <!DOCTYPE html>
 <html>
@@ -35,21 +35,43 @@
 
             <ul class="nav navbar-top-links">
                 <li>
-                    <a class="dropdown-toggle"  href="#">
+                    <a class="dropdown-toggle"  href="index.php">
                         Data Legal
                     </a>
                 </li>
-                <li>
-                    <a class="dropdown-toggle" href="input_legal.php">
-                        Input Data Legal
+                <li class= "dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                    Input Data Legal <i class="fa fa-caret-down"></i>
                     </a>
+                        <ul class="dropdown-menu dropdown-messages">
+                            <li>
+                                <a class="dropdown-toggle" href="input_legal.php">
+                                    <div>
+                                        <strong>Input Data Legal</strong>
+                                    </div>
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-toggle" href="land_document.php">
+                                    <div>
+                                        <strong>Input Land Document</strong>
+                                    </div>
+                                </a>
+                            </li>
+                        </ul>
                 </li>
                 <li>
                     <a class="dropdown-toggle"  href="view_dtmaster.php">
                         Data Master
                     </a>
                 </li>
-                
+                <!-- aku tambah yg ini -->
+                <li>
+                    <a class="dropdown-toggle"  href="input_form.php">
+                        Input Form
+                    </a>
+                </li>
+                <!---->
             </ul>
         </nav>
 
@@ -65,19 +87,20 @@
                 <div class="col-lg-12">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            Input Data Legal
+                            Input Data Legal ( Step 1 of 2 )
                         </div>
                         <!-- /.panel-heading -->
+                        <form role="form" action = "insert_into_legal.php" method="POST">
                         <div class="panel-body">
                             <div class="row">
                                 <div class="col-lg-6">
-                                    <form role="form">
+                                    
                                         <div class="form-group">
                                             <label>Site ID</label>
-                                            <input class="form-control">
+                                            <input class="form-control" id="siteid" name="siteid">
                                             <p></p>
                                             <label>Area</label>
-                                            <select class="form-control">
+                                            <select class="form-control" id="area" name="area">
                                                 <option>Area 1</option>
                                                 <option>Area 2</option>
                                                 <option>Area 3</option>
@@ -85,81 +108,86 @@
                                             </select>
                                             <p></p>
                                             <label>Regional</label>
-                                            <input class="form-control">
+                                            <input class="form-control" id="regional" name="regional">
                                             <p></p>
                                             <label>Site Name</label>
-                                            <input class="form-control">
+                                            <input class="form-control" id="sitename" name="sitename">
                                             <p></p>
                                             <label>Site Address</label>
-                                            <input class="form-control">
+                                            <input class="form-control" id="siteaddr" name="siteaddr">
+                                            <p></p>
+                                            <label>Vendor / Notaris </label>
+                                            <input class="form-control" id="vendor" name="vendor">
                                             <p></p>                                           
                                             <h2>Land Certification Project Accomplishment</h2>
                                             <label>Target Tahap 1</label>
                                             <p></p>
-                                            <input id="targetahap1" type="date">
+                                            <input id="targetahap1" type="date" name="targetahap1">
                                             <p></p>
                                             <label>Target Tahap 2</label>
                                             <p></p>
-                                            <input id="targetahap2" type="date">
+                                            <input id="targetahap2" type="date" name="targetahap2">
                                             <p></p>
                                             <label>Target Tahap 3</label>
                                             <p></p>
-                                            <input id="targetahap3" type="date">
+                                            <input id="targetahap3" type="date" name="targetahap3">
                                             <p></p>
                                             <p></p>
                                             <h2>BAPD</h2>
                                             <label>Tahap 1</label>
                                             <p></p>
-                                            <input id="bapdtahap1" type="date">
+                                            <input id="bapdtahap1" type="date" name="bapdtahap1">
                                             <p></p>
                                             <label>Tahap 2</label>
                                             <p></p>
-                                            <input id="bapdtahap2" type="date">
+                                            <input id="bapdtahap2" type="date" name="bapdtahap2">
                                             <p></p>
                                             <label>Tahap 3</label>
                                             <p></p>
-                                            <input id="bapdtahap3" type="date">
+                                            <input id="bapdtahap3" type="date" name="bapdtahap3">
                                             <p></p>
                                             <h2>BAST</h2>
                                             <label>Tahap 1</label>
                                             <p></p>
-                                            <input id="bapdtahap1" type="date">
+                                            <input id="basttahap1" type="date" name="basttahap1">
                                             <p></p>
                                             <label>Tahap 2</label>
                                             <p></p>
-                                            <input id="bapdtahap2" type="date">
+                                            <input id="basttahap2" type="date" name="basttahap2">
                                             <p></p>
                                             <label>Tahap 3</label>
                                             <p></p>
-                                            <input id="bapdtahap3" type="date">
+                                            <input id="basttahap3" type="date" name="basttahap3">
                                             <p></p>
+                                                                                        
                                             <!--<p class="help-block">Example block-level help text here.</p>-->
                                         </div>
-                                    </form>
                                 </div>
                                 <div class="col-lg-6">
-                                    <form role="form">
+                                    <form role="form" action = "insert_into_legal.php" method="POST">
                                         <div class="form-group">
-                                            <h2>Informasi Kontrak / PO</h2>
-                                            <label>Vendor / Notaris </label>
-                                            <input class="form-control">
-                                            <p></p>
+                                            
+                                            <h2>Informasi Kontrak / PO</h2>                                            
                                             <label>Harga Pekerjaan</label>
-                                            <input class="form-control">
+                                            <div class="form-group input-group">
+                                            <span class="input-group-addon">Rp</span>
+                                            <input type="text" class="form-control" id="harga" name="harga">
+                                            <span class="input-group-addon">.00</span>
+                                            </div>
                                             <p></p>
                                             <label>Tanggal Efektif Kontrak</label>
                                             <p></p>
-                                            <input id="tglefektif" type="date">
+                                            <input id="tglefektif" type="date" name="tglefektif">
                                             <p></p>
                                             <label>Tanggal Berakhirnya Kontrak</label>
                                             <p></p>
-                                            <input id="tglakhir" type="date">
+                                            <input id="tglakhir" type="date" name="tglakhir">
                                             <p></p>
                                             <label>Subkontraktor</label>
-                                            <input class="form-control">
+                                            <input class="form-control" id="subkontraktor" name="subkontraktor">
                                             <p></p>
                                             <label>Remarks</label>
-                                            <input class="form-control">
+                                            <input class="form-control" id="remarks" name="remarks">
                                             <p></p>
                                             <h2>Problem</h2>
                                         </div>
@@ -167,6 +195,7 @@
                                             <table class="table table-hover" id="dataTables-example">
                                             <thead>
                                             <tr>
+                                                <th></th>
                                                 <th>Jenis Case</th>
                                                 <th>Deskripsi</th>
                                                 <th>PIC</th>
@@ -174,67 +203,61 @@
                                             </tr>
                                             </thead>
                                             <tbody>
-                                                <tr>
-                                                    <td>
-                                                    <div class="checkbox">
-                                                        <label>
-                                                            <input type="checkbox" value="">Klasifikasi 1
-                                                        </label>
-                                                    </div>
-                                                    </td>
-                                                    <td>
-                                                        <textarea class="form-control" rows="3"></textarea>
-                                                    </td>
-                                                    <td>
-                                                        <input style="width:100px" type="text" name="pic" id="pic" />
-                                                    </td>
-                                                    <td>
-                                                        fin
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <div class="checkbox">
-                                                        <label>
-                                                            <input type="checkbox" value="">Klasifikasi 2
-                                                        </label>
-                                                    </div>
-                                                    </td>
-                                                    <td>
-                                                        <textarea class="form-control" rows="3"></textarea>
-                                                    </td>
-                                                    <td>
-                                                        <input style="width:100px" type="text" name="pic" id="pic" />
-                                                    </td>
-                                                    <td>
-                                                        fin
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <div class="checkbox">
-                                                        <label>
-                                                            <input type="checkbox" value="">Klasifikasi 3
-                                                        </label>
-                                                    </div>
-                                                    </td>
-                                                    <td>
-                                                        <textarea class="form-control" rows="3"></textarea>
-                                                    </td>
-                                                    <td>
-                                                        <input style="width:100px" type="text" name="pic" id="pic" />
-                                                    </td>
-                                                    <td>
-                                                        fin
-                                                    </td>
-                                                </tr>
+                                                
+                                                        <?php  
+                                                            include_once '../db_connect.php'; 
+                                                            $result = mysql_query("SELECT id_jenis_problem, klasifikasi FROM jenisproblem");
+
+                                                            $result2 = mysql_query("SELECT COUNT(*)+1 as idnow FROM jenisproblem");
+
+                                                            
+                                                            
+                                                            $temp2 = mysql_fetch_array($result2);
+                                                            while($temp = mysql_fetch_array($result)) { ?>
+                                                            <tr>
+                                                            <td><input type="checkbox" name="klasifikasiproblem[]" id="klasifikasiproblem" value=<?php echo $temp['id_jenis_problem']; ?> ></td>
+                                                            <td><?php echo $temp['klasifikasi']; ?></td>
+                                                            <td>
+                                                                <textarea class="form-control" rows="3" name="deskripsi[]" id="deskripsi" >
+                                                            </textarea></td>
+                                                            <td><input style="width:100px" type="text" name="pic[]" id="pic" /></td>
+                                                            <td>fin</td>                                                            
+                                                       </tr>     
+                                                    <?php
+                                                        } ?>
                                             </tbody>
+                                            <tr></tr>
+                                            <tr></tr>
+                                            <tr></tr>
+                                            
                                         </div>
-                                    </form>
+
+                                        <table border = 0 align="right">
+                                        
+                                            <tr>
+                                                <td align="center" width="100px"><button type="submit" class="btn btn-info btn-circle" ><i class="fa fa-check"></i>
+                                                    </button>
+                                                    
+                                                </td>
+                                                <td align="center" width="100px">
+                                                    <button type="reset" class="btn btn-warning btn-circle"><i class="fa fa-times"></i>
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td align="center" width="100px">Submit</td>
+                                                <td align="center" width="100px">Reset </td>
+                                            </tr>
+
+                                        </table>
+                                    
+                                    
                                 </div>
+                                
                             </div>
                             <!-- /.table-responsive -->
                         </div>
+                        </form>
                         <!-- /.panel-body -->
                     </div>
                     <!-- /.panel -->
