@@ -1,3 +1,48 @@
+<?php 
+    global $count_insert;
+    $count_insert=0;
+    if(isset($_POST['dtmaster'])){
+        $from_master = $_POST['dtmaster'];
+        foreach ($from_master as $siteid) {
+            //echo $siteid;
+            //echo "<br />";
+            
+            include_once '../db_connect.php';
+            $sql = "select * from tamara_asset_header where site_id='".$siteid."'";
+            $master = mysql_query($sql) or die(mysql_error());
+            $temp = mysql_fetch_array($master);
+
+            $sql_check = "select * from legal where site_id='".$siteid."'";
+            $check = mysql_query($sql_check) or die(mysql_error());
+            $temp_check = mysql_fetch_array($check);
+
+            if($temp_check==NULL) {
+                $sql_insert = "insert into legal (site_id, site_area, site_region, site_name, site_address)".
+                          " values ('".$temp['site_id']."','".$temp['area']."','".$temp['region']."','".$temp['site_name']."','".$temp['address']."')";
+                $insert = mysql_query($sql_insert);
+                $count_insert++;
+            }
+        }
+    } 
+?>
+
+<script type="text/javascript" languange="javascript">
+        function konfirmasi(form){
+            var siteid = "Site ID terpilih : ";
+            <?php
+            if(isset($_POST['dtmaster'])){
+                $from_master = $_POST['dtmaster'];
+                foreach ($from_master as $siteid) {
+                    //echo $siteid;
+                    echo "siteid+=".$siteid.",";
+                }
+            }
+            ?>
+
+            return confirm(siteid+" yakin akan memindahkan Data Master Terpilih ke Data Legal ?");
+        }
+</script>
+
 <?php
     //connect to the database
     include_once '../db_connect.php'; 
@@ -291,7 +336,7 @@ function close_it(doc, a, b) {
             </div>
         </div>
 
-<FORM  name="tamara_inquiry" id="tamara_inquiry" action='<?php echo $_SERVER['PHP_SELF'] ?>' method="post">
+<FORM  name="tamara_inquiry" id="tamara_inquiry" action='<?php echo $_SERVER['PHP_SELF'] ?>' method="post" role="form">
 <INPUT type=hidden name=p value=<?php echo $p; ?>>
 <INPUT type=hidden name=doc value=<?php echo $doc; ?>>
 
@@ -608,7 +653,21 @@ function removeEmpty($var) {
         
 if ($count >0) {            
 ?>
-<div class="records round"  align="right">
+<div class="records round"  align="left">
+        <?php if(isset($_POST['dtmaster'])){ ?>
+            <div class="row" id="keterangan_input">
+                <div class="col-lg-12">
+                    <div class="panel panel-info">
+                        <div class="panel-heading">
+                            Info Legal
+                        </div>
+                        <div class="panel-body">
+                            Telah ditambahkan <?php echo $count_insert ?> data baru dari Data Master.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <?php } ?>
 <table align=center cellpadding=1 cellspacing=0 width=100% >
 <tr bgcolor=#000000>
 <td align=left><font face=sans-serif size=-2 color="#FFFFFF"><b> </td>
@@ -700,7 +759,7 @@ if ($count >0) {
 </tr>
 </table>
         <br />
-        <button type="button" class="btn btn-primary btn-lg btn-block">Tambahkan yang Terpilih ke LEGAL</button>
+        <button type="submit" class="btn btn-primary btn-lg btn-block">Tambahkan yang Terpilih ke LEGAL</button>
         <br />
 </div>
 

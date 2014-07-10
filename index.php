@@ -43,32 +43,7 @@
     -->
 </head>
 
-<?php 
-    global $count_insert;
-    $count_insert=0;
-    if(isset($_POST['dtmaster'])){
-        $from_master = $_POST['dtmaster'];
-        foreach ($from_master as $siteid) {
-            //echo $siteid;
-            //echo "<br />";
-            include_once '../db_connect.php';
-            $sql = "select * from tamara_asset_header where site_id='".$siteid."'";
-            $master = mysql_query($sql) or die(mysql_error());
-            $temp = mysql_fetch_array($master);
 
-            $sql_check = "select * from legal where site_id='".$siteid."'";
-            $check = mysql_query($sql_check) or die(mysql_error());
-            $temp_check = mysql_fetch_array($check);
-
-            if($temp_check==NULL) {
-                $sql_insert = "insert into legal (site_id, site_area, site_region, site_name, site_address)".
-                          " values ('".$temp['site_id']."','".$temp['area']."','".$temp['region']."','".$temp['site_name']."','".$temp['address']."')";
-                $insert = mysql_query($sql_insert);
-                $count_insert++;
-            }
-        }
-    } 
-?>
 <body>
 
         <nav class="navbar navbar-default navbar-fixed-top" role="navigation" style="margin-bottom: 0">
@@ -126,20 +101,6 @@
                 <!-- /.col-lg-12 -->
             </div>
             <!-- /.row -->
-        <?php if(isset($_POST['dtmaster'])){ ?>
-            <div class="row" id="keterangan_input">
-                <div class="col-lg-12">
-                    <div class="panel panel-info">
-                        <div class="panel-heading">
-                            Info Legal
-                        </div>
-                        <div class="panel-body">
-                            Telah ditambahkan <?php echo $count_insert ?> data baru dari Data Master.
-                        </div>
-                    </div>
-                </div>
-            </div>
-        <?php } ?>
             <div class="row">
                 <div class="col-lg-12">
                     <div class="panel panel-default">
@@ -148,7 +109,7 @@
                         </div>
                         <!-- /.panel-heading -->
                         <div class="panel-body">
-                            <div class="table-responsive">
+                            <div class="table-responsive scroll-table">
                                 <table class="table table-striped table-bordered table-hover">
                                     <?php   
                                         include_once '../db_connect.php';
@@ -156,7 +117,7 @@
                                         $sql = "select * from legal;";
                                         $legal = mysql_query($sql) or die(mysql_error());
                                     ?>
-                                    <thead>
+                                    <thead >
                                         <tr>
                                             <th rowspan="2">#</th>
                                             <th rowspan="2">Site ID</th>
@@ -166,13 +127,25 @@
                                             <th rowspan="2">Site Address</th>
                                             <th rowspan="2">Vendor/Notaris</th>
                                             <th colspan="3">Telkomsel</th>
-                                            <th rowspan="2">Vendor</th>
+                                            <th colspan="3">BAPD</th>
+                                            <th colspan="3">BAST</th>
+                                            <th colspan="5">Informasi Kontak / PO</th>
                                         </tr>
                                         <tr>
-                                            
                                             <th>Target Tahap 1</th>
                                             <th>Target Tahap 2</th>
                                             <th>Target Tahap 3</th>
+                                            <th>Tahap 1</th>
+                                            <th>Tahap 2</th>
+                                            <th>Tahap 3</th>
+                                            <th>Tahap 1</th>
+                                            <th>Tahap 2</th>
+                                            <th>Tahap 3</th>
+                                            <th>Harga Pekerjaan</th>
+                                            <th>Tanggal Efektif Kontrak</th>
+                                            <th>Tanggal AKhir Kontrak</th>
+                                            <th>Sub Kontraktor</th>
+                                            <th>Remarks</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -188,6 +161,16 @@
                                                 <td><?php echo $temp['site_region']; ?></td>
                                                 <td><?php echo $temp['site_name']; ?></td>
                                                 <td><?php echo $temp['site_address']; ?></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
                                                 <td></td>
                                                 <td></td>
                                                 <td></td>
