@@ -130,18 +130,16 @@
                                             <th rowspan="2">Site Address</th>
                                             <th rowspan="2">Vendor/Notaris</th>
                                             <th colspan="3">Telkomsel</th>
-                                            <th rowspan="2">detail</th>
-                                            <!--
+                                            <!--<th rowspan="2">detail</th> -->
                                             <th colspan="3">BAPD</th>
                                             <th colspan="3">BAST</th>
                                             <th colspan="5">Informasi Kontak / PO</th>
-                                            -->
+                                            
                                         </tr>
                                         <tr>
                                             <th>Target Tahap 1</th>
                                             <th>Target Tahap 2</th>
                                             <th>Target Tahap 3</th>
-                                            <!--
                                             <th>Tahap 1</th>
                                             <th>Tahap 2</th>
                                             <th>Tahap 3</th>
@@ -152,7 +150,7 @@
                                             <th>Tanggal Efektif Kontrak</th>
                                             <th>Tanggal AKhir Kontrak</th>
                                             <th>Sub Kontraktor</th>
-                                            <th>Remarks</th>-->
+                                            <th>Remarks</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -172,10 +170,12 @@
                                                 <td></td>
                                                 <td></td>
                                                 <td></td>
-                                                <td><a href='javascript:fg_popup_form("fg_formContainer","fg_form_InnerContainer","fg_backgroundpopup");'>
-                                                    <button type="button" class="btn btn-primary btn-circle"><i class="fa fa-list"></i>
-                                                    </button></a></td>
                                                 <!--
+                                                <td><a href='javascript:fg_popup_form("fg_formContainer","fg_form_InnerContainer","fg_backgroundpopup");'>
+                                                    <button type="button" class="btn btn-primary btn-circle" name="detail_info" value=<?php echo $temp['site_id']; ?>>
+                                                    <i class="fa fa-list"></i>
+                                                    </button></a></td>
+                                                -->
                                                 <td></td>
                                                 <td></td>
                                                 <td></td>
@@ -186,7 +186,7 @@
                                                 <td></td>
                                                 <td></td>
                                                 <td></td>
-                                                <td></td>-->
+                                                <td></td>
                                            </tr>     
                                         <?php
                                             } ?>
@@ -223,6 +223,7 @@
     </script>
 
     <?PHP
+
 //3. php include contactform-code.php at the end of the page
 
 require_once('contactform-code.php');

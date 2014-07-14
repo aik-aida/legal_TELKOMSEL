@@ -1,4 +1,4 @@
-<script type='text/javascript' src='scripts/gen_validatorv31.js'></script>
+<!--<script type='text/javascript' src='scripts/gen_validatorv31.js'></script> -->
 <script type='text/javascript' src='scripts/fg_ajax.js'></script>
 <script type='text/javascript' src='scripts/fg_moveable_popup.js'></script>
 <script type='text/javascript' src='scripts/fg_form_submitter.js'></script>
@@ -8,10 +8,16 @@
         <div id="fg_box_Close"><a href="javascript:fg_hideform('fg_formContainer','fg_backgroundpopup');">Close(X)</a></div>
     </div>
 
+    
     <div id="fg_form_InnerContainer">
-    <form id='contactus' action='javascript:fg_submit_form()' method='post' accept-charset='UTF-8'>
 
-    <input type='hidden' name='submitted' id='submitted' value='1'/>
+    <form id='contactus' accept-charset='UTF-8'>
+    lalalalalala
+    <?php echo "aida";?>
+
+        <!--
+    <input type='hidden
+    <' name='submitted' id='submitted' value='1'/>
     <input type='hidden' name='<?php echo $formproc->GetFormIDInputName(); ?>' value='<?php echo $formproc->GetFormIDInputValue(); ?>'/>
     <input type='text'  class='spmhidip' name='<?php echo $formproc->GetSpamTrapInputName(); ?>' />
     <div class='short_explanation'>* required fields</div>
@@ -34,13 +40,14 @@
 
     <div class='container'>
         <input type='submit' name='Submit' value='Submit' />
+    </div>-->
+    </form> 
     </div>
-    </form>
-    </div>
+
 </div>
 <!-- client-side Form Validations:
 Uses the excellent form validation script from JavaScript-coder.com-->
-
+<!--
 <script type='text/javascript'>
 // <![CDATA[
 
@@ -93,7 +100,7 @@ Uses the excellent form validation script from JavaScript-coder.com-->
 
 // ]]>
 </script>
-
+-->
 <div id='fg_backgroundpopup'></div>
 
 <div id='fg_submit_success_message'>
