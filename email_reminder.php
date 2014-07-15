@@ -17,10 +17,7 @@
 	$to1 = 'aris_firman@telkomsel.co.id';
 	$to2 = 'aida.muflichah@gmail.com';
 	
-
 	$i = 1;
-	$j = 1;
-	$k = 1;
 	
 	$ambilregion = "SELECT DISTINCT site_region FROM legal";
 	$ambilregions = mysql_query($ambilregion);
@@ -32,7 +29,7 @@
 		$headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
 		$msg = '';
 		$msg = '<html><body>';
-		$msg = "Berikut adalah list site id dan site name beserta tahap yang sedang ditempuh : ";
+		$msg .= "Berikut adalah list site id dan site name beserta tahap yang sedang ditempuh : ";
 		$msg .= '<br><table border = "1" cellspacing="0">' ;
 		$msg .= "<tr bgcolor =YELLOW><td width=40><center>No</center></td>
 			         <td width=100><center>Site ID</center></td>

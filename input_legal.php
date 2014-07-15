@@ -1,9 +1,12 @@
 <?php
     /*include_once '../db_connect.php';
-    $sql = "select * from tamara_aset_header;";
-    $master = mysql_query($sql);
+    $sql_area = "select * from area";
+    $sql_region = "select * from region";
+    $master = mysql_query($sql_area);
+    $master2 = mysql_query($sql_region);
     $arr_master = mysql_fetch_array($master);
-    print_r($arr_master);*/
+    $arr_master2 = mysql_fetch_array($master2);*/
+    //print_r($arr_master);*/
 ?>
 <!DOCTYPE html>
 <html>
@@ -101,14 +104,27 @@
                                             <p></p>
                                             <label>Area</label>
                                             <select class="form-control" id="area" name="area">
-                                                <option>Area 1</option>
-                                                <option>Area 2</option>
-                                                <option>Area 3</option>
-                                                <option>Area 4</option>
+                                            <?php  
+                                                include_once '../db_connect.php'; 
+                                                $sql_area = "select * from area";
+                                                $master = mysql_query($sql_area);
+                                                while($arr_master = mysql_fetch_array($master)) { ?>
+                                                    <option><?php echo $arr_master['area_code']; ?></option>
+                                                <?php
+                                                        } ?>
                                             </select>
                                             <p></p>
                                             <label>Regional</label>
-                                            <input class="form-control" id="regional" name="regional">
+                                            <select class="form-control" id="regional" name="regional">
+                                            <?php  
+                                                include_once '../db_connect.php'; 
+                                                $sql_region = "select * from region";
+                                                $master2 = mysql_query($sql_region);
+                                                while($arr_master2 = mysql_fetch_array($master2)) { ?>
+                                                    <option><?php echo $arr_master2['region_code']; ?></option>
+                                                <?php
+                                                        } ?>
+                                            </select>
                                             <p></p>
                                             <label>Site Name</label>
                                             <input class="form-control" id="sitename" name="sitename">
@@ -216,12 +232,17 @@
                                                             while($temp = mysql_fetch_array($result)) { ?>
                                                             <tr>
                                                             <td><input type="checkbox" name="klasifikasiproblem[]" id="klasifikasiproblem" value=<?php echo $temp['id_jenis_problem']; ?> ></td>
-                                                            <td><?php echo $temp['klasifikasi']; ?></td>
+                                                            <td width="100px"><?php echo $temp['klasifikasi']; ?></td>
                                                             <td>
                                                                 <textarea class="form-control" rows="3" name="deskripsi[]" id="deskripsi" >
                                                             </textarea></td>
                                                             <td><input style="width:100px" type="text" name="pic[]" id="pic" /></td>
-                                                            <td>fin</td>                                                            
+                                                            <td width="106px">
+                                                                <select class="form-control" id="stproblem" name="stproblem[]">
+                                                                    <option>Open</option>
+                                                                    <option>Close</option>
+                                                                </select>
+                                                            </td>                                                            
                                                        </tr>     
                                                     <?php
                                                         } ?>

@@ -15,18 +15,19 @@
 	
 	$result = mysql_query($insertintolegal);
 
-
 	$choose = $_POST['klasifikasiproblem'];
 	$deskripsi = $_POST['deskripsi'];
 	$pic = $_POST['pic'];
+	$status = $_POST['stproblem'];
 	$count = 0;
+
 	foreach ($choose as $key)
 	{
 		$insertintodetailproblem =  "insert into detail_problem values('". $_POST['siteid'] ."',
-								 	".$choose[$count].",'". $deskripsi[$count] ."','". $pic[$count] ."')";
+								 	".$choose[$count].",'". $deskripsi[$count] ."','". $pic[$count] ."',
+								 	'". $status[$count] ."')";
 		$result2 = mysql_query($insertintodetailproblem);
 		$count++;
-
 	}
 
 	header("Location:land_document.php");
