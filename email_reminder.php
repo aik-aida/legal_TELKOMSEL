@@ -7,29 +7,145 @@
 	}
 	mysql_select_db("tamara");
 
-	$ceknull = "SELECT bast_tahap1 from legal";
-	$ceknulls = mysql_query($ceknull);
-	$arr_ceknull = mysql_fetch_array($ceknulls) ;
+	$cek = " SELECT target_tahap1, target_tahap2, target_tahap3,
+	                bast_tahap1, bast_tahap2, bast_tahap3 
+	         from legal ";
+	$ceks = mysql_query($cek);
+	$arr_cek = mysql_fetch_array($ceks) ;
 
-	if($arr_ceknull['bast_tahap1']==NULL)
+	$to = 'diniputrimandasari@gmail.com';
+	$to1 = 'aris_firman@telkomsel.co.id';
+	$to2 = 'aida.muflichah@gmail.com';
+	
+
+	$i = 1;
+	$j = 1;
+	$k = 1;
+	
+	$ambilregion = "SELECT DISTINCT site_region FROM legal";
+	$ambilregions = mysql_query($ambilregion);
+
+	while($a = mysql_fetch_array($ambilregions))
 	{
-		$result = "SELECT target_tahap1, SYSDATE(), 
-				   datediff(target_tahap1,SYSDATE()) as selisih_hari
-			   from legal ;";
+		$subjectRegion = 'REMINDER PROGRESS TAHAP';
+		$headers  = 'MIME-Version: 1.0' . "\r\n";
+		$headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
+		$msg = '';
+		$msg = '<html><body>';
+		$msg = "Berikut adalah list site id dan site name beserta tahap yang sedang ditempuh : ";
+		$msg .= '<br><table border = "1" cellspacing="0">' ;
+		$msg .= "<tr bgcolor =YELLOW><td width=40><center>No</center></td>
+			         <td width=100><center>Site ID</center></td>
+			         <td width=100><center>Site Name</center></td>
+			         <td width=100><center>Site Region</center></td>
+			         <td width=100><center>Mitra</center></td>
+			 		 <td width=200><center>Tahap yang sedang Ditempuh</center></td></tr>";
 
+		$result = "SELECT target_tahap1, target_tahap2, target_tahap3, SYSDATE(), 
+				          datediff(target_tahap1,SYSDATE()) as selisih_hari1,
+				          datediff(target_tahap2,SYSDATE()) as selisih_hari2,
+				          datediff(target_tahap3,SYSDATE()) as selisih_hari3
+			   	   from legal ;";
 		$results = mysql_query($result) or die(mysql_error());
 		$arr_result = mysql_fetch_array($results);
+		$different1 = $arr_result['selisih_hari1'];
+		$different2 = $arr_result['selisih_hari2'];
+		$different3 = $arr_result['selisih_hari3'];
 
-		$different = $arr_result['selisih_hari'];
-		
-		if($different<=14 && $different>0)
+		$ceknull = " SELECT site_id, site_area, site_name, site_region, vendor 
+		           	 from legal 
+		           	 where bast_tahap1='0000-00-00' and site_region='".$a[0]."'";
+		$ceknulls = mysql_query($ceknull);
+		while($arr_ceknull = mysql_fetch_array($ceknulls))
 		{
-			mail(
-				 'diniputrimandasari@gmail.com',
-				 'TAMARA REMINDER UDAH PAKE CRONTAB',
-				 'Perhatian, kurang '.$different.' hari lagi loooh. Segera upload dokumen! Btw, ini udah pake crontab loooh :p');
+			if($different1<=7)
+			{
+				$msg.="<tr><td width=40><center>".$i."</center></td>
+		         	   <td width=100><center>".$arr_ceknull['site_id']."</center></td>
+		               <td width=100><center>".$arr_ceknull['site_name']."</center></td>
+		               <td width=100><center>".$arr_ceknull['site_region']."</center></td>
+		               <td width=100><center>".$arr_ceknull['vendor']."</center></td>
+		 		       <td width=200><center>Tahap 1</center></td></tr>";
+		 		$i++;
+			}
+		}
+
+		$ceknull2 = " SELECT site_id, site_area, site_name, site_region, vendor 
+		              from legal 
+		              where bast_tahap1!='0000-00-00' and bast_tahap2='0000-00-00' and site_region='".$a[0]."'";
+		$ceknulls2 = mysql_query($ceknull2);
+		while($arr_ceknull2 = mysql_fetch_array($ceknulls2))
+		{
+			if($different2<=7)
+			{
+				$msg.="<tr><td width=40><center>".$i."</center></td>
+		         	   <td width=100><center>".$arr_ceknull2['site_id']."</center></td>
+		               <td width=100><center>".$arr_ceknull2['site_name']."</center></td>
+		               <td width=100><center>".$arr_ceknull2['site_region']."</center></td>
+		               <td width=100><center>".$arr_ceknull2['vendor']."</center></td>
+		 		       <td width=200><center>Tahap 2</center></td></tr>";
+		 		$i++;
+		 	}
+		}
+
+		$ceknull3 = " SELECT site_id, site_area, site_name, site_region, vendor 
+		              from legal 
+		              where bast_tahap1!='0000-00-00' and bast_tahap2!='0000-00-00' and bast_tahap3='0000-00-00' and site_region='".$a[0]."'";
+		$ceknulls3 = mysql_query($ceknull3);
+		while($arr_ceknull3 = mysql_fetch_array($ceknulls3))
+		{
+			if($different3<=7)
+			{
+				$msg.="<tr><td width=40><center>".$i."</center></td>
+		         	   <td width=100><center>".$arr_ceknull3['site_id']."</center></td>
+		               <td width=100><center>".$arr_ceknull3['site_name']."</center></td>
+		               <td width=100><center>".$arr_ceknull3['site_region']."</center></td>
+		               <td width=100><center>".$arr_ceknull3['vendor']."</center></td>
+		 		       <td width=200><center>Tahap 3</center></td></tr>";
+		 		$i++;
+		 	}
+		}
+
+		$msg.= '</table></body></html>';
+		$i=1;
+
+
+		echo $msg;
+		
+	}
+	
+	
+	
+		//print_r($b);
+		
+		/*
+		*/
+	
+
+	
+		
+		/*
+		while($arr_cek = mysql_fetch_array($ceks))
+		{
+			
+			/*$msg.="	 <tr><td width=40><center>1</center></td>
+			         <td width=100><center>".$arr_cek['site_id']."</center></td>
+			         <td width=100><center>".$arr_cek['site_name']."</center></td>
+			         <td width=100><center>".$arr_cek['vendor']."</center></td>
+			 		 <td width=200><center>Tahap 1</center></td></tr>"
+			 		 ;
+		}*/
+
+		//$arr_cek['site_id'].'\t' . $arr_cek['site_name'].'\t'.$arr_cek['vendor'];
+		
+	//if($different<=7 && $different>0)
+	//{
+	//echo $msg;
+			//mail($to1, $subjectRegion, $msg, $headers);
+			//mail($to, $subjectRegion, $msg, $headers);
+			//mail($to2, $subjectRegion, $msg, $headers);
 			 
-			mail(
+			/*mail(
 				 'aris_firman@telkomsel.co.id',
 				 'TAMARA REMINDER UDAH PAKE CRONTAB',
 				 'Perhatian, kurang '.$different.' hari lagi loooh. Segera upload dokumen! Btw, ini udah pake crontab loooh :p');
@@ -37,22 +153,12 @@
 			mail(
 				 'aida.muflichah@gmail.com',
 				 'TAMARA REMINDER UDAH PAKE CRONTAB',
-				 'Perhatian, kurang '.$different.' hari lagi loooh. Segera upload dokumen! Btw, ini udah pake crontab loooh :p');
-		}
-	}
-	else
-		echo "gagal";
+				 'Perhatian, kurang '.$different.' hari lagi loooh. Segera upload dokumen! Btw, ini udah pake crontab loooh :p');*/
+	//}
+	//}
+	//else
+		//echo "gagal";
 	
-
-	/*mail(
-	     'aris_firman@telkomsel.co.id',
-	     'TESTING TAMARA REMINDER',
-	     'Ini adalah percobaan pengiriman email, tapi belom pake crontab loh maas :p');
-
-	mail(
-	     'aida.muflichah@gmail.com',
-	     'TESTING TAMARA REMINDER',
-	     'Ini adalah percobaan pengiriman email, tapi belom pake crontab loh maas :p');*/
 
 
 ?>

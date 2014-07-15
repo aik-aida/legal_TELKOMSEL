@@ -1,3 +1,24 @@
+<?php
+    global $count_delete;
+    global $site_deleted;
+    $count_delete=0;
+    $site_deleted="";
+    if(isset($_POST['del'])){        
+        $from_master = $_POST['del'];
+        foreach ($from_master as $siteid) {
+            
+            include_once '../db_connect.php';
+            
+            $sql_check = "delete from legal where site_id='".$siteid."'";
+            $check = mysql_query($sql_check);
+            
+            $site_deleted.=$siteid." , ";
+
+            $count_delete++;
+        }
+    }
+?>
+
 <!--<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
@@ -38,7 +59,6 @@
     <link href="js/bootstrap.min.js" rel="stylesheet">
     <link href="font-awesome/css/font-awesome.css" rel="stylesheet">
     <link href="css/sb-admin.css" rel="stylesheet">
-    <link rel="STYLESHEET" type="text/css" href="popup.css">
     <script type="text/javascript" src="js/jquery-1.10.2.js"></script>
     <!--
       <FRAMESET id="main" BORDER=0 rows="15%,*">
@@ -105,6 +125,22 @@
                 <!-- /.col-lg-12 -->
             </div>
             <!-- /.row -->
+            <?php if(isset($_POST['del'])){ ?>
+                <div class="row" id="keterangan_input">
+                    <div class="col-lg-12">
+                        <div class="panel panel-danger">
+                            <div class="panel-heading">
+                                Info Legal
+                            </div>
+                            <div class="panel-body">
+                                Telah TERHAPUS <?php echo $count_delete; ?> data  dari Data Legal, dengan SITE ID :
+                                <?php echo $site_deleted; ?>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <?php } ?>
+
             <div class="row">
                 <div class="col-lg-12">
                     <div class="panel panel-default">
@@ -114,6 +150,7 @@
                         <!-- /.panel-heading -->
                         <div class="panel-body">
                             <div class="table-responsive scroll-table">
+                                <form method="post" action='<?php echo $_SERVER['PHP_SELF'] ?>'>
                                 <table class="table table-striped table-bordered table-hover" id="dataTables-example">
                                     <?php   
                                         include_once '../db_connect.php';
@@ -123,6 +160,9 @@
                                     ?>
                                     <thead >
                                         <tr>
+                                            <th rowspan="2"><button type="submit" class="btn btn-warning btn-circle" style="font-size: 7pt">
+                                                            <i class="fa fa-times"></i>
+                                                            </button><label style="font-size: 6pt"><b>hapus</b></label></th>
                                             <th rowspan="2">#</th>
                                             <th rowspan="2">Tanggal Penambahan</th>
                                             <th rowspan="2">Site ID</th>
@@ -140,7 +180,6 @@
                                             -->
                                         </tr>
                                         <tr>
-                                            
                                             <th>Tahap 1</th>
                                             <th>Tahap 2</th>
                                             <th>Tahap 3</th>
@@ -158,16 +197,19 @@
                                             <th>Remarks</th>-->
                                         </tr>
                                     </thead>
-                                    <tbody>
+                                    <tbody style="font-size: 7pt">
                                         <?php
                                             global $count;
                                              $count = 0;
                                             while($temp = mysql_fetch_array($legal)) { 
                                             $count++;?>
-                                            <tr>
+                                            <tr><font size=1>
+                                                <td><input type="checkbox" name="del[]" id="del" value=<?php echo $temp['site_id']; ?> ></td>
                                                 <td><?php echo $count ?></td>
                                                 <td></td>
-                                                <td><?php echo $temp['site_id']; ?></td>
+                                                <td style="color: #0000FF;">
+                                                    <a href=<?php echo "update_legal.php?id=".$temp['site_id']; ?>>
+                                                    <?php echo $temp['site_id']; ?></a></font></td>
                                                 <td><?php echo $temp['site_area']; ?></td>
                                                 <td><?php echo $temp['site_region']; ?></td>
                                                 <td><?php echo $temp['site_name']; ?></td>
@@ -183,9 +225,7 @@
                                                     data-teltiga=<?php echo $temp['target_tahap3']; ?> 
                                                     >
                                                     <!--<a href='javascript:fg_popup_form("fg_formContainer","fg_form_InnerContainer","fg_backgroundpopup");'>-->
-                                                    <button type="button" class="btn btn-primary btn-circle">
-                                                    <i class="fa fa-list"></i>
-                                                    </button></a>
+                                                    <button type="button" class="btn btn-primary btn-xs"></button>
                                                     </td>
                                                 <!--
                                                 <td></td>
@@ -199,11 +239,13 @@
                                                 <td></td>
                                                 <td></td>
                                                 <td></td>-->
+                                                </font>
                                            </tr>     
                                         <?php
                                             } ?>
                                     </tbody>
                                 </table>
+                                </form>
                             </div>
                             <!-- /.table-responsive -->
                         </div>

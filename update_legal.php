@@ -89,6 +89,16 @@
                         <div class="panel-heading">
                             Input Data Legal ( Step 1 of 2 )
                         </div>
+                        <?php   
+                            include_once '../db_connect.php';
+                            global $legal;
+                            global $data;
+                            $sql = "select * from legal where site_id='".$_GET['id']."';";
+                            $legal = mysql_query($sql) or die(mysql_error());
+                            $data = mysql_fetch_array($legal);
+                            //print_r($data);
+                                    ?>
+                        <?php //echo "<br />".$_GET['id']; ?>
                         <!-- /.panel-heading -->
                         <form role="form" action = "updateto_legal.php" method="POST">
                         <div class="panel-body">
@@ -97,67 +107,102 @@
                                     
                                         <div class="form-group">
                                             <label>Site ID</label>
-                                            <input class="form-control" id="siteid" name="siteid">
+                                            <input class="form-control" id="siteid" name="siteid"
+                                                value=<?php echo $data['site_id']; ?> >
                                             <p></p>
                                             <label>Area</label>
                                             <select class="form-control" id="area" name="area">
-                                                <option>Area 1</option>
-                                                <option>Area 2</option>
-                                                <option>Area 3</option>
-                                                <option>Area 4</option>
+                                                <?php  
+                                                include_once '../db_connect.php'; 
+                                                $sql_area = "select * from area";
+                                                $master = mysql_query($sql_area);
+                                                while($arr_master = mysql_fetch_array($master)) { ?>
+                                                    <option value=<?php echo $arr_master['area_code']; ?>
+                                                            selected=<?php if($data['site_area']==$arr_master['area_code'])
+                                                                                {echo "selected";}
+                                                                            else{echo "";} ?>
+                                                            >
+                                                        <?php echo $arr_master['area_description']; ?></option>
+                                                <?php
+                                                        } ?>
                                             </select>
                                             <p></p>
                                             <label>Regional</label>
-                                            <input class="form-control" id="regional" name="regional">
-                                            <p></p>
+                                            <select class="form-control" id="regional" name="regional">
+                                            <?php  
+                                                include_once '../db_connect.php'; 
+                                                $sql_region = "select * from region";
+                                                $master2 = mysql_query($sql_region);
+                                                while($arr_master2 = mysql_fetch_array($master2)) { ?>
+                                                    <option value=<?php echo $arr_master2['region_code']; ?>
+                                                            selected=<?php if($data['site_region']==$arr_master2['region_code'])
+                                                                                {echo "selected";}
+                                                                            else{echo "";} ?>
+                                                            >
+                                                        <?php echo $arr_master2['region_description']; ?></option>
+                                                <?php
+                                                        } ?>
+                                            </select>
                                             <label>Site Name</label>
-                                            <input class="form-control" id="sitename" name="sitename">
+                                            <input class="form-control" id="sitename" name="sitename"
+                                                    value=<?php echo $data['site_name']; ?> >
                                             <p></p>
                                             <label>Site Address</label>
-                                            <input class="form-control" id="siteaddr" name="siteaddr">
+                                            <textarea class="form-control" rows="5" name="address[]" id="address">
+                                                    <?php echo $data['site_address']; ?></textarea>
                                             <p></p>
                                             <label>Vendor / Notaris </label>
-                                            <input class="form-control" id="vendor" name="vendor">
+                                            <input class="form-control" id="vendor" name="vendor"
+                                                    value=<?php echo $data['vendor']; ?> >
                                             <p></p>                                           
                                             <h2>Land Certification Project Accomplishment</h2>
                                             <label>Target Tahap 1</label>
                                             <p></p>
-                                            <input id="targetahap1" type="date" name="targetahap1">
+                                            <input id="targetahap1" type="date" name="targetahap1"
+                                                    value=<?php echo $data['target_tahap1']; ?> >
                                             <p></p>
                                             <label>Target Tahap 2</label>
                                             <p></p>
-                                            <input id="targetahap2" type="date" name="targetahap2">
+                                            <input id="targetahap2" type="date" name="targetahap2"
+                                                    value=<?php echo $data['target_tahap2']; ?> >
                                             <p></p>
                                             <label>Target Tahap 3</label>
                                             <p></p>
-                                            <input id="targetahap3" type="date" name="targetahap3">
+                                            <input id="targetahap3" type="date" name="targetahap3"
+                                                    value=<?php echo $data['target_tahap3']; ?> >
                                             <p></p>
                                             <p></p>
                                             <h2>BAPD</h2>
                                             <label>Tahap 1</label>
                                             <p></p>
-                                            <input id="bapdtahap1" type="date" name="bapdtahap1">
+                                            <input id="bapdtahap1" type="date" name="bapdtahap1"
+                                                    value=<?php echo $data['bapd_tahap1']; ?> >
                                             <p></p>
                                             <label>Tahap 2</label>
                                             <p></p>
-                                            <input id="bapdtahap2" type="date" name="bapdtahap2">
+                                            <input id="bapdtahap2" type="date" name="bapdtahap2"
+                                                    value=<?php echo $data['bapd_tahap2']; ?> >
                                             <p></p>
                                             <label>Tahap 3</label>
                                             <p></p>
-                                            <input id="bapdtahap3" type="date" name="bapdtahap3">
+                                            <input id="bapdtahap3" type="date" name="bapdtahap3"
+                                                    value=<?php echo $data['bapd_tahap3']; ?> >
                                             <p></p>
                                             <h2>BAST</h2>
                                             <label>Tahap 1</label>
                                             <p></p>
-                                            <input id="basttahap1" type="date" name="basttahap1">
+                                            <input id="basttahap1" type="date" name="basttahap1"
+                                                    value=<?php echo $data['bast_tahap1']; ?> >
                                             <p></p>
                                             <label>Tahap 2</label>
                                             <p></p>
-                                            <input id="basttahap2" type="date" name="basttahap2">
+                                            <input id="basttahap2" type="date" name="basttahap2"
+                                                    value=<?php echo $data['bast_tahap2']; ?> >
                                             <p></p>
                                             <label>Tahap 3</label>
                                             <p></p>
-                                            <input id="basttahap3" type="date" name="basttahap3">
+                                            <input id="basttahap3" type="date" name="basttahap3"
+                                                    value=<?php echo $data['bast_tahap3']; ?> >
                                             <p></p>
                                                                                         
                                             <!--<p class="help-block">Example block-level help text here.</p>-->
@@ -171,23 +216,28 @@
                                             <label>Harga Pekerjaan</label>
                                             <div class="form-group input-group">
                                             <span class="input-group-addon">Rp</span>
-                                            <input type="text" class="form-control" id="harga" name="harga">
+                                            <input type="text" class="form-control" id="harga" name="harga"
+                                                    value=<?php echo $data['harga_pekerjaan']; ?> >
                                             <span class="input-group-addon">.00</span>
                                             </div>
                                             <p></p>
                                             <label>Tanggal Efektif Kontrak</label>
                                             <p></p>
-                                            <input id="tglefektif" type="date" name="tglefektif">
+                                            <input id="tglefektif" type="date" name="tglefektif"
+                                                    value=<?php echo $data['tgl_efektif_kontrak']; ?> >
                                             <p></p>
                                             <label>Tanggal Berakhirnya Kontrak</label>
                                             <p></p>
-                                            <input id="tglakhir" type="date" name="tglakhir">
+                                            <input id="tglakhir" type="date" name="tglakhir"
+                                                    value=<?php echo $data['tgl_akhir_kontrak']; ?> >
                                             <p></p>
                                             <label>Subkontraktor</label>
-                                            <input class="form-control" id="subkontraktor" name="subkontraktor">
+                                            <input class="form-control" id="subkontraktor" name="subkontraktor"
+                                                    value=<?php echo $data['subkontraktor']; ?> >
                                             <p></p>
                                             <label>Remarks</label>
-                                            <input class="form-control" id="remarks" name="remarks">
+                                            <input class="form-control" id="remarks" name="remarks"
+                                                    value=<?php echo $data['remarks']; ?> >
                                             <p></p>
                                             <h2>Problem</h2>
                                         </div>
