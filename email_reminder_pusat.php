@@ -1,5 +1,6 @@
 <?php
 	//include '../db_connect.php';
+	//ini_set("max_execution_time", 0);
 	$ln=mysql_connect("localhost","root", "", false, 128); //do not use connection pool (mysql_pconnect) in mysql transaction
 	if (!$ln) {
 		echo "error connect ";
@@ -11,22 +12,24 @@
 				       (datediff(tgl_akhir_kontrak,SYSDATE()))/30 as selisih_bulan,
 				       floor((datediff(tgl_akhir_kontrak,SYSDATE()))/7) as selisih_minggu
 			   	from legal";
-	$results = mysql_query($result) or die(mysql_error());
+	$results = mysql_query($result);
 	$arr_result = mysql_fetch_array($results);
 	$different = $arr_result['selisih_bulan'];
 	$different2 = $arr_result['selisih_minggu'];
 
 	$i=1;
 
-	$to = 'diniputrimandasari@gmail.com';
-	$to1 = 'aris_firman@telkomsel.co.id';
-	$to2 = 'aida.muflichah@gmail.com';
+	//$to = 'diniputrimandasari@gmail.com';
+	//$to1 = 'aris_firman@telkomsel.co.id';
+	//$to = 'diniputrimandasari@gmail.com';
+	//$to2 = 'aida.muflichah@gmail.com';
 	$subjectPusat = 'REMINDER BERAKHIRNYA KONTRAK';
-
+	$headers  = 'MIME-Version: 1.0' . "\r\n";
+	$headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
+	
 	if($different<=2)
 	{
-		$headers  = 'MIME-Version: 1.0' . "\r\n";
-		$headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
+		
 		$msg = '<html><body>';
 		$msg .= "Berikut lampiran data site dan jangka waktu akan berakhirnya kontrak";
 		$msg .= '<br><table border = "1" cellspacing="0">' ;
@@ -40,7 +43,7 @@
 		$ambilid = " SELECT SYSDATE(), site_id, site_area, site_name, site_region, tgl_akhir_kontrak, 
 		                    floor((datediff(tgl_akhir_kontrak,SYSDATE()))/7) as selisih_minggu
 			   	     from legal
-			   	     where (datediff(tgl_akhir_kontrak,SYSDATE()))/30 <= 2";
+			   	     where (datediff(tgl_akhir_kontrak,SYSDATE()))/30 > 2";
 		$ambilids = mysql_query($ambilid);
 		while($b = mysql_fetch_array($ambilids))
 		{
@@ -55,8 +58,12 @@
 
 		$msg.= '</table></body></html>';
 		$i=1;
+		//$msg = 'lalalla';
+		//$arr_cekemail[0];
+		mail('aris_firman@telkomsel.co.id', $subjectPusat, $msg, $headers);
 
-
-		echo $msg;
+		//echo $msg;
 	}
+
+
 ?>
