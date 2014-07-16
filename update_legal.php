@@ -209,7 +209,7 @@
                                         </div>
                                 </div>
                                 <div class="col-lg-6">
-                                    <form role="form" action = "updateto_legal.php?id=".$data['site_id']; ?>" method="POST">
+                                    <form role="form" action="updateto_legal.php?id=".<?php echo $data['site_id']; ?> method="POST">
                                         <div class="form-group">
                                             
                                             <h2>Informasi Kontrak / PO</h2>                                            
@@ -268,21 +268,16 @@
                                                             while($temp = mysql_fetch_array($result)) { 
                                                                 if($user_problem==NULL){ ?>
                                                                     <tr>
-                                                                        <td><input type="checkbox" name="klasifikasiproblem[]" id="klasifikasiproblem" value=<?php echo $temp['id_jenis_problem']; ?> 
-                                                                                <?php if($usprob['id_jenis_problem']==$temp['id_jenis_problem']){echo "checked";} ?> ></td>
+                                                                        <td><input type="checkbox" name="klasifikasiproblem[]" id="klasifikasiproblem"></td>
                                                                         <td><?php echo $temp['klasifikasi']; ?></td>
                                                                         <td>
                                                                             <textarea class="form-control" rows="3" name="deskripsi[]" id="deskripsi" >
-                                                                             <?php if($usprob['id_jenis_problem']==$temp['id_jenis_problem']){echo $usprob['deskripsi'];} ?>
                                                                         </textarea></td>
-                                                                        <td><input style="width:100px" type="text" name="pic[]" id="pic" 
-                                                                                value=<?php if($usprob['id_jenis_problem']==$temp['id_jenis_problem']){echo $usprob['pic'];}?> ></td>
+                                                                        <td><input style="width:100px" type="text" name="pic[]" id="pic" ></td>
                                                                         <td width="106px">
                                                                             <select class="form-control" id="stproblem" name="stproblem[]">
-                                                                                <option value="Open" <?php if($usprob['id_jenis_problem']==$temp['id_jenis_problem'] && $usprob['status_problem']=="Open")
-                                                                                                            {echo "selected";} ?> >Open</option>
-                                                                                <option value="Close" <?php if($usprob['id_jenis_problem']==$temp['id_jenis_problem'] && $usprob['status_problem']=="Close")
-                                                                                                            {echo "selected";} ?> >Close</option>
+                                                                                <option value="Open" >Open</option>
+                                                                                <option value="Close"  >Close</option>
                                                                             </select>
                                                                         </td>                                                            
                                                                     </tr>
