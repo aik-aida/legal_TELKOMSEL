@@ -14,8 +14,8 @@
 	$arr_cek = mysql_fetch_array($ceks) ;
 
 	$to = 'diniputrimandasari@gmail.com';
-	$to1 = 'aris_firman@telkomsel.co.id';
-	$to2 = 'aida.muflichah@gmail.com';
+	//$to1 = 'aris_firman@telkomsel.co.id';
+	//$to2 = 'aida.muflichah@gmail.com';
 	
 	$i = 1;
 	
@@ -106,8 +106,21 @@
 		$msg.= '</table></body></html>';
 		$i=1;
 
+		$cekemail = " SELECT emailuser
+		           	  from dummy
+		           	  where region_code='".$a[0]."'";
+		           	  
+		$cekemails = mysql_query($cekemail);
 
-		echo $msg;
+		while($arr_cekemail = mysql_fetch_array($cekemails))
+		{
+			//echo $cekemails;
+			$to = $arr_cekemail[0];
+			mail($to, $subjectRegion, $msg, $headers);
+			//$to = '';
+		}
+
+		//echo $msg;
 		
 	}
 	
