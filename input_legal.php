@@ -239,8 +239,8 @@
                                                             <td><input style="width:100px" type="text" name="pic[]" id="pic" /></td>
                                                             <td width="106px">
                                                                 <select class="form-control" id="stproblem" name="stproblem[]">
-                                                                    <option>Open</option>
-                                                                    <option>Close</option>
+                                                                    <option value="Open">Open</option>
+                                                                    <option value="Close">Close</option>
                                                                 </select>
                                                             </td>                                                            
                                                        </tr>     

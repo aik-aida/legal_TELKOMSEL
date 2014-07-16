@@ -26,12 +26,16 @@
 	$choose = $_POST['klasifikasiproblem'];
 	$deskripsi = $_POST['deskripsi'];
 	$pic = $_POST['pic'];
+	$status = $_POST['stproblem'];
 	$count = 0;
 	foreach ($choose as $key)
 	{
-		$insertintodetailproblem =  "insert into detail_problem values('". $_POST['siteid'] ."',
-								 	".$choose[$count].",'". $deskripsi[$count] ."','". $pic[$count] ."')";
-		$result2 = mysql_query($insertintodetailproblem);
+		$updateintodetailproblem =  "update detail_problem set deskripsi='". $deskripsi[$count] ."', pic='". $pic[$count] .
+									"', status_problem='". $status[$count] ."' where site_id='". $_POST['siteid'] ."' and id_jenis_problem=
+								 	".$choose[$count].";";
+		echo $updateintodetailproblem;
+		echo "<br />";
+		$result2 = mysql_query($updateintodetailproblem);
 		$count++;
 
 	}
