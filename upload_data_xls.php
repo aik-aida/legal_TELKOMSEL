@@ -57,13 +57,27 @@
                         for($j=1;$j<=count($data->sheets[$i]['cells']);$j++) // loop used to get each row of the sheet
                         { 
                           if($j>1) {
-                            if(in_array($data->sheets[$i]['cells'][$j][2], $id_inlegal)){
+                                $area = $data->sheets[$i]['cells'][$j][2];
+                                $region = $data->sheets[$i]['cells'][$j][3];
+                                $siteid = $data->sheets[$i]['cells'][$j][4];
+                                $name = $data->sheets[$i]['cells'][$j][5];
+                                $address = $data->sheets[$i]['cells'][$j][6];
+                                $vendor = $data->sheets[$i]['cells'][$j][7];
+                                $no = $data->sheets[$i]['cells'][$j][8];
+                                $harga = $data->sheets[$i]['cells'][$j][9];
+                                $awal = $data->sheets[$i]['cells'][$j][10];
+                                $akhir = $data->sheets[$i]['cells'][$j][11];
+                                $sub = $data->sheets[$i]['cells'][$j][12];
+                                //$status = $data->sheets[$i]['cells'][$j][13];
+                                $remarks = $data->sheets[$i]['cells'][$j][13];
+
+                            if(in_array($siteid, $id_inlegal)){
                                 $count_rej++;
                                 $sql_reject = "select site_id, log_added, log_input from legal where site_id='".
-                                                $data->sheets[$i]['cells'][$j][2]."';";
+                                                $siteid."';";
                                 $tmp_reject = mysql_query($sql_reject) or die(mysql_error());
                                 $dt = mysql_fetch_array($tmp_reject);
-                                array_push($id_double, $data->sheets[$i]['cells'][$j][2]);
+                                array_push($id_double, $siteid);
                                 array_push($id_reject, $dt);
                                 //print_r($id_reject);
                                 //echo "<br />";
@@ -77,24 +91,14 @@
                                     $html.=$data->sheets[$i]['cells'][$j][$k];
                                     $html.="</td>";
                                 }
-                                array_push($id_acc, $data->sheets[$i]['cells'][$j][2]);
-                                $siteid = $data->sheets[$i]['cells'][$j][2];
-                                $area = $data->sheets[$i]['cells'][$j][3];
-                                $region = $data->sheets[$i]['cells'][$j][4];
-                                $name = $data->sheets[$i]['cells'][$j][5];
-                                $address = $data->sheets[$i]['cells'][$j][6];
-                                $vendor = $data->sheets[$i]['cells'][$j][7];
-                                $harga = $data->sheets[$i]['cells'][$j][8];
-                                $awal = $data->sheets[$i]['cells'][$j][9];
-                                $akhir = $data->sheets[$i]['cells'][$j][10];
-                                $sub = $data->sheets[$i]['cells'][$j][11];
-                                $remarks = $data->sheets[$i]['cells'][$j][12];
+                                array_push($id_acc, $siteid);
+                                
 
                                 
                                     $insertintolegal =  "insert into legal(site_id,site_area,site_region,site_name,site_address,vendor,".
-                                                        "harga_pekerjaan,tgl_efektif_kontrak,tgl_akhir_kontrak,subkontraktor,remarks,log_added,log_input) ".
+                                                        "harga_pekerjaan,tgl_efektif_kontrak,tgl_akhir_kontrak,subkontraktor,remarks,log_added,log_input,no_kontrak) ".
                                                         "values ('". $siteid ."','". $area ."','". $region ."','". $name ."','". $address .
-                                                        "','". $vendor ."','". $harga ."','". $awal ."','". $akhir ."', '". $sub ."','". $remarks ."',SYSDATE(),'EXCEL');";
+                                                        "','". $vendor ."','". $harga ."','". $awal ."','". $akhir ."', '". $sub ."','". $remarks ."',SYSDATE(),'EXCEL','".$no."');";
                          
                                     $result = mysql_query($insertintolegal);
                                     //echo $insertintolegal;
@@ -102,6 +106,15 @@
                                 
                                 $html.="</tr>";
                             }
+                          }
+                          else {
+                                $html.="<tr>";
+                                for($k=1;$k<=count($data->sheets[$i]['cells'][$j]);$k++) // This loop is created to get data in a table format.
+                                {
+                                    $html.="<td>";
+                                    $html.=$data->sheets[$i]['cells'][$j][$k];
+                                    $html.="</td>";
+                                }
                           }
                         }
                     }

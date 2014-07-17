@@ -84,6 +84,7 @@
                                             <th>BAST Tahap 3</th>
                                             <th>Status Problem</th>
                                             <th>detail</th>
+                                            <th style="display:none;"></th>
                                             <th style="display:none;">BAPD Tahap 1</th>
                                             <th style="display:none;">BAPD Tahap 2</th>
                                             <th style="display:none;">BAPD Tahap 3</th>
@@ -106,7 +107,7 @@
                                              $count = 0;
                                             while($temp = mysql_fetch_array($legal)) { 
                                             $count++;?>
-                                            <tr data-toggle="modal" data-target="#smallModal"  class="id-detail-modal"><font size=1>
+                                            <tr ><font size=1>
                                                 <td><input type="checkbox" name="del[]" id="del" value=<?php echo $temp['site_id']; ?> ></td>
                                                 <td><?php echo $count ?></td>
                                                 <td><?php echo $temp['log_added']; ?></td>
@@ -136,21 +137,27 @@
                                                     }
                                                     echo "<td>".$stat."</td>";
                                                 ?>
-                                                <td><a href="#" class="btn btn-xs btn-success"  style="font-size: 7pt">detail</a></td>
-                                                <td id="bapd_tahap1"  style="display:none;"><?php echo $temp['bapd_tahap1']; ?></td>
-                                                <td id="bapd_tahap2"  style="display:none;"><?php echo $temp['bapd_tahap2']; ?></td>
-                                                <td id="bapd_tahap3"  style="display:none;"><?php echo $temp['bapd_tahap3']; ?></td>
-                                                <td id="target_tahap1"  style="display:none;"><?php echo $temp['target_tahap1']; ?></td>
-                                                <td id="target_tahap2"  style="display:none;"><?php echo $temp['target_tahap2']; ?></td>
-                                                <td id="target_tahap3"  style="display:none;"><?php echo $temp['target_tahap3']; ?></td>
-                                                <td id="harga_pekerjaan"  style="display:none;"><?php echo $temp['harga_pekerjaan']; ?></td>
-                                                <td id="tgl_efektif_kontrak"  style="display:none;"><?php echo $temp['tgl_efektif_kontrak']; ?></td>
-                                                <td id="tgl_akhir_kontrak"  style="display:none;"><?php echo $temp['tgl_akhir_kontrak']; ?></td>
-                                                <td id="subkontraktor"  style="display:none;"><?php echo $temp['subkontraktor']; ?></td>
-                                                <td id="remarks"  style="display:none;"><?php echo $temp['remarks']; ?></td>
-                                                <td id="land_shm_path"  style="display:none;"><?php echo $temp['land_shm_path']; ?></td>
-                                                <td id="land_access_path"  style="display:none;"><?php echo $temp['land_access_path']; ?></td>
-                                                <td id="land_pajak_path"  style="display:none;"><?php echo $temp['land_pajak_path']; ?></td>
+                                                <td data-toggle="modal" data-target="#smallModal"  class="id-detail-modal"><a href="#" class="btn btn-xs btn-success"  style="font-size: 7pt">detail</a></td>
+                                                <!-- aida -->
+                                                <!-- nambahin class="hidden-dulu" -->
+                                                <td id="siteid" style="display:none;" class="hidden-dulu">
+                                                    <a href=<?php echo "update_legal.php?id=".$temp['site_id']; ?>>
+                                                    <?php echo $temp['site_id']; ?></a></font></td>
+												<td id="bapd_tahap1"  style="display:none;" class="hidden-dulu"><?php echo $temp['bapd_tahap1']; ?></td>
+                                                <td id="bapd_tahap2"  style="display:none;" class="hidden-dulu"><?php echo $temp['bapd_tahap2']; ?></td>
+                                                <td id="bapd_tahap3"  style="display:none;" class="hidden-dulu"><?php echo $temp['bapd_tahap3']; ?></td>
+                                                <td id="target_tahap1"  style="display:none;" class="hidden-dulu"><?php echo $temp['target_tahap1']; ?></td>
+                                                <td id="target_tahap2"  style="display:none;" class="hidden-dulu"><?php echo $temp['target_tahap2']; ?></td>
+                                                <td id="target_tahap3"  style="display:none;" class="hidden-dulu"><?php echo $temp['target_tahap3']; ?></td>
+                                                <td id="harga_pekerjaan"  style="display:none;" class="hidden-dulu"><?php echo $temp['harga_pekerjaan']; ?></td>
+                                                <td id="tgl_efektif_kontrak"  style="display:none;" class="hidden-dulu"><?php echo $temp['tgl_efektif_kontrak']; ?></td>
+                                                <td id="tgl_akhir_kontrak"  style="display:none;" class="hidden-dulu"><?php echo $temp['tgl_akhir_kontrak']; ?></td>
+                                                <td id="subkontraktor"  style="display:none;" class="hidden-dulu"><?php echo $temp['subkontraktor']; ?></td>
+                                                <td id="remarks"  style="display:none;" class="hidden-dulu"><?php echo $temp['remarks']; ?></td>
+                                                <td id="land_shm_path"  style="display:none;" class="hidden-dulu"><?php echo $temp['land_shm_path']; ?></td>
+                                                <td id="land_access_path"  style="display:none;" class="hidden-dulu"><?php echo $temp['land_access_path']; ?></td>
+                                                <td id="land_pajak_path"  style="display:none;" class="hidden-dulu"><?php echo $temp['land_pajak_path']; ?></td>
+												<!-- aida -->
                                                 </font>
                                            </tr>     
                                         <?php
@@ -270,6 +277,13 @@
                                                     <td><b>Dokumen No. Objek Pajak</b></td>
                                                     <td><div class="doc3"><div></td>
                                                 </tr>
+												<!-- aida -->
+												<tr>
+                                                    <td><b>*</b></td>
+                                                    <td><b>Dokumen No. Objek Pajak</b></td>
+                                                    <td><div class="doc3"><div></td>
+                                                </tr>
+												<!-- aida -->
                                             </tbody>
                                         </table>
                                 </div>
@@ -306,27 +320,33 @@
     <script type="text/javascript">
         $(document).ready(function(){
             $('.id-detail-modal').click(function(){
+				// aida
+				var parent = $(this).parent();
+				// aida
                 var modal = document.getElementById('smallModal');
-
+                /*
                 var title = document.getElementById('modal-id');
                 var siteid = $(this).find('#site_id').html();
                 $(modal).find('.modal-id').html("<h5><b>"+siteid+"</b></h5>");
-
-                var target1 = $(this).find('#target_tahap1').html();
-                var target2 = $(this).find('#target_tahap2').html();
-                var target3 = $(this).find('#target_tahap3').html();
-                var bapd1 = $(this).find('#bapd_tahap1').html();
-                var bapd2 = $(this).find('#bapd_tahap2').html();
-                var bapd3 = $(this).find('#bapd_tahap3').html();
-                var harga = $(this).find('#harga_pekerjaan').html();
-                var awal = $(this).find('#tgl_efektif_kontrak').html();
-                var akhir = $(this).find('#tgl_akhir_kontrak').html();
-                var sub = $(this).find('#subkontraktor').html();
-                var rem = $(this).find('#remarks').html();
-                var doc1 = $(this).find('#land_shm_path').html();
-                var doc2 = $(this).find('#land_access_path').html();
-                var doc3 = $(this).find('#land_pajak_path').html();
-
+				*/
+				// aida
+                var siteid = $(parent).find('#siteid').html();
+                var target1 = $(parent).find('#target_tahap1').html();
+                var target2 = $(parent).find('#target_tahap2').html();
+                var target3 = $(parent).find('#target_tahap3').html();
+                var bapd1 = $(parent).find('#bapd_tahap1').html();
+                var bapd2 = $(parent).find('#bapd_tahap2').html();
+                var bapd3 = $(parent).find('#bapd_tahap3').html();
+                var harga = $(parent).find('#harga_pekerjaan').html();
+                var awal = $(parent).find('#tgl_efektif_kontrak').html();
+                var akhir = $(parent).find('#tgl_akhir_kontrak').html();
+                var sub = $(parent).find('#subkontraktor').html();
+                var rem = $(parent).find('#remarks').html();
+                var doc1 = $(parent).find('#land_shm_path').html();
+                var doc2 = $(parent).find('#land_access_path').html();
+                var doc3 = $(parent).find('#land_pajak_path').html();
+				// aida
+				$(modal).find('.modal-id').html("<h5><b>"+siteid+"</b></h5>");
                 $(modal).find('.target1').html(target1);
                 $(modal).find('.target2').html(target2);
                 $(modal).find('.target3').html(target3);
