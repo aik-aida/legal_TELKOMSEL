@@ -16,7 +16,8 @@
 							tgl_efektif_kontrak = '". $_POST['tglefektif'] ."',
 							tgl_akhir_kontrak = '". $_POST['tglakhir'] ."', 
 							subkontraktor = '". $_POST['subkontraktor'] ."', 
-							remarks = '". $_POST['remarks'] ."'
+							remarks = '". $_POST['remarks'] ."',
+							no_kontrak = '". $_POST['no_kontrak'] ."'
 						WHERE site_id = '". $_POST['siteid'] ."'";
 						 
 	

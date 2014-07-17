@@ -113,7 +113,10 @@
                                     <form role="form" action = "insert_into_legal.php" method="POST">
                                         <div class="form-group">
                                             
-                                            <h2>Informasi Kontrak / PO</h2>                                            
+                                            <h2>Informasi Kontrak / PO</h2>
+                                            <label>No. Kontrak</label>
+                                            <input class="form-control" id="no_kontrak" name="no_kontrak">
+                                            <p></p>                                 
                                             <label>Harga Pekerjaan</label>
                                             <div class="form-group input-group">
                                             <span class="input-group-addon">Rp</span>
