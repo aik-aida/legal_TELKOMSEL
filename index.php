@@ -18,104 +18,13 @@
         }
     }
 ?>
-
-<!--<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html>
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="font-awesome/css/font-awesome.css" rel="stylesheet">
-    <link href="css/sb-admin.css" rel="stylesheet">
-  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"></meta>
-  <link rel="shortcut icon" href="images/signal.png"></link>
-  <link rel="stylesheet" href="global.css" type="text/css"></link>
-  <title>Tamara Application</title>
-
-  <FRAMESET id="main" BORDER=0 rows="15%,*">
-    <FRAME NAME="header" src=header.php scrolling=no >
-    </FRAME>
-    <FRAME NAME="body" scr=dashboard.php scrolling=yes>
-    </FRAME>
-  </FRAMESET>
-</head>
-
-</html>
--->
 <!DOCTYPE html>
 <html>
 
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"></meta>
-  <link rel="shortcut icon" href="images/signal.png"></link>
-  <link rel="stylesheet" href="global.css" type="text/css"></link>
-  <title>Legal Application</title>
-
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="js/bootstrap.min.js" rel="stylesheet">
-    <link href="font-awesome/css/font-awesome.css" rel="stylesheet">
-    <link href="css/sb-admin.css" rel="stylesheet">
-    <script type="text/javascript" src="js/jquery-1.10.2.js"></script>
-    <!--
-      <FRAMESET id="main" BORDER=0 rows="15%,*">
-      <FRAME NAME="header" src=header.php scrolling=no >
-      </FRAME>
-    -->
+    <?php include 'header.php'; ?>
 </head>
-
-
 <body>
-
-        <nav class="navbar navbar-default navbar-fixed-top" role="navigation" style="margin-bottom: 0">
-            <div class="navbar-header">
-                <a class="navbar-brand" href="index.php">LEGAL</a>
-            </div>
-
-            <ul class="nav navbar-top-links">
-                <li>
-                    <a class="dropdown-toggle"  href="index.php">
-                        Data Legal
-                    </a>
-                </li>
-                <li class= "dropdown">
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                    Input Data Legal <i class="fa fa-caret-down"></i>
-                    </a>
-                        <ul class="dropdown-menu dropdown-messages">
-                            <li>
-                                <a class="dropdown-toggle" href="input_legal.php">
-                                    <div>
-                                        <strong>Input Data Legal</strong>
-                                    </div>
-                                </a>
-                            </li>
-                            <li>
-                                <a class="dropdown-toggle" href="land_document.php">
-                                    <div>
-                                        <strong>Input Land Document</strong>
-                                    </div>
-                                </a>
-                            </li>
-                        </ul>
-                </li>
-                <li>
-                    <a class="dropdown-toggle"  href="view_dtmaster.php">
-                        Data Master
-                    </a>
-                </li>
-                <!-- aku tambah yg ini -->
-                <li>
-                    <a class="dropdown-toggle"  href="input_form.php">
-                        Input Form
-                    </a>
-                </li>
-                <!---->
-            </ul>
-        </nav>
-
         <div id="page-wrapper">
             <div class="row">
                 <div class="col-lg-12">
@@ -200,7 +109,7 @@
                                             <tr data-toggle="modal" data-target="#smallModal"  class="id-detail-modal"><font size=1>
                                                 <td><input type="checkbox" name="del[]" id="del" value=<?php echo $temp['site_id']; ?> ></td>
                                                 <td><?php echo $count ?></td>
-                                                <td></td>
+                                                <td><?php echo $temp['log_added']; ?></td>
                                                 <td style="color: #0000FF;" id="site_id">
                                                     <a href=<?php echo "update_legal.php?id=".$temp['site_id']; ?>>
                                                     <?php echo $temp['site_id']; ?></a></font></td>
@@ -418,12 +327,6 @@
                 $(modal).find('.doc1').html(doc1);
                 $(modal).find('.doc2').html(doc2);
                 $(modal).find('.doc3').html(doc3);
-
-                //var sitename = $(this).find('#site_name').html();
-                //var modal = document.getElementById('basicModal');
-                //var text = "";
-                
-                //$(modal).find('.modal-body').html(text);
                 $('#smallModal').modal('show');
             });
         });

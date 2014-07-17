@@ -17,8 +17,8 @@
             $temp_check = mysql_fetch_array($check);
 
             if($temp_check==NULL) {
-                $sql_insert = "insert into legal (site_id, site_area, site_region, site_name, site_address)".
-                          " values ('".$temp['site_id']."','".$temp['area']."','".$temp['region']."','".$temp['site_name']."','".$temp['address']."')";
+                $sql_insert = "insert into legal (site_id, site_area, site_region, site_name, site_address, log_added, log_input)".
+                          " values ('".$temp['site_id']."','".$temp['area']."','".$temp['region']."','".$temp['site_name']."','".$temp['address']."',SYSDATE(),'MASTER')";
                 $insert = mysql_query($sql_insert);
                 $count_insert++;
             }
@@ -46,7 +46,7 @@
 <?php
     //connect to the database
     include_once '../db_connect.php'; 
-    include_once '../global.php';
+    //include_once '../global.php';
     global $user_id;
     global $userregion;
     global $userarea;
@@ -116,21 +116,10 @@ if(function_exists("date_default_timezone_set") and function_exists("date_defaul
 @date_default_timezone_set("Asia/Jakarta");
 ?>
 
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<htmlse>
 
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"></meta>
-  <link rel="shortcut icon" href="images/signal.png"></link>
-  <link rel="stylesheet" href="global.css" type="text/css"></link>
-  <title>Legal Application</title>
-
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="font-awesome/css/font-awesome.css" rel="stylesheet">
-    <link href="css/plugins/dataTables/dataTables.bootstrap.css" rel="stylesheet">
-    <link href="css/sb-admin.css" rel="stylesheet">
-
+    <?php include 'header.php'; ?>
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
 <!--
     <link rel="stylesheet" href="../global.css" type="text/css"></link>-->
@@ -279,53 +268,6 @@ function close_it(doc, a, b) {
 </script>
 
 <div id="load" style="display:none;"><img src=../images/progress.gif  height="15" width="15"> Loading... Please wait</div>
-
-        <nav class="navbar navbar-default navbar-fixed-top" role="navigation" style="margin-bottom: 0">
-            <div class="navbar-header">
-                <a class="navbar-brand" href="index.php">LEGAL</a>
-            </div>
-
-            <ul class="nav navbar-top-links">
-                <li>
-                    <a class="dropdown-toggle"  href="index.php">
-                        Data Legal
-                    </a>
-                </li>
-                <li class= "dropdown">
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                    Input Data Legal <i class="fa fa-caret-down"></i>
-                    </a>
-                        <ul class="dropdown-menu dropdown-messages">
-                            <li>
-                                <a class="dropdown-toggle" href="input_legal.php">
-                                    <div>
-                                        <strong>Input Data Legal</strong>
-                                    </div>
-                                </a>
-                            </li>
-                            <li>
-                                <a class="dropdown-toggle" href="land_document.php">
-                                    <div>
-                                        <strong>Input Land Document</strong>
-                                    </div>
-                                </a>
-                            </li>
-                        </ul>
-                </li>
-                <li>
-                    <a class="dropdown-toggle"  href="view_dtmaster.php">
-                        Data Master
-                    </a>
-                </li>
-                <!-- aku tambah yg ini -->
-                <li>
-                    <a class="dropdown-toggle"  href="input_form.php">
-                        Input Form
-                    </a>
-                </li>
-                <!---->
-            </ul>
-        </nav>
 
         <div id="page-wrapper">
             <div class="row">
