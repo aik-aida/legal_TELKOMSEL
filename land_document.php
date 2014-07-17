@@ -22,14 +22,30 @@
                             Input Land Document ( Step 2 of 2 )
                         </div>
                         <!-- /.panel-heading -->
-                        
+                        <?php   
+                            if(isset($_GET['id']))
+                            {
+                                include_once '../db_connect.php';
+                                global $legal;
+                                global $data;
+                                $sql = "select * from legal where site_id='".$_GET['id']."';";
+                                $legal = mysql_query($sql) or die(mysql_error());
+                                $data = mysql_fetch_array($legal);
+                            }      
+                        ?>
                         <div class="panel-body">
                             <div class="row">
                                 <div class="col-lg-6">
                                         <div class="form-group">
                                             <form action="upload_file.php" method="post" enctype="multipart/form-data">
                                                 <label>Site ID</label>
-                                                <input class="form-control" id="siteid" name="siteid">
+                                                <input class="form-control" id="siteid" name="siteid" value=
+                                                <?php 
+                                                    if (isset($_GET['id'])) 
+                                                        {
+                                                            echo $data['site_id'];
+                                                        } 
+                                                    else echo "";?>>
                                                 <p></p>
                                                 <h2>Land Document</h2>
                                                 <label for="file"><h4><b>1. Land SHM /PKS</b></h4></label>
@@ -55,43 +71,54 @@
                                                     <div id="toggleText" style="display: none">
                                                         <p></p>
                                                         <label>Land Status</label>
-                                                        <input class="form-control" id="status" name="status">
+                                                        <input class="form-control" id="status" name="status" value=<?php echo $data['land_shm_status']; ?>>
                                                         <p></p>
                                                         <label>SHM/PKS No.</label>
-                                                        <input class="form-control" id="no" name="no">
+                                                        <input class="form-control" id="no" name="no" value=<?php echo $data['land_shm_no']; ?>>
                                                         <p></p>
                                                         <label>Title Dokumen</label>
-                                                        <select class="form-control" id="title" name="title">
-                                                            <option>Kuitansi</option>
-                                                            <option>BAK</option>
-                                                            <option>AJB</option>
-                                                            <option>PKS</option>
-                                                            <option>SHM/SHGB</option>
+                                                        <select class="form-control" id="title" name="title" >
+                                                            <option value="Kuitansi" <?php if($data['land_shm_title']=="Kuitansi")
+                                                                                                            {echo "selected";} ?> >Kuitansi</option>
+                                                            <option value="BAK" <?php if($data['land_shm_title']=="BAK")
+                                                                                                            {echo "selected";} ?> >BAK</option>
+                                                            <option value="AJB" <?php if($data['land_shm_title']=="AJB")
+                                                                                                            {echo "selected";} ?> >AJB</option>
+                                                            <option value="PKS" <?php if($data['land_shm_title']=="PKS")
+                                                                                                            {echo "selected";} ?> >PKS</option>
+                                                            <option value="SHM/SGB" <?php if($data['land_shm_title']=="SHM/SGB")
+                                                                                                            {echo "selected";} ?> >SHM/SGB</option>
                                                         </select>
                                                         <p></p>
                                                         <label>Dokumen yang Dimiliki</label>
                                                         <select class="form-control" id="own" name="own">
-                                                            <option>Asli</option>
-                                                            <option>Copy</option>
+                                                            <option value="Asli" <?php if($data['land_shm_doc']=="Asli")
+                                                                                                            {echo "selected";} ?> >Asli</option>
+                                                            <option value="Copy" <?php if($data['land_shm_doc']=="Copy")
+                                                                                                            {echo "selected";} ?> >Copy</option>
                                                         </select>
                                                         <p></p>
                                                         <label>Pemegang Dokumen Asli</label>
-                                                        <input class="form-control" id="owner" name="owner">
+                                                        <input class="form-control" id="owner" name="owner" value=<?php echo $data['land_shm_owner']; ?>>
                                                         <p></p>
                                                         <label>Valid Period</label>
                                                         <p></p>
-                                                        <input id="start" type="date" name="start">
+                                                        <input id="start" type="date" name="start" value=<?php echo $data['land_shm_valid_start']; ?>>
                                                         <label> until </label>
-                                                        <input id="end" type="date" name="end">
+                                                        <input id="end" type="date" name="end" value=<?php echo $data['land_shm_valid_end']; ?>>
                                                         <p></p>
                                                         <label>Active</label>
                                                         <select class="form-control" id="active" name="active">
-                                                            <option>Yes</option>
-                                                            <option>No</option>
+                                                            <option value="Yes" <?php if($data['land_shm_active']=="Yes")
+                                                                                                            {echo "selected";} ?> >Yes</option>
+                                                            <option value="No" <?php if($data['land_shm_active']=="No")
+                                                                                                            {echo "selected";} ?> >No</option>
                                                         </select>
                                                         <p></p>
                                                         <label>Upload Berkas</label>
                                                         <p></p>
+                                                        <?php if($data['land_shm_path']!=NULL){
+                                                            ?> <label><?php echo $data['land_shm_path']; ?></label> <?php }?>
                                                         <input type="file" name="file1" id="file1">
                                                         <p></p>
                                                     </div>
@@ -120,36 +147,45 @@
                                                     <div id="toggleText2" style="display: none">
                                                         <p></p>
                                                         <label>SHM/PKS No.</label>
-                                                        <input class="form-control" id="no2" name="no2">
+                                                        <input class="form-control" id="no2" name="no2" value=<?php echo $data['land_access_no']; ?>>
                                                         <p></p>
                                                         <label>Title Dokumen</label>
                                                         <select class="form-control" id="title2" name="title2">
-                                                            <option>Kuitansi</option>
-                                                            <option>BAK</option>
-                                                            <option>AJB</option>
-                                                            <option>PKS</option>
-                                                            <option>SHM/SHGB</option>
+                                                            <option value="Kuitansi" <?php if($data['land_access_title']=="Kuitansi")
+                                                                                                            {echo "selected";} ?> >Kuitansi</option>
+                                                            <option value="BAK" <?php if($data['land_access_title']=="BAK")
+                                                                                                            {echo "selected";} ?> >BAK</option>
+                                                            <option value="AJB" <?php if($data['land_access_title']=="AJB")
+                                                                                                            {echo "selected";} ?> >AJB</option>
+                                                            <option value="PKS" <?php if($data['land_access_title']=="PKS")
+                                                                                                            {echo "selected";} ?> >PKS</option>
+                                                            <option value="SHM/SGB" <?php if($data['land_access_title']=="SHM/SGB")
+                                                                                                            {echo "selected";} ?> >SHM/SGB</option>
                                                         </select>
                                                         <p></p>
                                                         <label>Dokumen yang Dimiliki</label>
                                                         <select class="form-control" id="own2" name="own2">
-                                                            <option>Asli</option>
-                                                            <option>Copy</option>
+                                                            <option value="Asli" <?php if($data['land_access_doc']=="Asli")
+                                                                                                            {echo "selected";} ?> >Asli</option>
+                                                            <option value="Copy" <?php if($data['land_access_doc']=="Copy")
+                                                                                                            {echo "selected";} ?> >Copy</option>
                                                         </select>
                                                         <p></p>
                                                         <label>Pemegang Dokumen Asli</label>
-                                                        <input class="form-control" id="owner2" name="owner2">
+                                                        <input class="form-control" id="owner2" name="owner2" value=<?php echo $data['land_access_owner']; ?>>
                                                         <p></p>
                                                         <label>Valid Period</label>
                                                         <p></p>
-                                                        <input id="start2" type="date" name="start2">
+                                                        <input id="start2" type="date" name="start2" value=<?php echo $data['land_access_valid_start']; ?>>
                                                         <label> until </label>
-                                                        <input id="end2" type="date" name="end2">
+                                                        <input id="end2" type="date" name="end2" value=<?php echo $data['land_access_valid_end']; ?>>
                                                         <p></p>
                                                         <label>Active</label>
                                                         <select class="form-control" id="active2" name="active2">
-                                                            <option>Yes</option>
-                                                            <option>No</option>
+                                                            <option value="Yes" <?php if($data['land_access_active']=="Yes")
+                                                                                                            {echo "selected";} ?> >Yes</option>
+                                                            <option value="No" <?php if($data['land_access_active']=="No")
+                                                                                                            {echo "selected";} ?> >No</option>
                                                         </select>
                                                         <p></p>
                                                         <label>Upload Berkas</label>
@@ -183,29 +219,33 @@
                                                     <div id="toggleText3" style="display: none">
                                                         <p></p>
                                                         <label>NOP</label>
-                                                        <input class="form-control" id="nop" name="nop">
+                                                        <input class="form-control" id="nop" name="nop" value=<?php echo $data['land_pajak_nop']; ?>>
                                                         <p></p>
                                                         <label>PBB Due Date</label>
                                                         <p></p>
-                                                        <input id="pbbdate" type="date" name="pbbdate">
+                                                        <input id="pbbdate" type="date" name="pbbdate" value=<?php echo $data['land_pajak_pbb_date']; ?>>
                                                         <p></p>
                                                         <label>PBB Amount</label>
-                                                        <input class="form-control" id="pbbamount" name="pbbamount">
+                                                        <input class="form-control" id="pbbamount" name="pbbamount" value=<?php echo $data['land_pajak_pbb_amount']; ?>>
                                                         <p></p>
                                                         <label>Paid Status</label>
-                                                        <select class="form-control" id="paidstatus" name="paidstatus">
-                                                            <option>Yes</option>
-                                                            <option>No</option>
+                                                        <select class="form-control" id="paidstatus" name="paidstatus" >
+                                                            <option value="Yes" <?php if($data['land_pajak_paid_status']=="Yes")
+                                                                                                            {echo "selected";} ?> >Yes</option>
+                                                            <option value="No" <?php if($data['land_pajak_paid_status']=="No")
+                                                                                                            {echo "selected";} ?> >No</option>
                                                         </select>
                                                         <p></p>
                                                         <label>Paid Date</label>
                                                         <p></p>
-                                                        <input id="paiddate" type="date" name="paiddate">
+                                                        <input id="paiddate" type="date" name="paiddate" value=<?php echo $data['land_pajak_paid_date']; ?>>
                                                         <p></p>
                                                         <label>Active</label>
                                                         <select class="form-control" id="active3" name="active3">
-                                                            <option>Yes</option>
-                                                            <option>No</option>
+                                                            <option value="Yes" <?php if($data['land_pajak_active']=="Yes")
+                                                                                                            {echo "selected";} ?> >Yes</option>
+                                                            <option value="No" <?php if($data['land_pajak_active']=="No")
+                                                                                                            {echo "selected";} ?> >No</option>
                                                         </select>
                                                         <p></p>
                                                         <label>Upload Berkas</label>

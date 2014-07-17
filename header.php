@@ -84,7 +84,7 @@ setTimeout("show_date()",1000);
                 </li>
                 <!-- aku tambah yg ini -->
                 <li>
-                    <a class="dropdown-toggle"  href="input_form.php">
+                    <a class="dropdown-toggle"  href="input_problem.php">
                          <b><font size="2.5">[ Input Form ]</b></font>
                     </a>
                 </li>

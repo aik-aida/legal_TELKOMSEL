@@ -80,12 +80,12 @@
                                             <table class="table table-striped table-bordered table-hover" id="dataTables-master">
                                                 <thead>
                                                     <tr>
-                                                        <th>ID Problem</th>
+                                                        <th width="100">ID Problem</th>
                                                         <th>Klasifikasi Problem</th>
                                                         
                                                     </tr>
                                                 </thead>
-                                                <tbody>
+                                                <tbody style="font-size: 10pt">
                                                     <?php
                                                         while($temp = mysql_fetch_array($master)) { ?>
                                                             <tr>

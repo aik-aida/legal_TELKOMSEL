@@ -13,5 +13,5 @@
 	//echo $insertintoproblem;
 	$result2 = mysql_query($insertintoproblem);
 
-	header("Location:input_form.php");
+	header("Location:input_problem.php");
 ?>

@@ -158,6 +158,20 @@
                                     </tbody>
                                 </table>
                                 </form>
+                                <form method="post" action="save_to_excel.php">
+                                    <table align="right">
+                                        <tr>
+                                            <td> 
+                                                <center><input type="image" src="submit.png" width="34" height="34"></center>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td width ="100"><font size=1><center> 
+                                                Save to Excel</center></font>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </form>
                             </div>
                             <!-- /.table-responsive -->
                         </div>
