@@ -31,22 +31,71 @@
                                 $sql = "select * from legal where site_id='".$_GET['id']."';";
                                 $legal = mysql_query($sql) or die(mysql_error());
                                 $data = mysql_fetch_array($legal);
-                            }      
+                            } 
+                            else if(isset($_GET['idsearch']))
+                            {
+                                include_once '../db_connect.php';
+                                global $legal;
+                                global $data;
+                                $sql = "select * from legal where site_id='".$_GET['idsearch']."';";
+                                $legal = mysql_query($sql) or die(mysql_error());
+                                $data = mysql_fetch_array($legal);
+                            } 
+
                         ?>
                         <div class="panel-body">
                             <div class="row">
                                 <div class="col-lg-6">
                                         <div class="form-group">
-                                            <form action="upload_file.php" method="post" enctype="multipart/form-data">
-                                                <label>Site ID</label>
-                                                <input class="form-control" id="siteid" name="siteid" value=
-                                                <?php 
-                                                    if (isset($_GET['id'])) 
-                                                        {
-                                                            echo $data['site_id'];
-                                                        } 
-                                                    else echo "";?>>
-                                                <p></p>
+                                            <form action="searchid_doc.php" method="post">
+                                            <label>Site ID</label>
+                                            <table>
+                                                <tr>
+                                                    <td width = "500">
+                                                        <input class="form-control" id="siteid" name="siteid" value=
+                                                        <?php 
+                                                            if (isset($_GET['id'])) 
+                                                                {
+                                                                    echo $data['site_id'];
+                                                                } 
+                                                                else if(isset($_GET['idsearch'])) 
+                                                                {
+                                                                    echo $data['site_id'];
+                                                                } 
+                                                            else echo "";?>>                                                        
+                                                    </td>
+                                                    <td width = "100" >
+                                                        <center><input type="submit" value="cari"></center> 
+                                                    </td>
+
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <?php
+                                                     if(!isset($_GET['id']) && !isset($_GET['idsearch']))
+                                                     {
+                                                        ?>
+                                                        <p class="help-block">Anda harus memasukkan Site ID terlebih dahulu</p><?php } ?>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                            </form>
+                                            
+                                            <?php 
+                                            if(isset($_GET['id']) || isset($_GET['idsearch']))
+                                                {?>
+                                            <form action="update_land_shm.php" method="post" enctype="multipart/form-data">
+                                               
+                                                <input style="display:none;"  id="siteid_shm" name="siteid_shm" value=<?php 
+                                                            if (isset($_GET['id'])) 
+                                                                {
+                                                                    echo $data['site_id'];
+                                                                } 
+                                                            else if(isset($_GET['idsearch'])) 
+                                                                {
+                                                                    echo $data['site_id'];
+                                                                } 
+                                                            else echo "";?>> 
                                                 <h2>Land Document</h2>
                                                 <label for="file"><h4><b>1. Land SHM /PKS</b></h4></label>
                                                 <p></p>
@@ -121,8 +170,38 @@
                                                             ?> <label><?php echo $data['land_shm_path']; ?></label> <?php }?>
                                                         <input type="file" name="file1" id="file1">
                                                         <p></p>
+                                                        <table border = 0 align="right">
+                                                            <tr>
+                                                                <td align="center" width="100px"><button type="submit" class="btn btn-info btn-circle" ><i class="fa fa-check"></i>
+                                                                    </button>
+                                                                    
+                                                                </td>
+                                                                <td align="center" width="100px">
+                                                                    <button type="reset" class="btn btn-warning btn-circle"><i class="fa fa-times"></i>
+                                                                    </button>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td align="center" width="100px">Submit</td>
+                                                                <td align="center" width="100px">Reset </td>
+                                                            </tr>
+                                                        </table>
                                                     </div>
                                                 </ul>
+                                            </form>
+                                            <form action="update_land_access.php" method="post" enctype="multipart/form-data">
+                                                
+                                                <input style="display:none;" id="siteid_access" name="siteid_access" value=<?php 
+                                                            if (isset($_GET['id'])) 
+                                                                {
+                                                                    echo $data['site_id'];
+                                                                } 
+                                                            else if(isset($_GET['idsearch'])) 
+                                                                {
+                                                                    echo $data['site_id'];
+                                                                } 
+                                                            else echo "";?>> 
+                                                <br><br><br>
                                                 <label for="file"><h4><b>2. Land Access SHM / PKS</b></h4></label>
                                                 <p></p>
                                                 <script language="javascript"> 
@@ -192,9 +271,37 @@
                                                         <p></p>
                                                         <input type="file" name="file2" id="file2">
                                                         <p></p>
+                                                        <table border = 0 align="right">
+                                                            <tr>
+                                                                <td align="center" width="100px"><button type="submit" class="btn btn-info btn-circle" ><i class="fa fa-check"></i>
+                                                                    </button>
+                                                                    
+                                                                </td>
+                                                                <td align="center" width="100px">
+                                                                    <button type="reset" class="btn btn-warning btn-circle"><i class="fa fa-times"></i>
+                                                                    </button>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td align="center" width="100px">Submit</td>
+                                                                <td align="center" width="100px">Reset </td>
+                                                            </tr>
+                                                        </table>
                                                     </div>
                                                 </ul>
-                                                <p></p>
+                                            </form>
+                                            <form action="update_land_pajak.php" method="post" enctype="multipart/form-data">
+                                                <input style="display:none;" id="siteid_pajak" name="siteid_pajak" value=<?php 
+                                                            if (isset($_GET['id'])) 
+                                                                {
+                                                                    echo $data['site_id'];
+                                                                } 
+                                                            else if(isset($_GET['idsearch'])) 
+                                                                {
+                                                                    echo $data['site_id'];
+                                                                } 
+                                                            else echo "";?>> 
+                                                <br><br><br>
                                                 <label for="file"><h4><b>3. No. Obyek Pajak</b></h4></label>
                                                 <p></p>
                                                 <script language="javascript"> 
@@ -252,28 +359,26 @@
                                                         <p></p>
                                                         <input type="file" name="file3" id="file3">
                                                         <p></p>
+                                                        <table border = 0 align="right">
+                                                            <tr>
+                                                                <td align="center" width="100px"><button type="submit" class="btn btn-info btn-circle" ><i class="fa fa-check"></i>
+                                                                    </button>
+                                                                    
+                                                                </td>
+                                                                <td align="center" width="100px">
+                                                                    <button type="reset" class="btn btn-warning btn-circle"><i class="fa fa-times"></i>
+                                                                    </button>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td align="center" width="100px">Submit</td>
+                                                                <td align="center" width="100px">Reset </td>
+                                                            </tr>
+                                                        </table>
                                                     </div>
                                                 </ul>
-                                                <p></p><br><br>
-                                                <table border = 0 align="right">
-                                                    <tr>
-                                                        <td align="center" width="100px"><button type="submit" class="btn btn-info btn-circle" ><i class="fa fa-check"></i>
-                                                            </button>
-                                                            
-                                                        </td>
-                                                        <td align="center" width="100px">
-                                                            <button type="reset" class="btn btn-warning btn-circle"><i class="fa fa-times"></i>
-                                                            </button>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td align="center" width="100px">Submit</td>
-                                                        <td align="center" width="100px">Reset </td>
-                                                    </tr>
-                                                </table>
-                                                
                                                 <!--<button type="submit" class="btn btn-primary btn-xs">Submit</button>-->
-                                            </form>
+                                            </form><?php } ?>
                                         </div>
                                 </div>
                             </div>

@@ -34,26 +34,31 @@
                                             <p></p>
                                             <label>Area</label>
                                             <select class="form-control" id="area" name="area">
-                                            <?php  
-                                                include_once '../db_connect.php'; 
-                                                $sql_area = "select * from area";
-                                                $master = mysql_query($sql_area);
-                                                while($arr_master = mysql_fetch_array($master)) { ?>
-                                                    <option><?php echo $arr_master['area_code']; ?></option>
-                                                <?php
-                                                        } ?>
+                                                <?php  
+                                                    include_once '../db_connect.php'; 
+                                                    $sql_area = "select * from area";
+                                                    $master = mysql_query($sql_area);
+                                                    while($arr_master = mysql_fetch_array($master)) { ?>
+                                                        <option value=<?php echo $arr_master['area_code']; ?>
+                                                                >
+                                                            <?php echo $arr_master['area_description']; ?></option>
+                                                    <?php
+                                                            } ?>
                                             </select>
                                             <p></p>
                                             <label>Regional</label>
                                             <select class="form-control" id="regional" name="regional">
-                                            <?php  
-                                                include_once '../db_connect.php'; 
-                                                $sql_region = "select * from region";
-                                                $master2 = mysql_query($sql_region);
-                                                while($arr_master2 = mysql_fetch_array($master2)) { ?>
-                                                    <option><?php echo $arr_master2['region_code']; ?></option>
-                                                <?php
-                                                        } ?>
+                                                <?php  
+                                                    include_once '../db_connect.php'; 
+                                                    $sql_region = "select * from region";
+                                                    $master2 = mysql_query($sql_region);
+                                                    while($arr_master2 = mysql_fetch_array($master2)) { ?>
+                                                        <option value=<?php echo $arr_master2['region_code']; ?>
+    
+                                                                >
+                                                            <?php echo $arr_master2['region_description']; ?></option>
+                                                    <?php
+                                                            } ?>
                                             </select>
                                             <p></p>
                                             <label>Site Name</label>
