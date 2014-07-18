@@ -70,6 +70,38 @@
                                         </table>
                                         </div>
                                     </form>
+                                    <br><br>
+
+                                    <form role="form" action = "edit_problem.php" method="post">
+                                        <div class="form-group">
+                                            <h2>Edit Klasifikasi Problem</h2>
+                                            <p></p>
+                                            <label>ID Problem</label>
+                                            <input class="form-control" id="problemid" name="problemid">
+                                            <p class="help-block" style="font-size: 10pt">ID Problem yang ingin Anda edit</p>
+                                            <p></p>
+                                            <br>
+                                            <label>Jenis Problem</label>
+                                            <input class="form-control" id="problem" name="problem">
+                                            <p></p>
+                                             <table border = 0 align="right"><br>
+                                        
+                                            <tr>
+                                                <td align="center" width="70px"><button type="submit" class="btn btn-info btn-circle"><i class="fa fa-check"></i>
+                                                    </button>
+                                                    
+                                                </td>
+                                                
+                                            </tr>
+                                            <tr>
+                                                <td align="center" width="70px">Edit</td>
+                                                
+                                            </tr>
+
+                                        </table>
+                                        </div>
+
+                                    </form>
                                 </div>
 
                                 <div class="col-lg-6">
