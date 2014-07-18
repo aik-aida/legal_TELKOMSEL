@@ -41,5 +41,5 @@
 
 	}
 
-	header("Location:land_document.php");
+	header("Location:land_document.php?id=".$_POST['siteid']);
 ?>

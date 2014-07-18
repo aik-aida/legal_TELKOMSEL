@@ -56,6 +56,8 @@
                             Tabel Data Legal
                         </div>
                         <!-- /.panel-heading -->
+                        
+
                         <div class="panel-body">
                             <div class="table-responsive scroll-table">
                                 <form method="post" action='<?php echo $_SERVER['PHP_SELF'] ?>'>
@@ -91,6 +93,7 @@
                                             <th style="display:none;">Telkomsel Target Tahap 1</th>
                                             <th style="display:none;">Telkomsel Target Tahap 2</th>
                                             <th style="display:none;">Telkomsel Target Tahap 3</th>
+                                            <th style="display:none;">No. Kontrak</th>
                                             <th style="display:none;">Harga Pekerjaan</th>
                                             <th style="display:none;">Tanggal Efektif Kontrak</th>
                                             <th style="display:none;">Tanggal AKhir Kontrak</th>
@@ -111,9 +114,9 @@
                                                 <td><input type="checkbox" name="del[]" id="del" value=<?php echo $temp['site_id']; ?> ></td>
                                                 <td><?php echo $count ?></td>
                                                 <td><?php echo $temp['log_added']; ?></td>
-                                                <td style="color: #0000FF;" id="site_id">
-                                                    <a href=<?php echo "update_legal.php?id=".$temp['site_id']; ?>>
-                                                    <?php echo $temp['site_id']; ?></a></font></td>
+                                                <td style="color:red" id="site_id"><font color="red"s> <b>
+                                                    <a href=<?php echo "update_legal.php?id=".$temp['site_id']; ?> style="color:red" >
+                                                    <?php echo $temp['site_id']; ?></a></b></font></td>
                                                 <td><?php echo $temp['site_area']; ?></td>
                                                 <td><?php echo $temp['site_region']; ?></td>
                                                 <td><?php echo $temp['site_name']; ?></td>
@@ -149,6 +152,7 @@
                                                 <td id="target_tahap1"  style="display:none;" class="hidden-dulu"><?php echo $temp['target_tahap1']; ?></td>
                                                 <td id="target_tahap2"  style="display:none;" class="hidden-dulu"><?php echo $temp['target_tahap2']; ?></td>
                                                 <td id="target_tahap3"  style="display:none;" class="hidden-dulu"><?php echo $temp['target_tahap3']; ?></td>
+                                                <td id="no_kontrak"  style="display:none;" class="hidden-dulu"><?php echo $temp['no_kontrak']; ?></td>
                                                 <td id="harga_pekerjaan"  style="display:none;" class="hidden-dulu"><?php echo $temp['harga_pekerjaan']; ?></td>
                                                 <td id="tgl_efektif_kontrak"  style="display:none;" class="hidden-dulu"><?php echo $temp['tgl_efektif_kontrak']; ?></td>
                                                 <td id="tgl_akhir_kontrak"  style="display:none;" class="hidden-dulu"><?php echo $temp['tgl_akhir_kontrak']; ?></td>
@@ -203,7 +207,7 @@
                                         <table class="table table-striped">
                                             <thead>
                                                 <tr>
-                                                    <th colspan="3"><div class="modal-id"></div></th>
+                                                    <th colspan="3"><div class="modal-id" style="color:#FF0000" ></div></th>
                                                 </tr>
                                             </thead>
                                             <tbody style="font-size: 7pt">
@@ -239,6 +243,11 @@
                                                 </tr>
                                                 <tr>
                                                     <td><b>*</b></td>
+                                                    <td><b>No. Kontrak</b></td>
+                                                    <td><div class="nokon"></div></td>
+                                                </tr>
+                                                <tr>
+                                                    <td><b>*</b></td>
                                                     <td><b>Harga Pekerjaan</b></td>
                                                     <td><div class="harga"></div></td>
                                                 </tr>
@@ -265,25 +274,19 @@
                                                 <tr>
                                                     <td><b>*</b></td>
                                                     <td><b>Dokumen Land SHM/PKS</b></td>
-                                                    <td><div class="doc1"><div></td>
+                                                    <td><div class="doc1"  style="color:#FF0000">
+                                                        <div></td>
                                                 </tr>
                                                 <tr>
                                                     <td><b>*</b></td>
                                                     <td><b>Dokumen Land Access SHM/PKS</b></td>
-                                                    <td><div class="doc2"><div></td>
+                                                    <td><div class="doc2"  style="color:#FF0000"><div></td>
                                                 </tr>
                                                 <tr>
                                                     <td><b>*</b></td>
                                                     <td><b>Dokumen No. Objek Pajak</b></td>
-                                                    <td><div class="doc3"><div></td>
+                                                    <td><div class="doc3"  style="color:#FF0000"><div></td>
                                                 </tr>
-												<!-- aida -->
-												<tr>
-                                                    <td><b>*</b></td>
-                                                    <td><b>Dokumen No. Objek Pajak</b></td>
-                                                    <td><div class="doc3"><div></td>
-                                                </tr>
-												<!-- aida -->
                                             </tbody>
                                         </table>
                                 </div>
@@ -337,6 +340,7 @@
                 var bapd1 = $(parent).find('#bapd_tahap1').html();
                 var bapd2 = $(parent).find('#bapd_tahap2').html();
                 var bapd3 = $(parent).find('#bapd_tahap3').html();
+                var nokon = $(parent).find('#no_kontrak').html();
                 var harga = $(parent).find('#harga_pekerjaan').html();
                 var awal = $(parent).find('#tgl_efektif_kontrak').html();
                 var akhir = $(parent).find('#tgl_akhir_kontrak').html();
@@ -353,14 +357,16 @@
                 $(modal).find('.bapd1').html(bapd1);
                 $(modal).find('.bapd2').html(bapd2);
                 $(modal).find('.bapd3').html(bapd3);
+                $(modal).find('.nokon').html(nokon);
                 $(modal).find('.harga').html(harga);
                 $(modal).find('.awal').html(awal);
                 $(modal).find('.akhir').html(akhir);
                 $(modal).find('.sub').html(sub);
                 $(modal).find('.rem').html(rem);
-                $(modal).find('.doc1').html(doc1);
-                $(modal).find('.doc2').html(doc2);
-                $(modal).find('.doc3').html(doc3);
+                //<a href='file/Aida.pdf' target='_blank'>Test pdf</a>
+                $(modal).find('.doc1').html("<a href='"+doc1+"' target='_blank'  style='color:red'>"+doc1+"</a>");
+                $(modal).find('.doc2').html("<a href='"+doc2+"' target='_blank'  style='color:red'>"+doc2+"</a>");
+                $(modal).find('.doc3').html("<a href='"+doc3+"' target='_blank'  style='color:red'>"+doc3+"</a>");
                 $('#smallModal').modal('show');
             });
         });

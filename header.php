@@ -30,11 +30,13 @@ setTimeout("show_date()",1000);
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="js/bootstrap.min.js" rel="stylesheet">
     <link href="font-awesome/css/font-awesome.css" rel="stylesheet">
+
     <link href="css/sb-admin.css" rel="stylesheet">
     <script type="text/javascript" src="js/jquery-1.10.2.js"></script>
-    
+    <script type="text/javascript" src="js/jquery-1.8.3.js"></script>
+    <script type="text/javascript" src="js/jquery.fancybox.js"></script>
+    <link href="css/jquery.fancybox.css" rel="stylesheet">
 <body  bgcolor="#eeeeff" onload="show_date()">
         <nav class="navbar navbar-default navbar-fixed-top" role="navigation" style="margin-bottom: 0 ">
             <div class="navbar-header">
@@ -85,7 +87,7 @@ setTimeout("show_date()",1000);
                 <!-- aku tambah yg ini -->
                 <li>
                     <a class="dropdown-toggle"  href="input_problem.php">
-                         <b><font size="2.5">[ Input Form ]</b></font>
+                         <b><font size="2.5">[ Input Problem ]</b></font>
                     </a>
                 </li>
                     <table align="right" CELLPADDING="100" border="0">

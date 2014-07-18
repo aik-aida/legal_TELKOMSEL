@@ -31,7 +31,7 @@
                                     ?>
                         <?php //echo "<br />".$_GET['id']; ?>
                         <!-- /.panel-heading -->
-                        <form role="form" action = "updateto_legal.php" method="POST">
+                        <form role="form" action = "updateto_legal.php?id=".<?php echo $data['site_id']; ?> method="POST">
                         <div class="panel-body">
                             <div class="row">
                                 <div class="col-lg-6">
