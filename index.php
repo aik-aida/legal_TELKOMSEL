@@ -27,8 +27,28 @@
 <body>
         <div id="page-wrapper">
             <div class="row">
-                <div class="col-lg-12">
+                <div class="col-lg-6">
                     <h1 class="page-header">Data Legal</h1>
+                </div>
+                <div class="col-lg-6" >
+                                <form method="post" action="save_to_excel.php">
+                                    <table align="right">
+                                        <tr>
+                                            <td height = "50"> &nbsp;
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td> 
+                                                <center><input type="image" src="submit.png" width="34" height="34"></center>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td width ="100"><font size=1><center> 
+                                                Save to Excel</center></font>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </form>
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
@@ -168,20 +188,6 @@
                                             } ?>
                                     </tbody>
                                 </table>
-                                </form>
-                                <form method="post" action="save_to_excel.php">
-                                    <table align="right">
-                                        <tr>
-                                            <td> 
-                                                <center><input type="image" src="submit.png" width="34" height="34"></center>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td width ="100"><font size=1><center> 
-                                                Save to Excel</center></font>
-                                            </td>
-                                        </tr>
-                                    </table>
                                 </form>
                             </div>
                             <!-- /.table-responsive -->

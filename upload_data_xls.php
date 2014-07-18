@@ -156,19 +156,35 @@
                         </div>
                         <!-- /.panel-heading -->
                         <div class="panel-body">
-                            <label>File input</label> <input type="file" name="upload_doc" id="upload_doc">
-                            <BR />
-                            <table border = 0 align="LEFT">
-                                                    <tr>
-                                                        <td align="center" width="100px"><button type="submit" class="btn btn-info btn-circle" ><i class="fa fa-check"></i>
-                                                            </button>
-                                                            
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td align="center" width="100px">Upload</td>
-                                                    </tr>
-                                                </table>
+                                <div class="col-lg-12">
+                                    <div class="panel panel-primary">
+                                        <div class="panel-heading">
+                                            FORMAT EXCEL INPUTAN
+                                        </div>
+                                        <div class="panel-body">
+                                            <p>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-12" align="center">
+                                    <label>File input</label><br />
+                                    <input type="file" name="upload_doc" id="upload_doc" accept="application/vnd.ms-excel">
+                                    <BR />
+                                                        <table border = 0 align="center">
+                                                            <tr>
+                                                                <td align="center" width="100px"><button type="submit" class="btn btn-info btn-circle" ><i class="fa fa-check"></i>
+                                                                    </button>
+                                                                    
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td align="center" width="100px">Upload</td>
+                                                            </tr>
+                                                        </table>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>                              

@@ -90,7 +90,7 @@ setTimeout("show_date()",1000);
                          <b><font size="2.5">[ Input Problem ]</b></font>
                     </a>
                 </li>
-                    <table align="right" CELLPADDING="100" border="0">
+                    <table align="right" CELLPADDING="150" border="0">
                         <tr ><td align="right" height = "30 "><font size=-1 face=Arial,Helvetica,Geneva color=blue>
                                 <?php if(isset($_SESSION['useremployee'])) 
                                     { echo "Welcome : ".$_SESSION['useremployee'];} ?>
