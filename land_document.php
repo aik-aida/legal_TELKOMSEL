@@ -169,6 +169,7 @@
                                                         <?php if($data['land_shm_path']!=NULL){
                                                             ?> <label><?php echo $data['land_shm_path']; ?></label> <?php }?>
                                                         <input type="file" name="file1" id="file1">
+                                                        <p class="help-block" style="font-size: 8pt">File yang disarankan berformat .pdf, .jpg, atau .doc</p>
                                                         <p></p>
                                                         <table border = 0 align="right">
                                                             <tr>
@@ -270,6 +271,7 @@
                                                         <label>Upload Berkas</label>
                                                         <p></p>
                                                         <input type="file" name="file2" id="file2">
+                                                        <p class="help-block" style="font-size: 8pt">File yang disarankan berformat .pdf, .jpg, atau .doc</p>
                                                         <p></p>
                                                         <table border = 0 align="right">
                                                             <tr>
@@ -358,6 +360,7 @@
                                                         <label>Upload Berkas</label>
                                                         <p></p>
                                                         <input type="file" name="file3" id="file3">
+                                                        <p class="help-block" style="font-size: 8pt">File yang disarankan berformat .pdf, .jpg, atau .doc</p>
                                                         <p></p>
                                                         <table border = 0 align="right">
                                                             <tr>
