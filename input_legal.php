@@ -31,6 +31,7 @@
                                         <div class="form-group">
                                             <label>Site ID</label>
                                             <input class="form-control" id="siteid" name="siteid">
+                                            <p class="help-block" style="font-size: 8pt">Ex : ADL001</p>
                                             <p></p>
                                             <label>Area</label>
                                             <select class="form-control" id="area" name="area">
@@ -45,6 +46,7 @@
                                                     <?php
                                                             } ?>
                                             </select>
+                                            <p class="help-block" style="font-size: 8pt">Pilih salah satu dari list yang telah disediakan</p>
                                             <p></p>
                                             <label>Regional</label>
                                             <select class="form-control" id="regional" name="regional">
@@ -60,15 +62,19 @@
                                                     <?php
                                                             } ?>
                                             </select>
+                                            <p class="help-block" style="font-size: 8pt">Pilih salah satu dari list yang telah disediakan</p>
                                             <p></p>
                                             <label>Site Name</label>
                                             <input class="form-control" id="sitename" name="sitename">
+                                            <p class="help-block" style="font-size: 8pt">Ex : TUMAWA</p>
                                             <p></p>
                                             <label>Site Address</label>
                                             <input class="form-control" id="siteaddr" name="siteaddr">
+                                            <p class="help-block" style="font-size: 8pt">Ex : Jl. BATU </p>
                                             <p></p>
                                             <label>Vendor / Notaris </label>
                                             <input class="form-control" id="vendor" name="vendor">
+                                            <p class="help-block" style="font-size: 8pt">Ex : Kiki Faisal</p>
                                             <p></p>                                           
                                             <h2>Land Certification Project Accomplishment</h2>
                                             <label>Target Tahap 1</label>
@@ -121,6 +127,7 @@
                                             <h2>Informasi Kontrak / PO</h2>
                                             <label>No. Kontrak</label>
                                             <input class="form-control" id="no_kontrak" name="no_kontrak">
+                                            <p class="help-block" style="font-size: 8pt">Ex : 123</p>
                                             <p></p>                                 
                                             <label>Harga Pekerjaan</label>
                                             <div class="form-group input-group">
@@ -128,6 +135,7 @@
                                             <input type="text" class="form-control" id="harga" name="harga">
                                             <span class="input-group-addon">.00</span>
                                             </div>
+                                            <p class="help-block" style="font-size: 8pt">Ex : 125000</p>
                                             <p></p>
                                             <label>Tanggal Efektif Kontrak</label>
                                             <p></p>
@@ -139,9 +147,11 @@
                                             <p></p>
                                             <label>Subkontraktor</label>
                                             <input class="form-control" id="subkontraktor" name="subkontraktor">
+                                            <p class="help-block" style="font-size: 8pt">Ex : Junaedi Rahman</p>
                                             <p></p>
                                             <label>Remarks</label>
                                             <input class="form-control" id="remarks" name="remarks">
+                                            <p class="help-block" style="font-size: 8pt">Ex : YA</p>
                                             <p></p>
                                             <h2>Problem</h2>
                                         </div>
