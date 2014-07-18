@@ -9,9 +9,13 @@
     global $id_acc;
     global $count_acc;
     global $count_rej;
+    global $not_match;
+    global $wrong_date;
 
     $count_rej =0;
     $count_acc =0;
+    $not_match = false;
+    $wrong_date = false;
 
     $id_acc = array();
     $id_reject = array();
@@ -56,20 +60,75 @@
                         //echo "Sheet $i:<br /><br />Total rows in sheet $i  ".count($data->sheets[$i]['cells'])."<br />";
                         for($j=1;$j<=count($data->sheets[$i]['cells']);$j++) // loop used to get each row of the sheet
                         { 
-                          if($j>1) {
-                                $area = $data->sheets[$i]['cells'][$j][2];
-                                $region = $data->sheets[$i]['cells'][$j][3];
-                                $siteid = $data->sheets[$i]['cells'][$j][4];
-                                $name = $data->sheets[$i]['cells'][$j][5];
-                                $address = $data->sheets[$i]['cells'][$j][6];
-                                $vendor = $data->sheets[$i]['cells'][$j][7];
-                                $no = $data->sheets[$i]['cells'][$j][8];
-                                $harga = $data->sheets[$i]['cells'][$j][9];
-                                $awal = $data->sheets[$i]['cells'][$j][10];
-                                $akhir = $data->sheets[$i]['cells'][$j][11];
-                                $sub = $data->sheets[$i]['cells'][$j][12];
+                          if($j==1) {
+                                $html.="<tr>";
+                                for($k=1;$k<=count($data->sheets[$i]['cells'][$j]);$k++) // This loop is created to get data in a table format.
+                                {
+                                    $html.="<td>";
+                                    $html.=$data->sheets[$i]['cells'][$j][$k];
+                                    $html.="</td>";
+
+                                    $area = $data->sheets[$i]['cells'][$j][1];
+                                    $region = $data->sheets[$i]['cells'][$j][2];
+                                    $siteid = $data->sheets[$i]['cells'][$j][3];
+                                    $name = $data->sheets[$i]['cells'][$j][4];
+                                    $address = $data->sheets[$i]['cells'][$j][5];
+                                    $vendor = $data->sheets[$i]['cells'][$j][6];
+                                    $no = $data->sheets[$i]['cells'][$j][7];
+                                    $harga = $data->sheets[$i]['cells'][$j][8];
+                                    $awal = $data->sheets[$i]['cells'][$j][9];
+                                    $akhir = $data->sheets[$i]['cells'][$j][10];
+                                    $sub = $data->sheets[$i]['cells'][$j][11];
+                                    //$status = $data->sheets[$i]['cells'][$j][13];
+                                    $remarks = $data->sheets[$i]['cells'][$j][12];
+
+                                    if( $area!="AREA"||
+                                        $region!="REGION" ||
+                                        $siteid!="SITE ID" ||
+                                        $name!="SITE NAME" ||
+                                        $address!="SITE ADDRESS" ||
+                                        $vendor!="VENDOR" ||
+                                        $no!="No. Kontrak / PO" ||
+                                        $harga!="HARGA KONTRAK" ||
+                                        $awal!="TANGGAL EFEKTIF KONTRAK" ||
+                                        $akhir!="TANGGAL AKHIR KONTRAK" ||
+                                        $sub!="SUBKONTRAKTOR" ||
+                                        $remarks!="REMARKS"
+                                        ){
+                                        $not_match = true;
+                                    }
+                                }
+                          }
+
+                          if($j==2) {
+                                $awal = $data->sheets[$i]['cells'][$j][9];
+                                $akhir = $data->sheets[$i]['cells'][$j][10];
+                                $awal1 = substr($awal, 4,1);
+                                $awal2 = substr($awal, 7,1);
+                                $akhir1 = substr($akhir, 4,1);
+                                $akhir2 = substr($akhir, 7,1);
+                                if( $awal1!="/" && $awal2!="/" && $akhir1!="/" && $akhir2!="/"){
+                                    //global $wa;
+                                    //$wa = $awal1.$awal2."-".$awal."-".$akhir1.$akhir2;
+                                    $wrong_date=true;
+                                    break;
+                                }
+                          }
+
+                          if($j>1 && $not_match==false && $wrong_date==false) {
+                                $area = $data->sheets[$i]['cells'][$j][1];
+                                $region = $data->sheets[$i]['cells'][$j][2];
+                                $siteid = $data->sheets[$i]['cells'][$j][3];
+                                $name = $data->sheets[$i]['cells'][$j][4];
+                                $address = $data->sheets[$i]['cells'][$j][5];
+                                $vendor = $data->sheets[$i]['cells'][$j][6];
+                                $no = $data->sheets[$i]['cells'][$j][7];
+                                $harga = $data->sheets[$i]['cells'][$j][8];
+                                $awal = $data->sheets[$i]['cells'][$j][9];
+                                $akhir = $data->sheets[$i]['cells'][$j][10];
+                                $sub = $data->sheets[$i]['cells'][$j][11];
                                 //$status = $data->sheets[$i]['cells'][$j][13];
-                                $remarks = $data->sheets[$i]['cells'][$j][13];
+                                $remarks = $data->sheets[$i]['cells'][$j][12];
 
                             if(in_array($siteid, $id_inlegal)){
                                 $count_rej++;
@@ -100,22 +159,14 @@
                                                         "values ('". $siteid ."','". $area ."','". $region ."','". $name ."','". $address .
                                                         "','". $vendor ."','". $harga ."','". $awal ."','". $akhir ."', '". $sub ."','". $remarks ."',SYSDATE(),'EXCEL','".$no."');";
                          
-                                    $result = mysql_query($insertintolegal);
+                                    //$result = mysql_query($insertintolegal);
                                     //echo $insertintolegal;
                                     //echo "<br />";
                                 
                                 $html.="</tr>";
                             }
                           }
-                          else {
-                                $html.="<tr>";
-                                for($k=1;$k<=count($data->sheets[$i]['cells'][$j]);$k++) // This loop is created to get data in a table format.
-                                {
-                                    $html.="<td>";
-                                    $html.=$data->sheets[$i]['cells'][$j][$k];
-                                    $html.="</td>";
-                                }
-                          }
+                          
                         }
                     }
                 }
@@ -156,13 +207,106 @@
                         </div>
                         <!-- /.panel-heading -->
                         <div class="panel-body">
+
+
+            <?php if(isset($_FILES["upload_doc"])){ 
+                    if($not_match || $wrong_date) { ?>
+                    <div class="col-lg-12">
+                        <div class="panel panel-danger">
+                            <div class="panel-heading">
+                                SALAH FORMAT
+                            </div>
+                            <div class="panel-body">
+                                <p> <?php if($wrong_date) {echo "FORMAT DATA TANGGAL SALAH, Format Tanggal yang diterima sistem adalah : YYYY-MM-DD <br /><br />" ;}
+                                          if($not_match) { echo "Header Data Tidak Terbaca Identik dengan contoh Dokumen di bawah. <br />".$html."
+                                                                Perhatikan sekali lagi dan Pastikan FORMAT DATA dan URUTAN BENAR<br />
+                                                                Jika diperlukan, Unduh template dokumen upload
+                                                                <a href='file/template_upload.xls' target='_blank' style='color:red'>disini</a>";} ?> </p>
+                            </div>
+                        </div>
+                    </div>
+                    <?php }
+                    else { ?>
+                        <div class="row" id="keterangan_input">
+                            <div class="col-lg-12">
+                                <div class="panel panel-info">
+                                    <div class="panel-heading">
+                                        Info Legal
+                                    </div>
+                                    <div class="panel-body">
+                                        <?php //echo $target_path1; ?>
+                                        <?php if($count_acc>0){
+                                                echo $count_acc; ?> Data Berhasil ditambahkan dalam Database Legal, 
+                                        <?php if($count_acc<=50) { ?>
+                                            berikut detail datanya :
+                                            <br />
+                                            <?php echo $html; ?>
+                                        <?php } else  { ?>
+                                            dengan SITE_ID :
+                                        <?php foreach ($id_acc as $key) {
+                                            echo $key." , ";
+                                        }}
+                                            echo "<br />";
+                                            echo "<br />";
+                                            }?>
+                                            
+                                        <?php if($count_rej>0){
+                                            $string = "";
+                                            echo $count_rej." Data Konflik dan tidak berhasil ditambahkan, cek LOG FILE dengan nama tanggal hari ini pada Folder D:/log_trouble pada PC anda untuk melihat detail Konflik.";
+                                            $string.= $count_rej." Data Konflik dan tidak berhasil ditambahkan, dengan detail LOG berikut :\r\n";
+                                            foreach ($id_reject as $key) {
+
+                                            $string.= "SITE_ID : ".$key['site_id']." KONFLIK dengan data >> ".
+                                                $key['site_id']." ditambahkan pada ".$key['log_added']." lewat data ".$key['log_input']."\r\n";
+                                        } 
+
+                                        $result = " SELECT date(sysdate()) as now, time(sysdate()) as now2";
+                                        
+                                        $results = mysql_query($result);
+                                        $arr_result = mysql_fetch_array($results);
+
+                                        $dir = "D:/log_trouble";
+
+                                        if( is_dir($dir) === false )
+                                        {
+                                            mkdir($dir);
+                                        }
+
+                                        $myFile='D:/log_trouble/'.$arr_result['now'].'.txt';
+
+                                        if( is_file($myFile) === true )
+                                        {
+                                            $i = 1;
+                                            do
+                                            {
+                                                $myFile='D:/log_trouble/'.$arr_result['now'].'('.$i.').txt';
+                                                $i++;   
+                                            }
+                                            while(is_file($myFile) === true);
+                                        }
+
+                                        
+                                        $fh = fopen($myFile, 'w') or die("can't open file");
+                                        fwrite($fh, $string);
+                                        fclose($fh);
+                                        }?>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    <?php } ?>
+            <?php } ?>
+
                                 <div class="col-lg-12">
                                     <div class="panel panel-primary">
                                         <div class="panel-heading">
                                             FORMAT EXCEL INPUTAN
                                         </div>
                                         <div class="panel-body">
-                                            <p>
+                                            <p> Sistem hanya menerima dokumen upload Excel 97/2003 Workload dengan tipe extention .xls, dengan urutan kolom pada data excel sebagai berikut : <br />
+                                            <input type="image" src="example upload.PNG">
+                                            File dengan input atau format salah akan merubah database, maka HATI-HATI
                                             </p>
                                         </div>
                                     </div>
@@ -189,78 +333,6 @@
                     </div>
                 </div>                              
             </form>
-
-            <?php if(isset($_FILES["upload_doc"])){ ?>
-                <div class="row" id="keterangan_input">
-                    <div class="col-lg-12">
-                        <div class="panel panel-info">
-                            <div class="panel-heading">
-                                Info Legal
-                            </div>
-                            <div class="panel-body">
-                                <?php //echo $target_path1; ?>
-                                <?php if($count_acc>0){
-                                        echo $count_acc; ?> Data Berhasil ditambahkan dalam Database Legal, 
-                                <?php if($count_acc<=50) { ?>
-                                    berikut detail datanya :
-                                    <br />
-                                    <?php echo $html; ?>
-                                <?php } else  { ?>
-                                    dengan SITE_ID :
-                                <?php foreach ($id_acc as $key) {
-                                    echo $key." , ";
-                                }}
-                                    echo "<br />";
-                                    echo "<br />";
-                                    }?>
-                                    
-                                <?php if($count_rej>0){
-                                    $string = "";
-                                    echo $count_rej." Data Konflik dan tidak berhasil ditambahkan, cek LOG FILE dengan nama tanggal hari ini pada Folder D:/log_trouble pada PC anda untuk melihat detail Konflik.";
-                                    $string.= $count_rej." Data Konflik dan tidak berhasil ditambahkan, dengan detail LOG berikut :\r\n";
-                                    foreach ($id_reject as $key) {
-
-                                    $string.= "SITE_ID : ".$key['site_id']." KONFLIK dengan data >> ".
-                                        $key['site_id']." ditambahkan pada ".$key['log_added']." lewat data ".$key['log_input']."\r\n";
-                                } 
-
-                                $result = " SELECT date(sysdate()) as now, time(sysdate()) as now2";
-                                
-                                $results = mysql_query($result);
-                                $arr_result = mysql_fetch_array($results);
-
-                                $dir = "D:/log_trouble";
-
-                                if( is_dir($dir) === false )
-                                {
-                                    mkdir($dir);
-                                }
-
-                                $myFile='D:/log_trouble/'.$arr_result['now'].'.txt';
-
-                                if( is_file($myFile) === true )
-                                {
-                                    $i = 1;
-                                    do
-                                    {
-                                        $myFile='D:/log_trouble/'.$arr_result['now'].'('.$i.').txt';
-                                        $i++;   
-                                    }
-                                    while(is_file($myFile) === true);
-                                }
-
-                                
-                                $fh = fopen($myFile, 'w') or die("can't open file");
-                                fwrite($fh, $string);
-                                fclose($fh);
-                                }?>
-                                
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            <?php } ?>
-
         </div>
 
     <!-- Core Scripts - Include with every page -->
