@@ -142,18 +142,23 @@
                                                         </fieldset>
                                                         <label>Nama</label>
                                                         <input class="form-control" id="nama" name="nama">
+                                                        <p class="help-block" style="font-size: 8pt">Ex : Kiki Faisal</p>
                                                         <p></p>
                                                         <label>Departemen</label>
                                                         <input class="form-control" id="dept" name="dept">
+                                                        <p class="help-block" style="font-size: 8pt">Ex : NOS, Assest Management Database Integrator</p>
                                                         <p></p>
                                                         <label>Divisi</label>
                                                         <input class="form-control" id="div" name="div">
+                                                        <p class="help-block" style="font-size: 8pt">Ex : Assest Management</p>
                                                         <p></p>
                                                         <label>Email</label>
                                                         <input class="form-control" id="email" name="email">
+                                                        <p class="help-block" style="font-size: 8pt">Ex : kiki@telkomsel.co.id</p>
                                                         <p></p>
                                                         <label>No. Handphone</label>
                                                         <input class="form-control" id="hp" name="hp">
+                                                        <p class="help-block" style="font-size: 8pt">Ex : 08123250987</p>
                                                         <p></p>
                                                         <label>Area</label>
                                                         <select class="form-control" id="area" name="area">
@@ -188,6 +193,7 @@
                                                         <p></p>
                                                         <label>Status</label>
                                                         <input class="form-control" id="status" name="status">
+                                                        <p class="help-block" style="font-size: 8pt">Ex : True, False</p>
                                                         <table border = 0 align="right"><br>
                                                             <tr>
                                                                 <td align="center" width="70px"><button type="submit" class="btn btn-info btn-circle"><i class="fa fa-check"></i>
@@ -276,18 +282,23 @@
                                                             <div id="toggleText2" style="display: none">
                                                                 <label>Nama</label>
                                                                 <input class="form-control" id="nama" name="nama" value=<?php echo $data['username']; ?>>
+                                                                <p class="help-block" style="font-size: 8pt">Ex : Kiki Faisal</p>
                                                                 <p></p>
                                                                 <label>Departemen</label>
                                                                 <input class="form-control" id="dept" name="dept" value=<?php echo $data['department']; ?>>
+                                                                <p class="help-block" style="font-size: 8pt">Ex : NOS, Assest Management Database Integrator</p>
                                                                 <p></p>
                                                                 <label>Divisi</label>
                                                                 <input class="form-control" id="div" name="div" value=<?php echo $data['division']; ?>>
+                                                                <p class="help-block" style="font-size: 8pt">Ex : Assest Management</p>
                                                                 <p></p>
                                                                 <label>Email</label>
                                                                 <input class="form-control" id="email" name="email" value=<?php echo $data['email']; ?>>
+                                                                <p class="help-block" style="font-size: 8pt">Ex : kiki@telkomsel.co.id</p>
                                                                 <p></p>
                                                                 <label>No. Handphone</label>
                                                                 <input class="form-control" id="hp" name="hp" value=<?php echo $data['handphone']; ?>>
+                                                                <p class="help-block" style="font-size: 8pt">Ex : 08123250987</p>
                                                                 <p></p>
                                                                 <label>Area</label>
                                                                 <select class="form-control" id="area" name="area">
@@ -327,6 +338,7 @@
                                                                 <p></p>
                                                                 <label>Status</label>
                                                                 <input class="form-control" id="status" name="status" value=<?php echo $data['enabled']; ?> >
+                                                                <p class="help-block" style="font-size: 8pt">Ex : True, False</p>
                                                                 <table border = 0 align="right"><br>
                                                                     <tr>
                                                                         <td align="center" width="70px"><button type="submit" class="btn btn-info btn-circle"><i class="fa fa-check"></i>
