@@ -241,7 +241,7 @@
                                                      if(!isset($_GET['idsearch']))
                                                      {
                                                         ?>
-                                                        <p class="help-block">Anda harus memasukkan Site ID terlebih dahulu</p><?php } ?>
+                                                        <p class="help-block">Anda harus memasukkan ID User terlebih dahulu</p><?php } ?>
                                                         </td>
                                                     </tr>
 
