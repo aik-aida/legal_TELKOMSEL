@@ -51,6 +51,12 @@ h3        {
        overflow-x: scroll;
        overflow-y: hidden;
     }
+.scroll-table-y{
+      display: block;
+	  height: 220px;
+	  overflow-y: scroll;
+    }
+
 .outerTableColor2 { background-color: #620C00; }
 .outerTableColor { background-color: #660000; }
 .OddRow { background-color: #FFFFCC; }
