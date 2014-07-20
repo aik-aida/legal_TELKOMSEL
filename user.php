@@ -285,11 +285,13 @@
                                                                 <p class="help-block" style="font-size: 8pt">Ex : Kiki Faisal</p>
                                                                 <p></p>
                                                                 <label>Departemen</label>
-                                                                <input class="form-control" id="dept" name="dept" value=<?php echo $data['department']; ?>>
+                                                                <textarea class="form-control" rows="1" name="dept[]" id="dept">
+                                                                    <?php echo $data['department']; ?></textarea>
                                                                 <p class="help-block" style="font-size: 8pt">Ex : NOS, Assest Management Database Integrator</p>
                                                                 <p></p>
                                                                 <label>Divisi</label>
-                                                                <input class="form-control" id="div" name="div" value=<?php echo $data['division']; ?>>
+                                                                <textarea class="form-control" rows="1" name="div[]" id="div">
+                                                                    <?php echo $data['division']; ?></textarea>
                                                                 <p class="help-block" style="font-size: 8pt">Ex : Assest Management</p>
                                                                 <p></p>
                                                                 <label>Email</label>
