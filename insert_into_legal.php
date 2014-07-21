@@ -1,6 +1,9 @@
 <?php
 	include '../db_connect.php'; 
 
+	$sqlcek = "select site_id from legal where site_id='".$_POST['siteid']."'";
+	
+
 	$insertintolegal =  "insert into legal(site_id,site_area,site_region,site_name,site_address,target_tahap1, 
 						 target_tahap2, target_tahap3, bapd_tahap1, bapd_tahap2, bapd_tahap3,
 						 bast_tahap1, bast_tahap2, bast_tahap3, vendor, no_kontrak, harga_pekerjaan,tgl_efektif_kontrak,

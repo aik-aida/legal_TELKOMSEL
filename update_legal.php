@@ -39,7 +39,7 @@
                                         <div class="form-group">
                                             <label>Site ID</label>
                                             <input class="form-control" id="siteid" name="siteid"
-                                                value=<?php echo $data['site_id']; ?> >
+                                                value=<?php echo "'".$data['site_id']."'"; ?> >
                                                 <p class="help-block" style="font-size: 8pt">Ex : ADL001</p>
                                             <p></p>
                                             <label>Area</label>
@@ -48,11 +48,13 @@
                                                 include_once '../db_connect.php'; 
                                                 $sql_area = "select * from area";
                                                 $master = mysql_query($sql_area);
-                                                while($arr_master = mysql_fetch_array($master)) { ?>
-                                                    <option value=<?php echo $arr_master['area_code']; ?>
-                                                            selected=<?php if($data['site_area']==$arr_master['area_code'])
-                                                                                {echo "selected";}
-                                                                            else{echo "";} ?>
+                                                while($arr_master = mysql_fetch_array($master)) { 
+                                                        echo $arr_master['area_code']."---".$data['site_area'];
+                                                    ?>
+
+                                                    <option value=<?php echo $arr_master['area_code']; ?> 
+                                                            <?php if($data['site_area']==$arr_master['area_code'])
+                                                                                {echo "selected='selected'";} ?>
                                                             >
                                                         <?php echo $arr_master['area_description']; ?></option>
                                                 <?php
@@ -68,9 +70,8 @@
                                                 $master2 = mysql_query($sql_region);
                                                 while($arr_master2 = mysql_fetch_array($master2)) { ?>
                                                     <option value=<?php echo $arr_master2['region_code']; ?>
-                                                            selected=<?php if($data['site_region']==$arr_master2['region_code'])
-                                                                                {echo "selected";}
-                                                                            else{echo "";} ?>
+                                                            <?php if($data['site_region']==$arr_master2['region_code'])
+                                                                                {echo "selected='selected'";}?>
                                                             >
                                                         <?php echo $arr_master2['region_description']; ?></option>
                                                 <?php
@@ -90,7 +91,7 @@
                                             <p></p>
                                             <label>Vendor / Notaris </label>
                                             <input class="form-control" id="vendor" name="vendor"
-                                                    value=<?php echo $data['vendor']; ?> >
+                                                    value=<?php echo "'".$data['vendor']."'"; ?> >
                                             <p class="help-block" style="font-size: 8pt">Ex : Kiki Faisal</p>
                                             <p></p>                                           
                                             <h2>Land Certification Project Accomplishment</h2>

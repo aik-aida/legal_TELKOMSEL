@@ -1,3 +1,9 @@
+<script type="text/javascript">
+    $(document).ready(function(){
+        var id = $("siteid").val();
+        
+        });
+</script>
 
 <!DOCTYPE html>
 <html>

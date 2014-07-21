@@ -1,26 +1,54 @@
 <?php 
     global $count_insert;
+    global $id_inlegal;
+    global $id_reject;
+    global $id_acc;
+    global $count_rej;
+
+
+    $count_rej =0;
     $count_insert=0;
+
+    $id_reject = array();
+    $id_inlegal = array();
+    $id_acc = array();
+
+    
     if(isset($_POST['dtmaster'])){
+        include_once '../db_connect.php';
+
+        $sql_legal = "select site_id from legal";
+        $tmp_legal = mysql_query($sql_legal) or die(mysql_error());
+        while($dt = mysql_fetch_array($tmp_legal)) {
+            array_push($id_inlegal, $dt['site_id']);
+        }
+    
+
         $from_master = $_POST['dtmaster'];
         foreach ($from_master as $siteid) {
             //echo $siteid;
             //echo "<br />";
-            
-            include_once '../db_connect.php';
-            $sql = "select * from tamara_asset_header where site_id='".$siteid."'";
-            $master = mysql_query($sql) or die(mysql_error());
-            $temp = mysql_fetch_array($master);
+            if(in_array($siteid, $id_inlegal)){
+                $count_rej++;
+                $sql_reject = "select site_id, log_added, log_input from legal where site_id='".
+                                                $siteid."';";
+                $tmp_reject = mysql_query($sql_reject) or die(mysql_error());
+                $dt = mysql_fetch_array($tmp_reject);
+                array_push($id_reject, $dt);
+                //print_r($id_reject);
+                //echo "<br />";
+                }
+            else {
+                $sql = "select * from tamara_asset_header where site_id='".$siteid."'";
+                $master = mysql_query($sql) or die(mysql_error());
+                $temp = mysql_fetch_array($master);
 
-            $sql_check = "select * from legal where site_id='".$siteid."'";
-            $check = mysql_query($sql_check) or die(mysql_error());
-            $temp_check = mysql_fetch_array($check);
-
-            if($temp_check==NULL) {
+ 
                 $sql_insert = "insert into legal (site_id, site_area, site_region, site_name, site_address, log_added, log_input)".
                           " values ('".$temp['site_id']."','".$temp['area']."','".$temp['region']."','".$temp['site_name']."','".$temp['address']."',SYSDATE(),'MASTER')";
                 $insert = mysql_query($sql_insert);
                 $count_insert++;
+                array_push($id_acc, $siteid); 
             }
         }
     } 
@@ -604,7 +632,56 @@ if ($count >0) {
                             Info Legal
                         </div>
                         <div class="panel-body">
-                            Telah ditambahkan <?php echo $count_insert ?> data baru dari Data Master.
+                                        <?php //echo $target_path1; ?>
+                                        <?php if($count_insert>0){
+                                                echo $count_insert; ?> Data Berhasil ditambahkan dalam Database Legal, dengan SITE_ID :
+                                                <?php foreach ($id_acc as $key) {
+                                                    echo $key." , ";
+                                                }
+                                            echo "<br />";
+                                            echo "<br />";
+                                            }
+                                         if($count_rej>0){
+                                            $string = "";
+                                            echo $count_rej." Data Konflik dan tidak berhasil ditambahkan, cek LOG FILE dengan nama tanggal hari ini pada Folder D:/log_trouble pada PC anda untuk melihat detail Konflik.";
+                                            $string.= $count_rej." Data Konflik dan tidak berhasil ditambahkan, dengan detail LOG berikut :\r\n";
+                                            foreach ($id_reject as $key) {
+
+                                            $string.= "SITE_ID : ".$key['site_id']." KONFLIK dengan data >> ".
+                                                $key['site_id']." ditambahkan pada ".$key['log_added']." lewat data ".$key['log_input']."\r\n";
+                                            } 
+
+                                            $result_date = " SELECT date(sysdate()) as now, time(sysdate()) as now2";
+                                            
+                                            $results_date = mysql_query($result_date);
+                                            $arr_resultdate = mysql_fetch_array($results_date);
+
+                                            $dir = "D:/log_trouble";
+
+                                            if( is_dir($dir) === false )
+                                            {
+                                                mkdir($dir);
+                                            }
+
+                                            $myFile='D:/log_trouble/'.$arr_resultdate['now'].'.txt';
+
+                                            if( is_file($myFile) === true )
+                                            {
+                                                $i = 1;
+                                                do
+                                                {
+                                                    $myFile='D:/log_trouble/'.$arr_resultdate['now'].'('.$i.').txt';
+                                                    $i++;   
+                                                }
+                                                while(is_file($myFile) === true);
+                                            }
+
+                                            
+                                            $fh = fopen($myFile, 'w') or die("can't open file");
+                                            fwrite($fh, $string);
+                                            fclose($fh);
+                                        }?>
+                                        
                         </div>
                     </div>
                 </div>
