@@ -1,0 +1,4 @@
+MASALAH : region sama area
+Harus diperhatikan :
+pemegang dokumen asli -> text area
+update_legal : ganti text area vendor, subkontraktor,PIC

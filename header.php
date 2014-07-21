@@ -77,6 +77,7 @@ setTimeout("show_date()",1000);
                                     </div>
                                 </a>
                             </li>
+
                         </ul>
                 </li>
                 <li>
@@ -85,11 +86,28 @@ setTimeout("show_date()",1000);
                     </a>
                 </li>
                 <!-- aku tambah yg ini -->
-                <li>
-                    <a class="dropdown-toggle"  href="input_problem.php">
-                         <b><font size="2.5">[ Input Problem ]</b></font>
+                <li class= "dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                     <b><font size="2.5">[ Management ]</b></font> <i class="fa fa-caret-down"></i>
                     </a>
+                        <ul class="dropdown-menu dropdown-messages">
+                            <li>
+                                <a class="dropdown-toggle" href="input_problem.php">
+                                    <div>
+                                        <strong><font size="2.5">[ Problem Management ]</b></font></strong>
+                                    </div>
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-toggle" href="user.php">
+                                    <div>
+                                        <strong> <b><font size="2.5">[ User Management ]</b></font></strong>
+                                    </div>
+                                </a>
+                            </li>
+                        </ul>
                 </li>
+
                     <table align="right" CELLPADDING="150" border="0">
                         <tr ><td align="right" height = "30 "><font size=-1 face=Arial,Helvetica,Geneva color=blue>
                                 <?php if(isset($_SESSION['useremployee'])) 

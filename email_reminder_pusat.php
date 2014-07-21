@@ -31,19 +31,21 @@
 	{
 		
 		$msg = '<html><body>';
-		$msg .= "Berikut lampiran data site dan jangka waktu akan berakhirnya kontrak";
+		$msg .= "Yth Bapak/Ibu,<br><br>";
+		$msg .= "Berikut kami sampaikan informasi Kontrak / PO yang akan berakhir jangka waktunya : <br>";
 		$msg .= '<br><table border = "1" cellspacing="0">' ;
 		$msg .= "<tr bgcolor =YELLOW><td width=40><center>No</center></td>
 			         <td width=100><center>Site ID</center></td>
 			         <td width=100><center>Site Name</center></td>
 			         <td width=100><center>Site Region</center></td>
-			 		 <td width=200><center>Waktu akan Berakhirnya Kontrak</center></td>
-			         <td width=100><center>Tanggal</center></td></tr>";
+			         <td width=200><center>Nomor Kontrak / PO</center></td>
+			 		 <td width=200><center>Jangka Waktu Kontrak</center></td>
+			         <td width=100><center>Tanggal Berakhirnya Kontrak</center></td></tr>";
 
-		$ambilid = " SELECT SYSDATE(), site_id, site_area, site_name, site_region, tgl_akhir_kontrak, 
+		$ambilid = " SELECT SYSDATE(), site_id, site_area, site_name, site_region, tgl_akhir_kontrak, no_kontrak, 
 		                    floor((datediff(tgl_akhir_kontrak,SYSDATE()))/7) as selisih_minggu
 			   	     from legal
-			   	     where (datediff(tgl_akhir_kontrak,SYSDATE()))/30 > 2";
+			   	     where ((datediff(tgl_akhir_kontrak,SYSDATE()))/30 < 2) && ((datediff(tgl_akhir_kontrak,SYSDATE()))/30 > 0)";
 		$ambilids = mysql_query($ambilid);
 		while($b = mysql_fetch_array($ambilids))
 		{
@@ -51,18 +53,38 @@
 		         	   <td width=100><center>".$b['site_id']."</center></td>
 		               <td width=100><center>".$b['site_name']."</center></td>
 		               <td width=100><center>".$b['site_region']."</center></td>
-		               <td width=100><center>".$b['selisih_minggu']."</center></td>
+		               <td width=100><center>".$b['no_kontrak']."</center></td>
+		               <td width=100><center>".$b['selisih_minggu']." minggu</center></td>
 		 		       <td width=200><center>".$b['tgl_akhir_kontrak']."</center></td></tr>";
 		 	$i++;
 		}
 
-		$msg.= '</table></body></html>';
+		$msg.= '</table>';
+		$msg.= "<br>Mohon dapat dilakukan perpanjangan atau penutupan atau hal lainnya ke departemen atau unit terkait.";
+		$msg.= "<br>Terima Kasih<br>";
+		$msg.='</body></html>';
 		$i=1;
+
+		//dicek lagi untuk masalah region code
+		/*
+		$cekemail = " SELECT email
+			          from user_legal
+			          where region_code_legal ='".$a[0]."'";
+			           	  
+		$cekemails = mysql_query($cekemail);
+
+		while($arr_cekemail = mysql_fetch_array($cekemails))
+		{
+			//echo $cekemails;
+			$to = $arr_cekemail[0];
+			mail($to, $subjectRegion, $msg, $headers);
+				//$to = '';
+		}
 		//$msg = 'lalalla';
 		//$arr_cekemail[0];
-		mail('aris_firman@telkomsel.co.id', $subjectPusat, $msg, $headers);
+		//mail('aris_firman@telkomsel.co.id', $subjectPusat, $msg, $headers);
 
-		//echo $msg;
+		//echo $msg;*/
 	}
 
 

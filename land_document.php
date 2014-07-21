@@ -120,10 +120,10 @@
                                                     <div id="toggleText" style="display: none">
                                                         <p></p>
                                                         <label>Land Status</label>
-                                                        <input class="form-control" id="status" name="status" value=<?php echo $data['land_shm_status']; ?>>
+                                                        <input class="form-control" id="status" name="status" value=<?php echo "'".$data['land_shm_status']."'"; ?>>
                                                         <p></p>
                                                         <label>SHM/PKS No.</label>
-                                                        <input class="form-control" id="no" name="no" value=<?php echo $data['land_shm_no']; ?>>
+                                                        <input class="form-control" id="no" name="no" value=<?php echo "'".$data['land_shm_no']."'"; ?>>
                                                         <p></p>
                                                         <label>Title Dokumen</label>
                                                         <select class="form-control" id="title" name="title" >
@@ -148,7 +148,7 @@
                                                         </select>
                                                         <p></p>
                                                         <label>Pemegang Dokumen Asli</label>
-                                                        <input class="form-control" id="owner" name="owner" value=<?php echo $data['land_shm_owner']; ?>>
+                                                        <input class="form-control" id="owner" name="owner" value=<?php echo "'".$data['land_shm_owner']."'"; ?>>
                                                         <p></p>
                                                         <label>Valid Period</label>
                                                         <p></p>
@@ -227,7 +227,7 @@
                                                     <div id="toggleText2" style="display: none">
                                                         <p></p>
                                                         <label>SHM/PKS No.</label>
-                                                        <input class="form-control" id="no2" name="no2" value=<?php echo $data['land_access_no']; ?>>
+                                                        <input class="form-control" id="no2" name="no2" value=<?php echo "'".$data['land_access_no']."'"; ?>>
                                                         <p></p>
                                                         <label>Title Dokumen</label>
                                                         <select class="form-control" id="title2" name="title2">
@@ -252,7 +252,7 @@
                                                         </select>
                                                         <p></p>
                                                         <label>Pemegang Dokumen Asli</label>
-                                                        <input class="form-control" id="owner2" name="owner2" value=<?php echo $data['land_access_owner']; ?>>
+                                                        <input class="form-control" id="owner2" name="owner2" value=<?php echo "'".$data['land_access_owner']."'"; ?>>
                                                         <p></p>
                                                         <label>Valid Period</label>
                                                         <p></p>
@@ -270,6 +270,8 @@
                                                         <p></p>
                                                         <label>Upload Berkas</label>
                                                         <p></p>
+                                                        <?php if($data['land_access_path']!=NULL){
+                                                            ?> <label><?php echo $data['land_access_path']; ?></label> <?php }?>
                                                         <input type="file" name="file2" id="file2">
                                                         <p class="help-block" style="font-size: 8pt">File yang disarankan berformat .pdf, .jpg, atau .doc</p>
                                                         <p></p>
@@ -328,14 +330,14 @@
                                                     <div id="toggleText3" style="display: none">
                                                         <p></p>
                                                         <label>NOP</label>
-                                                        <input class="form-control" id="nop" name="nop" value=<?php echo $data['land_pajak_nop']; ?>>
+                                                        <input class="form-control" id="nop" name="nop" value=<?php echo "'".$data['land_pajak_nop']."'"; ?>>
                                                         <p></p>
                                                         <label>PBB Due Date</label>
                                                         <p></p>
                                                         <input id="pbbdate" type="date" name="pbbdate" value=<?php echo $data['land_pajak_pbb_date']; ?>>
                                                         <p></p>
                                                         <label>PBB Amount</label>
-                                                        <input class="form-control" id="pbbamount" name="pbbamount" value=<?php echo $data['land_pajak_pbb_amount']; ?>>
+                                                        <input class="form-control" id="pbbamount" name="pbbamount" value=<?php echo "'".$data['land_pajak_pbb_amount']."'"; ?>>
                                                         <p></p>
                                                         <label>Paid Status</label>
                                                         <select class="form-control" id="paidstatus" name="paidstatus" >
@@ -359,6 +361,8 @@
                                                         <p></p>
                                                         <label>Upload Berkas</label>
                                                         <p></p>
+                                                        <?php if($data['land_pajak_path']!=NULL){
+                                                            ?> <label><?php echo $data['land_pajak_path']; ?></label> <?php }?>
                                                         <input type="file" name="file3" id="file3">
                                                         <p class="help-block" style="font-size: 8pt">File yang disarankan berformat .pdf, .jpg, atau .doc</p>
                                                         <p></p>
