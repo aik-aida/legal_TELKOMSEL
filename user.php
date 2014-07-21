@@ -281,21 +281,19 @@
                                                         <ul>
                                                             <div id="toggleText2" style="display: none">
                                                                 <label>Nama</label>
-                                                                <input class="form-control" id="nama" name="nama" value=<?php echo $data['username']; ?>>
+                                                                <input class="form-control" id="nama" name="nama" value=<?php echo "'".$data['username']."'"; ?>>
                                                                 <p class="help-block" style="font-size: 8pt">Ex : Kiki Faisal</p>
                                                                 <p></p>
                                                                 <label>Departemen</label>
-                                                                <textarea class="form-control" rows="1" name="dept[]" id="dept">
-                                                                    <?php echo $data['department']; ?></textarea>
+                                                                <input class="form-control" id="dept" name="dept" value=<?php echo "'".$data['department']."'"; ?> >
                                                                 <p class="help-block" style="font-size: 8pt">Ex : NOS, Assest Management Database Integrator</p>
                                                                 <p></p>
                                                                 <label>Divisi</label>
-                                                                <textarea class="form-control" rows="1" name="div[]" id="div">
-                                                                    <?php echo $data['division']; ?></textarea>
+                                                                <input class="form-control" id="div" name="diiv" value=<?php echo "'".$data['division']."'"; ?> >
                                                                 <p class="help-block" style="font-size: 8pt">Ex : Assest Management</p>
                                                                 <p></p>
                                                                 <label>Email</label>
-                                                                <input class="form-control" id="email" name="email" value=<?php echo $data['email']; ?>>
+                                                                <input class="form-control" id="email" name="email" value=<?php echo "'".$data['email']."'"; ?>>
                                                                 <p class="help-block" style="font-size: 8pt">Ex : kiki@telkomsel.co.id</p>
                                                                 <p></p>
                                                                 <label>No. Handphone</label>
@@ -310,8 +308,8 @@
                                                                         $master = mysql_query($sql_area);
                                                                         while($arr_master = mysql_fetch_array($master)) { ?>
                                                                             <option value=<?php echo $arr_master['area_code']; ?>
-                                                                                    selected=<?php if($data['area_code_legal']==$arr_master['area_code'])
-                                                                                                        {echo "selected";}
+                                                                                    <?php if($data['area_code_legal']==$arr_master['area_code'])
+                                                                                                        {echo "selected=selected";}
                                                                                                     else{echo "";} ?>
                                                                                     >
                                                                                 <?php echo $arr_master['area_description']; ?></option>
@@ -328,8 +326,8 @@
                                                                     $master2 = mysql_query($sql_region);
                                                                     while($arr_master2 = mysql_fetch_array($master2)) { ?>
                                                                         <option value=<?php echo $arr_master2['region_code']; ?>
-                                                                                selected=<?php if($data['region_code_legal']==$arr_master2['region_code'])
-                                                                                                    {echo "selected";}
+                                                                                <?php if($data['region_code_legal']==$arr_master2['region_code'])
+                                                                                                    {echo "selected=selected";}
                                                                                                 else{echo "";} ?>
                                                                                 >
                                                                             <?php echo $arr_master2['region_description']; ?></option>
