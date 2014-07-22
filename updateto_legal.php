@@ -29,17 +29,35 @@
 	$pic = $_POST['pic'];
 	$status = $_POST['stproblem'];
 	$count = 0;
+
 	foreach ($choose as $key)
 	{
+
 		$updateintodetailproblem =  "update detail_problem set deskripsi='". $deskripsi[$count] ."', pic='". $pic[$count] .
 									"', status_problem='". $status[$count] ."' where site_id='". $_POST['siteid'] ."' and id_jenis_problem=
-								 	".$choose[$count].";";
+								 	".$key.";";
 		echo $updateintodetailproblem;
 		echo "<br />";
-		$result2 = mysql_query($updateintodetailproblem);
+
+		echo $key;
+		echo "<br />";
+		echo $_POST['siteid'];
+		echo "<br />";
+		print_r($_POST['klasifikasiproblem']);
+		echo "<br />";		
+		print_r($deskripsi);
+		echo "<br />";
+		print_r($pic);
+		echo "<br />";
+		print_r($status);
+		echo "<br />";
+		
+	
+
+		//$result2 = mysql_query($updateintodetailproblem);
 		$count++;
 
 	}
 
-	header("Location:land_document.php?id=".$_POST['siteid']);
+	//header("Location:land_document.php?id=".$_POST['siteid']);
 ?>

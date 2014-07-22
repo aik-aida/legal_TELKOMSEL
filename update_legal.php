@@ -49,10 +49,9 @@
                                                 $sql_area = "select * from area";
                                                 $master = mysql_query($sql_area);
                                                 while($arr_master = mysql_fetch_array($master)) { 
-                                                        echo $arr_master['area_code']."---".$data['site_area'];
                                                     ?>
 
-                                                    <option value=<?php echo $arr_master['area_code']; ?> 
+                                                    <option value=<?php echo "'".$arr_master['area_code']."'"; ?> 
                                                             <?php if($data['site_area']==$arr_master['area_code'])
                                                                                 {echo "selected='selected'";} ?>
                                                             >
@@ -69,7 +68,7 @@
                                                 $sql_region = "select * from region";
                                                 $master2 = mysql_query($sql_region);
                                                 while($arr_master2 = mysql_fetch_array($master2)) { ?>
-                                                    <option value=<?php echo $arr_master2['region_code']; ?>
+                                                    <option value=<?php echo "'".$arr_master2['region_code']."'"; ?>
                                                             <?php if($data['site_region']==$arr_master2['region_code'])
                                                                                 {echo "selected='selected'";}?>
                                                             >
@@ -81,7 +80,7 @@
                                             <p></p>
                                             <label>Site Name</label>
                                             <input class="form-control" id="sitename" name="sitename"
-                                                    value=<?php echo $data['site_name']; ?> >
+                                                    value=<?php echo "'".$data['site_name']."'"; ?> >
                                             <p class="help-block" style="font-size: 8pt">Ex : TUMAWA</p>
                                             <p></p>
                                             <label>Site Address</label>
@@ -148,13 +147,13 @@
                                         </div>
                                 </div>
                                 <div class="col-lg-6">
-                                    <form role="form" action="updateto_legal.php?id=".<?php echo $data['site_id']; ?> method="POST">
+                                    <form role="form" action="updateto_legal.php" method="POST">
                                         <div class="form-group">
                                             
                                             <h2>Informasi Kontrak / PO</h2>
                                             <label>No. Kontrak</label>
                                             <input class="form-control" id="no_kontrak" name="no_kontrak" 
-                                                    value=<?php echo $data['no_kontrak']; ?>>
+                                                    value=<?php echo "'".$data['no_kontrak']."'"; ?>>
                                             <p class="help-block" style="font-size: 8pt">Ex : 123</p>
                                             <p></p>                                             
                                             <label>Harga Pekerjaan</label>
@@ -178,12 +177,12 @@
                                             <p></p>
                                             <label>Subkontraktor</label>
                                             <input class="form-control" id="subkontraktor" name="subkontraktor"
-                                                    value=<?php echo $data['subkontraktor']; ?> >
+                                                    value=<?php echo "'".$data['subkontraktor']."'"; ?> >
                                             <p class="help-block" style="font-size: 8pt">Ex : Junaedi Rahman</p>
                                             <p></p>
                                             <label>Remarks</label>
                                             <input class="form-control" id="remarks" name="remarks"
-                                                    value=<?php echo $data['remarks']; ?> >
+                                                    value=<?php echo "'".$data['remarks']."'"; ?> >
                                             <p class="help-block" style="font-size: 8pt">Ex : YA</p>
                                             <p></p>
                                             <h2>Problem</h2>
@@ -204,16 +203,20 @@
                                                         <?php  
                                                             include_once '../db_connect.php'; 
                                                             $result = mysql_query("SELECT id_jenis_problem, klasifikasi FROM jenisproblem");
-                                                            $user_dt = mysql_query("SELECT * FROM detail_problem WHERE site_id='".$data['site_id']."';");
-
+                                                            
+                                                            /*
                                                             $user_problem = array();
 
-                                                            while ($prob = mysql_fetch_array($user_dt)) {
+                                                            while () {
                                                                 array_push($user_problem, $prob);
-                                                            }
+                                                            }*/
 
                                                             while($temp = mysql_fetch_array($result)) { 
-                                                                if($user_problem==NULL){ ?>
+                                                                $user_dt = mysql_query("SELECT * FROM detail_problem WHERE site_id='".$data['site_id'].
+                                                                                        "' and id_jenis_problem=".$temp['id_jenis_problem'].";");
+                                                                $prob = mysql_fetch_array($user_dt);
+
+                                                                if($prob==NULL){ ?>
                                                                     <tr>
                                                                         <td><input type="checkbox" name="klasifikasiproblem[]" id="klasifikasiproblem"></td>
                                                                         <td><?php echo $temp['klasifikasi']; ?></td>
@@ -230,30 +233,28 @@
                                                                     </tr>
                                                         <?php   }
                                                                 else {
-                                                                foreach ($user_problem as $usprob) {
                                                                     ?>
                                                                     
                                                                     <tr>
                                                                         <td><input type="checkbox" name="klasifikasiproblem[]" id="klasifikasiproblem" value=<?php echo $temp['id_jenis_problem']; ?> 
-                                                                                <?php if($usprob['id_jenis_problem']==$temp['id_jenis_problem']){echo "checked";} ?> ></td>
+                                                                                <?php if($prob['id_jenis_problem']==$temp['id_jenis_problem']){echo "checked";} ?> ></td>
                                                                         <td><?php echo $temp['klasifikasi']; ?></td>
                                                                         <td>
                                                                             <textarea class="form-control" rows="3" name="deskripsi[]" id="deskripsi" >
-                                                                             <?php if($usprob['id_jenis_problem']==$temp['id_jenis_problem']){echo $usprob['deskripsi'];} ?>
+                                                                             <?php if($prob['id_jenis_problem']==$temp['id_jenis_problem']){echo $prob['deskripsi'];} ?>
                                                                         </textarea></td>
                                                                         <td><input style="width:100px" type="text" name="pic[]" id="pic" 
-                                                                                value=<?php if($usprob['id_jenis_problem']==$temp['id_jenis_problem']){echo $usprob['pic'];}?> ></td>
+                                                                                value=<?php if($prob['id_jenis_problem']==$temp['id_jenis_problem']){echo $prob['pic'];}?> ></td>
                                                                         <td width="106px">
                                                                             <select class="form-control" id="stproblem" name="stproblem[]">
-                                                                                <option value="Open" <?php if($usprob['id_jenis_problem']==$temp['id_jenis_problem'] && $usprob['status_problem']=="Open")
+                                                                                <option value="Open" <?php if($prob['id_jenis_problem']==$temp['id_jenis_problem'] && $prob['status_problem']=="Open")
                                                                                                             {echo "selected";} ?> >Open</option>
-                                                                                <option value="Close" <?php if($usprob['id_jenis_problem']==$temp['id_jenis_problem'] && $usprob['status_problem']=="Close")
+                                                                                <option value="Close" <?php if($prob['id_jenis_problem']==$temp['id_jenis_problem'] && $prob['status_problem']=="Close")
                                                                                                             {echo "selected";} ?> >Close</option>
                                                                             </select>
                                                                         </td>                                                            
                                                                     </tr>     
-                                                    <?php           }
-                                                                }
+                                                    <?php        }
                                                             } ?>
                                             </tbody>
                                             <tr></tr>

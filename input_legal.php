@@ -1,9 +1,32 @@
-<script type="text/javascript">
-    $(document).ready(function(){
-        var id = $("siteid").val();
-        
-        });
-</script>
+<?php
+    include_once '../db_connect.php';
+
+    global $siteid_OK;
+    global $reject_id;
+
+    $reject_id = array();
+
+    if(isset($_POST['siteid_main'])) {
+        if($_POST['siteid_main']==""){
+            $siteid_OK = NULL;
+        }
+        else {
+            $sql = "select site_id, log_added, log_input from legal where site_id='".$_POST['siteid_main']."';";
+            $legal = mysql_query($sql) or die(mysql_error());
+            $data = mysql_fetch_array($legal);
+            
+            if($data==NULL)
+            {
+                $siteid_OK = true;
+            }
+            else
+            {
+                $siteid_OK = false;
+                $reject_id = $data;
+            }    
+        }
+    }
+?>
 
 <!DOCTYPE html>
 <html>
@@ -29,16 +52,53 @@
                             Input Data Legal ( Step 1 of 2 )
                         </div>
                         <!-- /.panel-heading -->
-                        <form role="form" action = "insert_into_legal.php" method="POST">
+                        
                         <div class="panel-body">
                             <div class="row">
                                 <div class="col-lg-6">
-                                    
-                                        <div class="form-group">
+                                        
+                                        <form role="form" action = '<?php echo $_SERVER['PHP_SELF'] ?>' method="POST">
                                             <label>Site ID</label>
-                                            <input class="form-control" id="siteid" name="siteid">
-                                            <p class="help-block" style="font-size: 8pt">Ex : ADL001</p>
+                                            <div class="row">
+                                                <div class="col-lg-10">
+                                                    <input class="form-control" id="siteid_main" name="siteid_main" value=<?php if(isset($_POST['siteid_main'])) {
+                                                                echo "'".$_POST['siteid_main']."'";
+                                                            } ?> >
+                                                </div>
+                                                <div class="col-lg-2">
+                                                    <button type="submit" class="btn btn-success">cari</button>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-lg-2">
+                                                    <p class="help-block" style="font-size: 8pt">Ex : ADL001</p>
+                                                </div>
+                                                <div class="col-lg-8" align="right">
+                                                    <?php
+                                                        if(isset($_POST['siteid_main'])) {
+                                                            if($siteid_OK==true) {
+                                                                echo "<a style='color:green'  class='help-block' style='font-size: 8pt'><b>SITE ID ini Valid untuk data baru</b>";
+                                                            }
+                                                            else if($siteid_OK==false && $_POST['siteid_main']!="") {
+                                                                echo "<a style='color:red'  class='help-block' style='font-size: 8pt'><b> Data SITE ID ini telah diinput pada ".$reject_id['log_added']." melalui ".$reject_id['log_input']."</b>";
+                                                            }
+                                                            else if ($siteid_OK==NULL) {
+                                                                echo "<a style='color:blue' class='help-block' style='font-size: 8pt'><b>anda harus memasukkan SITE ID baru terlebih dahulu</b>";    
+                                                            }
+                                                        }
+                                                        else {
+                                                            echo "<a style='color:blue' class='help-block' style='font-size: 8pt'><b>anda harus memasukkan SITE ID baru terlebih dahulu</b>";
+                                                        }
+                                                    ?>
+                                                    </a>
+                                                </div>
+                                            </div>
                                             <p></p>
+                                        </form>
+<?php if($siteid_OK) { ?>
+                                        
+                                        <form role="form" action = "insert_into_legal.php" method="POST">
+                                            <input class="form-control" id="siteid" name="siteid" value=<?php echo "'".$_POST['siteid_main']."'"; ?> style="display:none;">
                                             <label>Area</label>
                                             <select class="form-control" id="area" name="area">
                                                 <?php  
@@ -122,14 +182,9 @@
                                             <p></p>
                                             <input id="basttahap3" type="date" name="basttahap3">
                                             <p></p>
-                                                                                        
+                                            </div>
                                             <!--<p class="help-block">Example block-level help text here.</p>-->
-                                        </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <form role="form" action = "insert_into_legal.php" method="POST">
-                                        <div class="form-group">
-                                            
+                                            <div class="col-lg-6">
                                             <h2>Informasi Kontrak / PO</h2>
                                             <label>No. Kontrak</label>
                                             <input class="form-control" id="no_kontrak" name="no_kontrak">
@@ -160,80 +215,77 @@
                                             <p class="help-block" style="font-size: 8pt">Ex : YA</p>
                                             <p></p>
                                             <h2>Problem</h2>
-                                        </div>
-                                        <div class="table-responsive">
-                                            <table class="table table-hover" id="dataTables-example">
-                                            <thead>
-                                            <tr>
-                                                <th></th>
-                                                <th>Jenis Case</th>
-                                                <th>Deskripsi</th>
-                                                <th>PIC</th>
-                                                <th>Status</th>
-                                            </tr>
-                                            </thead>
-                                            <tbody>
-                                                
-                                                        <?php  
-                                                            include_once '../db_connect.php'; 
-                                                            $result = mysql_query("SELECT id_jenis_problem, klasifikasi FROM jenisproblem");
-
-                                                            $result2 = mysql_query("SELECT COUNT(*)+1 as idnow FROM jenisproblem");
-
-                                                            
-                                                            
-                                                            $temp2 = mysql_fetch_array($result2);
-                                                            while($temp = mysql_fetch_array($result)) { ?>
-                                                            <tr>
-                                                            <td><input type="checkbox" name="klasifikasiproblem[]" id="klasifikasiproblem" value=<?php echo $temp['id_jenis_problem']; ?> ></td>
-                                                            <td width="100px"><?php echo $temp['klasifikasi']; ?></td>
-                                                            <td>
-                                                                <textarea class="form-control" rows="3" name="deskripsi[]" id="deskripsi" >
-                                                            </textarea></td>
-                                                            <td><input style="width:100px" type="text" name="pic[]" id="pic" /></td>
-                                                            <td width="106px">
-                                                                <select class="form-control" id="stproblem" name="stproblem[]">
-                                                                    <option value="Open">Open</option>
-                                                                    <option value="Close">Close</option>
-                                                                </select>
-                                                            </td>                                                            
-                                                       </tr>     
-                                                    <?php
-                                                        } ?>
-                                            </tbody>
-                                            <tr></tr>
-                                            <tr></tr>
-                                            <tr></tr>
-                                            
-                                        </div>
-
-                                        <table border = 0 align="right">
-                                        
-                                            <tr>
-                                                <td align="center" width="100px"><button type="submit" class="btn btn-info btn-circle" ><i class="fa fa-check"></i>
-                                                    </button>
+                                            <div class="table-responsive">
+                                                <table class="table table-hover" id="dataTables-example">
+                                                <thead>
+                                                <tr>
+                                                    <th></th>
+                                                    <th>Jenis Case</th>
+                                                    <th>Deskripsi</th>
+                                                    <th>PIC</th>
+                                                    <th>Status</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
                                                     
-                                                </td>
-                                                <td align="center" width="100px">
-                                                    <button type="reset" class="btn btn-warning btn-circle"><i class="fa fa-times"></i>
-                                                    </button>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td align="center" width="100px">Submit</td>
-                                                <td align="center" width="100px">Reset </td>
-                                            </tr>
+                                                            <?php  
+                                                                include_once '../db_connect.php'; 
+                                                                $result = mysql_query("SELECT id_jenis_problem, klasifikasi FROM jenisproblem");
 
-                                        </table>
-                                    
-                                    
+                                                                $result2 = mysql_query("SELECT COUNT(*)+1 as idnow FROM jenisproblem");
+
+                                                                
+                                                                
+                                                                $temp2 = mysql_fetch_array($result2);
+                                                                while($temp = mysql_fetch_array($result)) { ?>
+                                                                <tr>
+                                                                <td><input type="checkbox" name="klasifikasiproblem[]" id="klasifikasiproblem" value=<?php echo $temp['id_jenis_problem']; ?> ></td>
+                                                                <td width="100px"><?php echo $temp['klasifikasi']; ?></td>
+                                                                <td>
+                                                                    <textarea class="form-control" rows="3" name="deskripsi[]" id="deskripsi" >
+                                                                </textarea></td>
+                                                                <td><input style="width:100px" type="text" name="pic[]" id="pic" /></td>
+                                                                <td width="106px">
+                                                                    <select class="form-control" id="stproblem" name="stproblem[]">
+                                                                        <option value="Open">Open</option>
+                                                                        <option value="Close">Close</option>
+                                                                    </select>
+                                                                </td>                                                            
+                                                           </tr>     
+                                                        <?php
+                                                            } ?>
+                                                </tbody>
+                                                <tr></tr>
+                                                <tr></tr>
+                                                <tr></tr>
+                                                </table>
+                                                
+                                            </div>
+
+                                            <table border = 0 align="right">
+                                            
+                                                <tr>
+                                                    <td align="center" width="100px"><button type="submit" class="btn btn-info btn-circle" ><i class="fa fa-check"></i>
+                                                        </button>
+                                                        
+                                                    </td>
+                                                    <td align="center" width="100px">
+                                                        <button type="reset" class="btn btn-warning btn-circle"><i class="fa fa-times"></i>
+                                                        </button>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td align="center" width="100px">Submit</td>
+                                                    <td align="center" width="100px">Reset </td>
+                                                </tr>
+                                            </table>
+                                            </div>
+                                            </form>
+                                            </div>
                                 </div>
-                                
                             </div>
-                            <!-- /.table-responsive -->
                         </div>
-                        </form>
-                        <!-- /.panel-body -->
+<?php } ?>
                     </div>
                     <!-- /.panel -->
                 </div>
