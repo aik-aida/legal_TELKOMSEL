@@ -23,6 +23,20 @@
 
 <head>
     <?php include 'header.php'; ?>
+    <script type="text/javascript">
+        function pop_up(url){
+        /*var wide = 500;
+        var high = 300;
+        screen_height = window.screen.availHeight;
+        screen_width = window.screen.availWidth;
+        left_point = parseInt(screen_width/2)-(wide/2); 
+        Stop_point = parseInt(screen_height/2)-(high/2);*/
+        //window.open(url, title, 'toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=no, resizable=no, copyhistory=no, width='+w+', height='+h+', top='+top+', left='+left);
+        window.open(url,'title','status=no,toolbar=no,scrollbars=yes,menubar=no,resizable=yes,width=700,height=300,directories=no,location=no');
+        //win = window.open(page, 'win', 'width='+wide+',height='+high+',left='+left_point+',top='+top_point+',toolbar=no,location=no,scrollbars=no,status=no,resizable=no,fullscreen=no');     //make sure your window is in the front 
+        //win.focus();
+        }
+    </script>
 </head>
 <body>
         <div id="page-wrapper">
@@ -145,21 +159,41 @@
                                                 <td><?php echo $temp['bast_tahap1']; ?></td>
                                                 <td><?php echo $temp['bast_tahap2']; ?></td>
                                                 <td><?php echo $temp['bast_tahap3']; ?></td>
+
+                                                
                                                 <?php
                                                     include_once '../db_connect.php';
                                                     global $legal;
                                                     global $stat;
                                                     $sql = "select * from detail_problem where site_id='".$temp['site_id']."';";
                                                     $problem = mysql_query($sql) or die(mysql_error());
-                                                    $stat="Close";
+                                                    
+                                                    $stat="-";
                                                     while($prob = mysql_fetch_array($problem)) {
-                                                        if($prob['status_problem']=="Open"){
-                                                            $stat="Open";
+                                                        if($prob==NULL){
+                                                            $stat="-";
                                                             break;
                                                         }
-                                                    }
-                                                    echo "<td>".$stat."</td>";
+                                                        else {
+                                                            if($prob['status_problem']=="Open"){
+                                                                $stat="Open";
+                                                                break;
+                                                            }
+                                                            else{
+                                                                $stat="Close";
+                                                            }
+                                                        }
+                                                    } ?>
+                                                <?php
+                                                    if($stat=="-") { ?>
+                                                    <td style="font-size:7pt;">
+                                                <?php } else { ?>
+                                                    <td ><a href=<?php echo "'detail_problem.php?id=".$temp['site_id']."'"; ?> target='blank' style="color:red; font-size:7pt;" onclick="pop_up(this);" >
+                                                <?php }
+                                                    echo "<b>".$stat."</b></a></td>";
                                                 ?>
+
+
                                                 <td data-toggle="modal" data-target="#smallModal"  class="id-detail-modal"><a href="#" class="btn btn-xs btn-success"  style="font-size: 7pt">detail</a></td>
                                                 <!-- aida -->
                                                 <!-- nambahin class="hidden-dulu" -->
@@ -199,6 +233,7 @@
             </div>
             <!-- /.row -->
         </div>
+        
     <div class="modal fade" id="smallModal" tabindex="-1" role="dialog" aria-labelledby="smallModal" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -307,6 +342,111 @@
         </div>
     </div>
 
+    <div class="modal fade" id="detailProblem" tabindex="-1" role="dialog" aria-labelledby="detailProblem" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title" ><b>Detail Problem</b></h4>
+                </div>
+                <div id="detailLegal" class="modal-body">
+                    <div class="row">
+                        <div class="col-lg-12">
+                                <!--
+                                    <div class="table-responsive">
+                                        <table class="table table-striped">
+                                            <thead>
+                                                <tr>
+                                                    <th colspan="3"><div class="modal-id" style="color:#FF0000" ></div></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody style="font-size: 7pt">
+                                                <tr>
+                                                    <td><b>*</b></td>
+                                                    <td><b>TELKOMSEL Target Tahap 1</b></td>
+                                                    <td><div class="target1"></div></td>
+                                                </tr>
+                                                <tr>
+                                                    <td><b>*</b></td>
+                                                    <td><b>TELKOMSEL Target Tahap 2</b></td>
+                                                    <td><div class="target2"></div></td>
+                                                </tr>
+                                                <tr>
+                                                    <td><b>*</b></td>
+                                                    <td><b>TELKOMSEL Target Tahap 3</b></td>
+                                                    <td><div class="target3"><div></td>
+                                                </tr>
+                                                <tr>
+                                                    <td><b>*</b></td>
+                                                    <td><b>BAPD Tahap 1</b></td>
+                                                    <td><div class="bapd1"></div></td>
+                                                </tr>
+                                                <tr>
+                                                    <td><b>*</b></td>
+                                                    <td><b>BAPD Tahap 2</b></td>
+                                                    <td><div class="bapd2"></div></td>
+                                                </tr>
+                                                <tr>
+                                                    <td><b>*</b></td>
+                                                    <td><b>BAPD Tahap 3</b></td>
+                                                    <td><div class="bapd3"><div></td>
+                                                </tr>
+                                                <tr>
+                                                    <td><b>*</b></td>
+                                                    <td><b>No. Kontrak</b></td>
+                                                    <td><div class="nokon"></div></td>
+                                                </tr>
+                                                <tr>
+                                                    <td><b>*</b></td>
+                                                    <td><b>Harga Pekerjaan</b></td>
+                                                    <td><div class="harga"></div></td>
+                                                </tr>
+                                                <tr>
+                                                    <td><b>*</b></td>
+                                                    <td><b>Tanggal Efektif Kontrak</b></td>
+                                                    <td><div class="awal"></div></td>
+                                                </tr>
+                                                <tr>
+                                                    <td><b>*</b></td>
+                                                    <td><b>Tanggal Akhir Kontrak</b></td>
+                                                    <td><div class="akhir"><div></td>
+                                                </tr>
+                                                <tr>
+                                                    <td><b>*</b></td>
+                                                    <td><b>Subkontraktor</b></td>
+                                                    <td><div class="sub"></div></td>
+                                                </tr>
+                                                <tr>
+                                                    <td><b>*</b></td>
+                                                    <td><b>Remarks</b></td>
+                                                    <td><div class="rem"></div></td>
+                                                </tr>
+                                                <tr>
+                                                    <td><b>*</b></td>
+                                                    <td><b>Dokumen Land SHM/PKS</b></td>
+                                                    <td><div class="doc1"  style="color:#FF0000">
+                                                        <div></td>
+                                                </tr>
+                                                <tr>
+                                                    <td><b>*</b></td>
+                                                    <td><b>Dokumen Land Access SHM/PKS</b></td>
+                                                    <td><div class="doc2"  style="color:#FF0000"><div></td>
+                                                </tr>
+                                                <tr>
+                                                    <td><b>*</b></td>
+                                                    <td><b>Dokumen No. Objek Pajak</b></td>
+                                                    <td><div class="doc3"  style="color:#FF0000"><div></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                </div>
+                                -->
+                        </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Core Scripts - Include with every page -->
     <script src="js/jquery-1.10.2.js"></script>
     <script src="js/bootstrap.min.js"></script>
@@ -320,13 +460,10 @@
     <script src="js/sb-admin.js"></script>
 
     <!-- Page-Level Demo Scripts - Tables - Use for reference -->
-    <script>
-    $(document).ready(function() {
-        $('#dataTables-example').dataTable();
-    });
-    </script>
-
     <script type="text/javascript">
+        
+        $('#dataTables-example').dataTable();
+
         $(document).ready(function(){
             $('.id-detail-modal').click(function(){
 				// aida
@@ -375,7 +512,14 @@
                 $(modal).find('.doc3').html("<a href='"+doc3+"' target='_blank'  style='color:red'>"+doc3+"</a>");
                 $('#smallModal').modal('show');
             });
+
+            $('.id-detail-problem').click(function(){
+                var modal = document.getElementById('detailProblem');
+                $('#detailProblem').modal('show');
+            });
+
         });
+        
     </script>
 </body>
 

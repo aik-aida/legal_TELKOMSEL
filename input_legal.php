@@ -135,7 +135,7 @@
                                             <p class="help-block" style="font-size: 8pt">Ex : TUMAWA</p>
                                             <p></p>
                                             <label>Site Address</label>
-                                            <input class="form-control" id="siteaddr" name="siteaddr">
+                                            <textarea class="form-control" rows="5" name="address[]" id="address"></textarea>
                                             <p class="help-block" style="font-size: 8pt">Ex : Jl. BATU </p>
                                             <p></p>
                                             <label>Vendor / Notaris </label>

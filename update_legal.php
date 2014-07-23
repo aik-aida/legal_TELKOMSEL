@@ -84,8 +84,7 @@
                                             <p class="help-block" style="font-size: 8pt">Ex : TUMAWA</p>
                                             <p></p>
                                             <label>Site Address</label>
-                                            <textarea class="form-control" rows="5" name="address[]" id="address">
-                                                    <?php echo $data['site_address']; ?></textarea>
+                                            <textarea class="form-control" rows="5" name="address[]" id="address"><?php echo $data['site_address']; ?></textarea>
                                             <p class="help-block" style="font-size: 8pt">Ex : Jl. BATU </p>
                                             <p></p>
                                             <label>Vendor / Notaris </label>
@@ -192,6 +191,7 @@
                                             <thead>
                                             <tr>
                                                 <th></th>
+                                                <th style="display:none;">dummy</th>
                                                 <th>Jenis Case</th>
                                                 <th>Deskripsi</th>
                                                 <th>PIC</th>
@@ -218,11 +218,11 @@
 
                                                                 if($prob==NULL){ ?>
                                                                     <tr>
-                                                                        <td><input type="checkbox" name="klasifikasiproblem[]" id="klasifikasiproblem"></td>
+                                                                        <td><input type="checkbox" name="klasifikasiproblem[]" id="klasifikasiproblem"  value=<?php echo $temp['id_jenis_problem']; ?> ></td>
+                                                                        <td style="display:none;"><input type="text" name="idprob[]" id="idprob" value=<?php echo $temp['id_jenis_problem']; ?> ></td>
                                                                         <td><?php echo $temp['klasifikasi']; ?></td>
                                                                         <td>
-                                                                            <textarea class="form-control" rows="3" name="deskripsi[]" id="deskripsi" >
-                                                                        </textarea></td>
+                                                                            <textarea class="form-control" rows="3" name="deskripsi[]" id="deskripsi" ></textarea></td>
                                                                         <td><input style="width:100px" type="text" name="pic[]" id="pic" ></td>
                                                                         <td width="106px">
                                                                             <select class="form-control" id="stproblem" name="stproblem[]">
@@ -238,11 +238,10 @@
                                                                     <tr>
                                                                         <td><input type="checkbox" name="klasifikasiproblem[]" id="klasifikasiproblem" value=<?php echo $temp['id_jenis_problem']; ?> 
                                                                                 <?php if($prob['id_jenis_problem']==$temp['id_jenis_problem']){echo "checked";} ?> ></td>
+                                                                        <td style="display:none;"><input type="text" name="idprob[]" id="idprob" value=<?php echo $temp['id_jenis_problem']; ?> ></td>
                                                                         <td><?php echo $temp['klasifikasi']; ?></td>
                                                                         <td>
-                                                                            <textarea class="form-control" rows="3" name="deskripsi[]" id="deskripsi" >
-                                                                             <?php if($prob['id_jenis_problem']==$temp['id_jenis_problem']){echo $prob['deskripsi'];} ?>
-                                                                        </textarea></td>
+                                                                            <textarea class="form-control" rows="3" name="deskripsi[]" id="deskripsi" ><?php if($prob['id_jenis_problem']==$temp['id_jenis_problem']){echo $prob['deskripsi'];} ?></textarea></td>
                                                                         <td><input style="width:100px" type="text" name="pic[]" id="pic" 
                                                                                 value=<?php if($prob['id_jenis_problem']==$temp['id_jenis_problem']){echo $prob['pic'];}?> ></td>
                                                                         <td width="106px">

@@ -23,41 +23,56 @@
 	
 	$result = mysql_query($updatetolegal);
 
-
+	$countprob = count($_POST['idprob']);
 	$choose = $_POST['klasifikasiproblem'];
+	$idproblem = $_POST['idprob'];
 	$deskripsi = $_POST['deskripsi'];
 	$pic = $_POST['pic'];
 	$status = $_POST['stproblem'];
-	$count = 0;
-
-	foreach ($choose as $key)
+	//foreach ($choose as $key)
+	for($i=0 ; $i<$countprob ; $i++)
 	{
+		if(in_array($idproblem[$i],$choose))
+		{
+			$user_dt = mysql_query("SELECT * FROM detail_problem WHERE site_id='".$_POST['siteid'].
+                               		"' and id_jenis_problem=".$idproblem[$i].";");
+			$prob = mysql_fetch_array($user_dt);
 
-		$updateintodetailproblem =  "update detail_problem set deskripsi='". $deskripsi[$count] ."', pic='". $pic[$count] .
-									"', status_problem='". $status[$count] ."' where site_id='". $_POST['siteid'] ."' and id_jenis_problem=
-								 	".$key.";";
-		echo $updateintodetailproblem;
-		echo "<br />";
+			if($prob==NULL){
+				$insertintodetailproblem =  "insert into detail_problem values('". $_POST['siteid'] ."',
+										 	".$idproblem[$i].",'". $deskripsi[$i] ."','". $pic[$i] ."',
+										 	'". $status[$i] ."')";
+				$result2 = mysql_query($insertintodetailproblem);
+				//echo $insertintodetailproblem;
+				//echo "<br />";
+			}
+			else {
+				$updateintodetailproblem =  "update detail_problem set deskripsi='". $deskripsi[$i] ."', pic='". $pic[$i] .
+											"', status_problem='". $status[$i] ."' where site_id='". $_POST['siteid'] ."' and id_jenis_problem=
+										 	".$idproblem[$i].";";
+				
+				//echo $updateintodetailproblem;
+				//echo "<br />";
+				/*
+				echo $key;
+				echo "<br />";
+				echo $_POST['siteid'];
+				echo "<br />";
+				print_r($_POST['klasifikasiproblem']);
+				echo "<br />";		
+				print_r($deskripsi);
+				echo "<br />";
+				print_r($pic);
+				echo "<br />";
+				print_r($status);
+				echo "<br />";
+				*/
+				$result2 = mysql_query($updateintodetailproblem);
 
-		echo $key;
-		echo "<br />";
-		echo $_POST['siteid'];
-		echo "<br />";
-		print_r($_POST['klasifikasiproblem']);
-		echo "<br />";		
-		print_r($deskripsi);
-		echo "<br />";
-		print_r($pic);
-		echo "<br />";
-		print_r($status);
-		echo "<br />";
-		
-	
-
-		//$result2 = mysql_query($updateintodetailproblem);
-		$count++;
-
+			}	
+		}
 	}
+		
 
-	//header("Location:land_document.php?id=".$_POST['siteid']);
+	header("Location:land_document.php?id=".$_POST['siteid']);
 ?>
