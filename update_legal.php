@@ -46,7 +46,7 @@
                                             <select class="form-control" id="area" name="area">
                                                 <?php  
                                                 include_once '../db_connect.php'; 
-                                                $sql_area = "select * from area";
+                                                $sql_area = "select * from area where area_description like '%Area'";
                                                 $master = mysql_query($sql_area);
                                                 while($arr_master = mysql_fetch_array($master)) { 
                                                     ?>
@@ -65,7 +65,7 @@
                                             <select class="form-control" id="regional" name="regional">
                                             <?php  
                                                 include_once '../db_connect.php'; 
-                                                $sql_region = "select * from region";
+                                                $sql_region = "select * from region where region_description like 'Office NO%'";
                                                 $master2 = mysql_query($sql_region);
                                                 while($arr_master2 = mysql_fetch_array($master2)) { ?>
                                                     <option value=<?php echo "'".$arr_master2['region_code']."'"; ?>
