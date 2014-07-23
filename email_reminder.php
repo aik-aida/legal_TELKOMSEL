@@ -124,8 +124,8 @@
 			$i=1;
 
 			$cekemail = " SELECT email
-			           	  from user_legal
-			           	  where region_code_legal ='".$a[0]."'";
+			           	  FROM employee
+			           	  WHERE division like '%Legal and Regulatory%' AND region_code ='".$a[0]."'";
 			           	  
 			$cekemails = mysql_query($cekemail);
 

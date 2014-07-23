@@ -19,10 +19,8 @@
 
 	$i=1;
 
-	//$to = 'diniputrimandasari@gmail.com';
-	//$to1 = 'aris_firman@telkomsel.co.id';
-	//$to = 'diniputrimandasari@gmail.com';
-	//$to2 = 'aida.muflichah@gmail.com';
+	//$to = 'Rudi_Widiantomo@telkomsel.co.id';
+	//$to1 = 'Pandoe_Wicaksono@telkomsel.co.id';
 	$subjectPusat = 'REMINDER BERAKHIRNYA KONTRAK';
 	$headers  = 'MIME-Version: 1.0' . "\r\n";
 	$headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
@@ -65,11 +63,9 @@
 		$msg.='</body></html>';
 		$i=1;
 
-		//dicek lagi untuk masalah region code
-		/*
 		$cekemail = " SELECT email
-			          from user_legal
-			          where region_code_legal ='".$a[0]."'";
+			          from employee
+			          where area_code ='010' and division like 'Legal and Regulatory%'";
 			           	  
 		$cekemails = mysql_query($cekemail);
 
@@ -80,11 +76,7 @@
 			mail($to, $subjectRegion, $msg, $headers);
 				//$to = '';
 		}
-		//$msg = 'lalalla';
-		//$arr_cekemail[0];
-		//mail('aris_firman@telkomsel.co.id', $subjectPusat, $msg, $headers);
 
-		//echo $msg;*/
 	}
 
 

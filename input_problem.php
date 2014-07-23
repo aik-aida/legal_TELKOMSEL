@@ -25,8 +25,19 @@
                 <div class="col-lg-12">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            Input Form
+                            Problem Management
                         </div>
+                        <?php
+                            if(isset($_GET['idsearch']) && $_GET['idsearch']!='gagal')
+                            {
+                                include_once '../db_connect.php';
+                                global $legal;
+                                global $data;
+                                $sql = "select * from jenisproblem where id_jenis_problem=".$_GET['idsearch'].";";
+                                $legal = mysql_query($sql) or die(mysql_error());
+                                $data = mysql_fetch_array($legal);
+                            } 
+                        ?>
                         <!-- /.panel-heading -->
                         <div class="panel-body">
                             <div class="row">
@@ -72,36 +83,71 @@
                                     </form>
                                     <br><br>
 
-                                    <form role="form" action = "edit_problem.php" method="post">
+                                    
                                         <div class="form-group">
                                             <h2>Edit Klasifikasi Problem</h2>
                                             <p></p>
                                             <label>ID Problem</label>
-                                            <input class="form-control" id="problemid" name="problemid">
-                                            <p class="help-block" style="font-size: 10pt">ID Problem yang ingin Anda edit</p>
-                                            <p></p>
+                                            <form role="form" action = "searchid_problem.php" method="post">
+                                                <table>
+                                                    <tr>
+                                                        <td width = "600">
+                                                            <input class="form-control" id="problemid" name="problemid" value=
+                                                             <?php 
+                                                            if (isset($_GET['idsearch']) && $_GET['idsearch']!='gagal') 
+                                                                {
+                                                                    echo $data['id_jenis_problem'];
+                                                                } 
+                                                            else echo "";?>>
+                                                        </td>
+                                                        <td width = "100">
+                                                            <center><input type="submit" value="cari"></center>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <?php
+                                                                 if(!isset($_GET['idsearch']))
+                                                                 {
+                                                                    ?>
+                                                                    <p class="help-block">Anda harus memasukkan ID Problem terlebih dahulu</p><?php } 
+                                                                    else if($_GET['idsearch']=='gagal')
+                                                                    {
+                                                                    ?>
+                                                                    <p class="help-block">ID yang Anda masukkan belum terdaftar!</p><?php } ?>
+                                                         </td>
+                                                    </tr>
+
+                                                </table>
+                                            </form>
+                                            <?php 
+                                                if(isset($_GET['idsearch']) && $_GET['idsearch']!='gagal')
+                                                { ?>
+
+                                            <form role="form" action = "edit_problem.php" method="post">
+                                                <input style="display:none;"  id="problemid" name="problemid" value=<?php 
+                                                            if (isset($_GET['idsearch'])) 
+                                                                {
+                                                                    echo "'".$data['id_jenis_problem']."'";
+                                                                } 
+                                                            else echo "";?> > 
                                             <br>
                                             <label>Jenis Problem</label>
-                                            <input class="form-control" id="problem" name="problem">
+                                            <input class="form-control" id="problem" name="problem" value=<?php echo "'".$data['klasifikasi']."'"; ?>>
                                             <p></p>
                                              <table border = 0 align="right"><br>
-                                        
-                                            <tr>
-                                                <td align="center" width="70px"><button type="submit" class="btn btn-info btn-circle"><i class="fa fa-check"></i>
-                                                    </button>
-                                                    
-                                                </td>
-                                                
-                                            </tr>
-                                            <tr>
-                                                <td align="center" width="70px">Edit</td>
-                                                
-                                            </tr>
-
-                                        </table>
+                                                <tr>
+                                                    <td align="center" width="70px"><button type="submit" class="btn btn-info btn-circle"><i class="fa fa-check"></i>
+                                                        </button>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td align="center" width="70px">Edit</td>
+                                                </tr>
+                                            </table>
+                                            </form>
+                                            <?php } ?>
                                         </div>
-
-                                    </form>
                                 </div>
 
                                 <div class="col-lg-6">

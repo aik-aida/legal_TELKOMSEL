@@ -61,7 +61,7 @@
                                                                 else if(isset($_GET['idsearch'])) 
                                                                 {
                                                                     echo $data['site_id'];
-                                                                } 
+                                                                }
                                                             else echo "";?>>                                                        
                                                     </td>
                                                     <td width = "100" >
@@ -72,17 +72,21 @@
                                                 <tr>
                                                     <td>
                                                         <?php
-                                                     if(!isset($_GET['id']) && !isset($_GET['idsearch']))
-                                                     {
-                                                        ?>
-                                                        <p class="help-block">Anda harus memasukkan Site ID terlebih dahulu</p><?php } ?>
+                                                         if(!isset($_GET['id']) && !isset($_GET['idsearch']))
+                                                         {
+                                                            ?>
+                                                            <p class="help-block">Anda harus memasukkan Site ID terlebih dahulu</p><?php } 
+                                                         else if($_GET['idsearch']=='gagal')
+                                                         {
+                                                            ?>
+                                                            <p class="help-block">ID yang Anda masukkan belum terdaftar!</p><?php } ?>
                                                     </td>
                                                 </tr>
                                             </table>
                                             </form>
                                             
                                             <?php 
-                                            if(isset($_GET['id']) || isset($_GET['idsearch']))
+                                            if((isset($_GET['id']) || isset($_GET['idsearch'])) && $_GET['idsearch']!='gagal')
                                                 {?>
                                             <form action="update_land_shm.php" method="post" enctype="multipart/form-data">
                                                
@@ -120,11 +124,17 @@
                                                     <div id="toggleText" style="display: none">
                                                         <p></p>
                                                         <label>Land Status</label>
-                                                        <input class="form-control" id="status" name="status" value=<?php echo "'".$data['land_shm_status']."'"; ?>>
+                                                        <select class="form-control" id="status" name="status" >
+                                                            <option value="Beli" <?php if($data['land_shm_no']=="Beli")
+                                                                                                            {echo "selected";} ?> >Beli</option>
+                                                            <option value="Sewa" <?php if($data['land_shm_no']=="Sewa")
+                                                                                                            {echo "selected";} ?> >Sewa</option>
+                                                        </select>
+                                                        <p class="help-block" style="font-size: 8pt">Pilih salah satu dari list yang telah disediakan</p>
                                                         <p></p>
                                                         <label>SHM/PKS No.</label>
                                                         <input class="form-control" id="no" name="no" value=<?php echo "'".$data['land_shm_no']."'"; ?>>
-                                                        <p></p>
+                                                        
                                                         <label>Title Dokumen</label>
                                                         <select class="form-control" id="title" name="title" >
                                                             <option value="Kuitansi" <?php if($data['land_shm_title']=="Kuitansi")
@@ -138,6 +148,7 @@
                                                             <option value="SHM/SGB" <?php if($data['land_shm_title']=="SHM/SGB")
                                                                                                             {echo "selected";} ?> >SHM/SGB</option>
                                                         </select>
+                                                        <p class="help-block" style="font-size: 8pt">Pilih salah satu dari list yang telah disediakan</p>
                                                         <p></p>
                                                         <label>Dokumen yang Dimiliki</label>
                                                         <select class="form-control" id="own" name="own">
@@ -146,9 +157,11 @@
                                                             <option value="Copy" <?php if($data['land_shm_doc']=="Copy")
                                                                                                             {echo "selected";} ?> >Copy</option>
                                                         </select>
+                                                        <p class="help-block" style="font-size: 8pt">Pilih salah satu dari list yang telah disediakan</p>
                                                         <p></p>
                                                         <label>Pemegang Dokumen Asli</label>
                                                         <input class="form-control" id="owner" name="owner" value=<?php echo "'".$data['land_shm_owner']."'"; ?>>
+                                                        <p class="help-block" style="font-size: 8pt">Ex : Kiki Faisal</p>
                                                         <p></p>
                                                         <label>Valid Period</label>
                                                         <p></p>
@@ -163,6 +176,7 @@
                                                             <option value="No" <?php if($data['land_shm_active']=="No")
                                                                                                             {echo "selected";} ?> >No</option>
                                                         </select>
+                                                        <p class="help-block" style="font-size: 8pt">Pilih salah satu dari list yang telah disediakan</p>
                                                         <p></p>
                                                         <label>Upload Berkas</label>
                                                         <p></p>
@@ -229,6 +243,7 @@
                                                         <label>SHM/PKS No.</label>
                                                         <input class="form-control" id="no2" name="no2" value=<?php echo "'".$data['land_access_no']."'"; ?>>
                                                         <p></p>
+                                                        <p></p>
                                                         <label>Title Dokumen</label>
                                                         <select class="form-control" id="title2" name="title2">
                                                             <option value="Kuitansi" <?php if($data['land_access_title']=="Kuitansi")
@@ -242,6 +257,7 @@
                                                             <option value="SHM/SGB" <?php if($data['land_access_title']=="SHM/SGB")
                                                                                                             {echo "selected";} ?> >SHM/SGB</option>
                                                         </select>
+                                                        <p class="help-block" style="font-size: 8pt">Pilih salah satu dari list yang telah disediakan</p>
                                                         <p></p>
                                                         <label>Dokumen yang Dimiliki</label>
                                                         <select class="form-control" id="own2" name="own2">
@@ -250,9 +266,11 @@
                                                             <option value="Copy" <?php if($data['land_access_doc']=="Copy")
                                                                                                             {echo "selected";} ?> >Copy</option>
                                                         </select>
+                                                        <p class="help-block" style="font-size: 8pt">Pilih salah satu dari list yang telah disediakan</p>
                                                         <p></p>
                                                         <label>Pemegang Dokumen Asli</label>
                                                         <input class="form-control" id="owner2" name="owner2" value=<?php echo "'".$data['land_access_owner']."'"; ?>>
+                                                        <p class="help-block" style="font-size: 8pt">Ex : Kiki Faisal</p>
                                                         <p></p>
                                                         <label>Valid Period</label>
                                                         <p></p>
@@ -267,6 +285,7 @@
                                                             <option value="No" <?php if($data['land_access_active']=="No")
                                                                                                             {echo "selected";} ?> >No</option>
                                                         </select>
+                                                        <p class="help-block" style="font-size: 8pt">Pilih salah satu dari list yang telah disediakan</p>
                                                         <p></p>
                                                         <label>Upload Berkas</label>
                                                         <p></p>
@@ -331,6 +350,7 @@
                                                         <p></p>
                                                         <label>NOP</label>
                                                         <input class="form-control" id="nop" name="nop" value=<?php echo "'".$data['land_pajak_nop']."'"; ?>>
+                                                        <p class="help-block" style="font-size: 8pt">Ex : 74.05.030.006.002-0037.0</p>
                                                         <p></p>
                                                         <label>PBB Due Date</label>
                                                         <p></p>
@@ -338,6 +358,7 @@
                                                         <p></p>
                                                         <label>PBB Amount</label>
                                                         <input class="form-control" id="pbbamount" name="pbbamount" value=<?php echo "'".$data['land_pajak_pbb_amount']."'"; ?>>
+                                                        <p class="help-block" style="font-size: 8pt">Ex :4193</p>
                                                         <p></p>
                                                         <label>Paid Status</label>
                                                         <select class="form-control" id="paidstatus" name="paidstatus" >
@@ -346,6 +367,7 @@
                                                             <option value="No" <?php if($data['land_pajak_paid_status']=="No")
                                                                                                             {echo "selected";} ?> >No</option>
                                                         </select>
+                                                        <p class="help-block" style="font-size: 8pt">Pilih salah satu dari list yang telah disediakan</p>
                                                         <p></p>
                                                         <label>Paid Date</label>
                                                         <p></p>
@@ -358,6 +380,7 @@
                                                             <option value="No" <?php if($data['land_pajak_active']=="No")
                                                                                                             {echo "selected";} ?> >No</option>
                                                         </select>
+                                                        <p class="help-block" style="font-size: 8pt">Pilih salah satu dari list yang telah disediakan</p>
                                                         <p></p>
                                                         <label>Upload Berkas</label>
                                                         <p></p>

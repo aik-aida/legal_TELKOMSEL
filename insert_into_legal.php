@@ -1,9 +1,6 @@
 <?php
 	include '../db_connect.php'; 
 
-	$sqlcek = "select site_id from legal where site_id='".$_POST['siteid']."'";
-	
-
 	$insertintolegal =  "insert into legal(site_id,site_area,site_region,site_name,site_address,target_tahap1, 
 						 target_tahap2, target_tahap3, bapd_tahap1, bapd_tahap2, bapd_tahap3,
 						 bast_tahap1, bast_tahap2, bast_tahap3, vendor, no_kontrak, harga_pekerjaan,tgl_efektif_kontrak,
@@ -18,20 +15,26 @@
 	
 	$result = mysql_query($insertintolegal);
 
+	$countproblem = count($_POST['idprob']);
 	$choose = $_POST['klasifikasiproblem'];
+	$idproblem = $_POST['idprob'];
 	$deskripsi = $_POST['deskripsi'];
 	$pic = $_POST['pic'];
 	$status = $_POST['stproblem'];
-	$count = 0;
+	
 
-	foreach ($choose as $key)
+	for($i=0 ; $i<$countproblem ; $i++)
 	{
-		$insertintodetailproblem =  "insert into detail_problem values('". $_POST['siteid'] ."',
-								 	".$choose[$count].",'". $deskripsi[$count] ."','". $pic[$count] ."',
-								 	'". $status[$count] ."')";
-		$result2 = mysql_query($insertintodetailproblem);
-		$count++;
+		if(in_array($idproblem[$i],$choose))
+		{
+			$insertintodetailproblem =  "insert into detail_problem values('". $_POST['siteid'] ."',
+								 		".$idproblem[$i].",'". $deskripsi[$i] ."','". $pic[$i] ."',
+									 	'". $status[$i] ."')";
+			$result2 = mysql_query($insertintodetailproblem);
+			//echo $insertintodetailproblem;
+		}
 	}
+	
 
 	header("Location:land_document.php");
 ?>
